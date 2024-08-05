@@ -22,6 +22,7 @@ export default function HomeScreen() {
       <View style={styles.textBox1}>
         <Text style={styles.textbox}>Welcoeme to</Text>
         <Text style={styles.textbox}>TutorHub</Text>
+        <Text> hola</Text>
       </View>
       <View style={styles.buttonBox}>
         <TouchableOpacity style={styles.studentbtn}>
