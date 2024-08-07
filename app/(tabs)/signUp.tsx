@@ -24,7 +24,7 @@ export default function Profile() {
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />
         </View>
-        <Text style={styles.headerText}>Create an Account</Text>
+        <Text style={styles.headerText}>Бүртгэл үүсгэх</Text>
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
@@ -32,44 +32,43 @@ export default function Profile() {
         </View>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Email</Text>
+            <Text style={styles.inputName}>мэйл хаяг</Text>
           </View>
           <TextInput
-            // placeholder="Write here"
-            placeholderTextColor={"#334155"}
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
             style={styles.input}
           />
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Password</Text>
+            <Text style={styles.inputName}>Нууц үг</Text>
           </View>
           <TextInput
-            // placeholder="Write here"
-            placeholderTextColor={"#334155"}
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
             style={styles.input}
           />
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Confirm Password</Text>
+            <Text style={styles.inputName}>Нууц үгээ батлаx</Text>
           </View>
           <TextInput
-            // placeholder="Write here"
-            placeholderTextColor={"#334155"}
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
             style={styles.input}
           />
           <View style={styles.rememberMeBox}>
             <Checkbox
-              // style={styles.checkbox}
               value={isChecked}
               onValueChange={setChecked}
               color={isChecked ? "#334155" : undefined}
             />
-            <Text>Remember me</Text>
+            <Text>Намайг санаx</Text>
           </View>
         </View>
       </View>
       <TouchableOpacity style={styles.button}>
-        <Link href="./signIn" style={styles.button1}>
+        <Link href="./homeScreen" style={styles.button1}>
           <View style={styles.button1}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+            <Text style={styles.buttonText}>Бүртгүүлэх</Text>
           </View>
         </Link>
       </TouchableOpacity>
@@ -175,6 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   body: {
+    overflow: "hidden",
     width: "100%",
     height: "100%",
     justifyContent: "center",

@@ -2,55 +2,59 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { auto } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
 import { TextInput } from "react-native-gesture-handler";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 
 export default function Profile() {
-  const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
-  const img = cld
-    .image("samples/man-portrait")
-    .format("auto")
-    .quality("auto")
-    .resize(auto().gravity(autoGravity()));
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>
-      <View>
-        <Icon name="book-reader" style={styles.logo} />
-      </View>
       <View style={styles.headerBox}>
-        <Text style={styles.headerText}>Hello there</Text>
-        <Text>Please enter your email & password to sign in</Text>
+        <View style={styles.logoBorder}>
+          <Icon name="book-reader" style={styles.logo} />
+        </View>
+        <View style={styles.headerwordBox}>
+          <Text style={styles.headerText}>Cайн уу</Text>
+          <Text>Нэвтрэхийн тулд мэйл хаяг, нууц </Text>
+          <Text>үгээ оруулна уу</Text>
+        </View>
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Email</Text>
+            <Text style={styles.inputName}>Mэйл хаяг</Text>
           </View>
-          <TextInput placeholderTextColor={"#334155"} style={styles.input} />
+          <TextInput
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
+            style={styles.input}
+          />
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Password</Text>
+            <Text style={styles.inputName}>Hууц үг</Text>
           </View>
-          <TextInput placeholderTextColor={"#334155"} style={styles.input} />
+          <TextInput
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
+            style={styles.input}
+          />
           <View style={styles.rememberMeBox}>
             <Checkbox
               value={isChecked}
               onValueChange={setChecked}
               color={isChecked ? "#334155" : undefined}
             />
-            <Text>Remember me</Text>
+            <Text>Намайг санаx</Text>
           </View>
         </View>
+        <Link href="./fotgotPassword">
+          <Text style={styles.forgotpw}>Нууц үгээ мартсан</Text>
+        </Link>
       </View>
       <TouchableOpacity style={styles.button}>
-        <Link href="./signIn" style={styles.button1}>
+        <Link href="./homeScreen" style={styles.button1}>
           <View style={styles.button1}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+            <Text style={styles.buttonText}>Нэвтрэх</Text>
           </View>
         </Link>
       </TouchableOpacity>
@@ -59,6 +63,29 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  forgotpw: {
+    color: "#334155",
+    fontSize: 20,
+  },
+  logoBorder: {
+    width: 80,
+    height: 80,
+    borderColor: "#334155",
+    borderRadius: 100,
+    borderWidth: 3,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerBox: {
+    position: "absolute",
+    top: "5%",
+    width: "90%",
+    height: "auto",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   rememberMeBox: {
     width: "90%",
     display: "flex",
@@ -134,12 +161,10 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 35,
   },
-  headerBox: {
-    position: "absolute",
-    top: "15%",
-    gap: 10,
-    width: "90%",
-    height: "auto",
+  headerwordBox: {
+    gap: 5,
+    width: "76%",
+    // height: "auto",
     justifyContent: "center",
     alignItems: "flex-start",
   },
@@ -151,11 +176,12 @@ const styles = StyleSheet.create({
   },
   logo: {
     color: "#334155",
-    fontSize: 80,
+    fontSize: 60,
     position: "absolute",
     top: "5%",
   },
   body: {
+    overflow: "hidden",
     width: "100%",
     height: "100%",
     justifyContent: "center",

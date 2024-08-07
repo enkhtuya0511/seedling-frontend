@@ -29,7 +29,7 @@ export default function HomeScreen() {
       <TouchableOpacity style={styles.tutortbtn1}>
         <Link href="./signIn" style={styles.studentbtn1}>
           <View style={styles.studentbtn2}>
-            <Text style={styles.btntext1}>Sign In</Text>
+            <Text style={styles.btntext1}>Нэвтрэх</Text>
           </View>
         </Link>
       </TouchableOpacity>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   body: {
+    overflow: "hidden",
     width: "100%",
     height: "100%",
     justifyContent: "center",
