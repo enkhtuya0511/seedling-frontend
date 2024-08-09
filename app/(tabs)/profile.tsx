@@ -1,13 +1,20 @@
 "use client";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+} from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import React from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { auto } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
-import { TextInput } from "react-native-gesture-handler";
+// import { AdvancedImage } from "@cloudinary/react";
+// import { TextInput } from "react-native-gesture-handler";
 
 export default function Profile() {
   const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
@@ -26,7 +33,12 @@ export default function Profile() {
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
-          <AdvancedImage cldImg={img} style={styles.profilePic} />
+          <Image
+            src={
+              "https://res.cloudinary.com/dsfypbtbn/image/upload/v1721285179/samples/man-portrait.jpg"
+            }
+            style={styles.profilePic}
+          />
         </View>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>

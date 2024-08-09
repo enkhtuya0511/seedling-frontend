@@ -1,8 +1,14 @@
 "use client";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { TextInput } from "react-native-gesture-handler";
+// import { TextInput } from "react-native-gesture-handler";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 

@@ -34,8 +34,19 @@ export default function HomeScreen() {
       attributes: { name: "Компьютерийн шинжлэх ухаан", courses: "20" },
     },
   ];
+
+  const otherSections = [
+    "Өдөр тутмын курсууд",
+    "Математик",
+    "Түүх",
+    "Хөгжим",
+    "Гадаад хэл",
+    "Нийгмийн судлал",
+  ];
+
   return (
     <View style={styles.body}>
+      {/* Header */}
       <View style={styles.headerBox}>
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />
@@ -46,37 +57,64 @@ export default function HomeScreen() {
           <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
-      <View style={styles.headerCard}>
-        <View style={styles.textBox}>
-          <Text style={styles.title}>Өдөр тутмын курсууд</Text>
-          <Text style={styles.subtitle}>
-            Өөрт хэрэгтэй хичээлээ хайж олоод заавал хамрагдаарай
-          </Text>
-        </View>
-        <View style={styles.border1}>
-          <Icon name="book-reader" style={styles.logo1} />
-        </View>
-      </View>
-      <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.categoryBox}
-      >
-        {subjectList.map((subject) => (
-          <View style={styles.courseBox}>
-            {/* <View style={styles.textBox}> */}
-            <Text style={styles.category}>{subject.attributes.name}</Text>
-            <Text style={styles.courses}>
-              {subject.attributes.courses} курсууд
+
+      {/* Scrollable Content */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.headerCard}>
+          <View style={styles.textBox}>
+            <Text style={styles.title}>Өдөр тутмын курсууд</Text>
+            <Text style={styles.subtitle}>
+              Өөрт хэрэгтэй хичээлээ хайж олоод заавал хамрагдаарай
             </Text>
-            {/* </View> */}
-            {/* <View style={styles.border}>
-              <Icon name="book-reader" style={styles.logo} />
-            </View> */}
+          </View>
+          <View style={styles.border1}>
+            <Icon name="book-reader" style={styles.logo1} />
+          </View>
+        </View>
+        {/* "Сэдвээр нь судлах" Section */}
+        <View style={styles.scrollBox}>
+          <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.categoryBox}
+          >
+            {subjectList.map((subject) => (
+              <View style={styles.courseBox} key={subject.id}>
+                <Text style={styles.category}>{subject.attributes.name}</Text>
+                <Text style={styles.courses}>
+                  {subject.attributes.courses} курсууд
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Other Sections */}
+        {otherSections.map((sectionTitle, index) => (
+          <View style={styles.otherSection} key={index}>
+            <Text style={styles.otherSectionTitle}>{sectionTitle}</Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.categoryBox}
+            >
+              {subjectList.map((subject) => (
+                <View style={styles.courseBoxOther} key={subject.id}>
+                  <Text style={styles.categoryOther}>
+                    {subject.attributes.name}
+                  </Text>
+                  <Text style={styles.coursesOther}>
+                    {subject.attributes.courses} курсууд
+                  </Text>
+                </View>
+              ))}
+            </ScrollView>
           </View>
         ))}
       </ScrollView>
+
+      {/* Tab Bar */}
       <View style={styles.tabBar}>
         <TouchableOpacity style={styles.tab}>
           <Link href="./home" style={styles.tab1}>
@@ -100,7 +138,7 @@ export default function HomeScreen() {
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./profile" style={styles.tab1}>
+          <Link href="./account" style={styles.tab1}>
             <View style={styles.tab1}>
               <Icon name="user" style={styles.tabBarIcon} />
             </View>
@@ -110,20 +148,37 @@ export default function HomeScreen() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
+  scrollBox: {
+    width: "100%",
+    height: 180,
+    marginTop: 20,
+  },
+  otherSection: {
+    width: "100%",
+    height: 200,
+  },
+  scrollContent: {
+    paddingBottom: 80,
+    paddingTop: "8%",
+  },
   subjectTitle: {
-    color: '"#334155',
+    color: "#334155",
     fontSize: 27,
-    position: "absolute",
-    top: "34%",
-    left: "5%",
+    marginLeft: "5%",
+  },
+  otherSectionTitle: {
+    color: "#334155",
+    fontSize: 22,
+    marginLeft: "5%",
   },
   subtitle: {
     color: "#94a3b8",
     fontSize: 15,
   },
   title: {
-    color: '"#334155',
+    color: "#334155",
     fontSize: 20,
   },
   textBox: {
@@ -133,24 +188,18 @@ const styles = StyleSheet.create({
   },
   headerCard: {
     width: "90%",
-    height: "20%",
+    height: 150,
     backgroundColor: "#F6F7FB",
     shadowColor: "#334155",
-    shadowOffset: { width: 2, height: 4 }, // Only a vertical shadow
+    shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 4,
     borderRadius: 20,
     justifyContent: "space-between",
     alignItems: "center",
-    position: "absolute",
-    top: "12%",
-    display: "flex",
     flexDirection: "row",
-    padding: "5%",
+    marginHorizontal: "5%",
   },
-  //   textBox: {
-  //     gap: 5,
-  //   },
   courses: {
     color: "#94a3b8",
     fontSize: 11,
@@ -163,27 +212,49 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 20,
     padding: 20,
-    // display: "flex",
-    // flexDirection: "row",
     shadowColor: "#334155",
-    shadowOffset: { width: 2, height: 4 }, // Only a vertical shadow
+    shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 4,
+    alignItems: "flex-start",
+  },
+  courseBoxOther: {
+    backgroundColor: "#F6F7FB",
+    width: "20%",
+    height: "80%",
+    margin: 10,
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: "#334155",
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    alignItems: "flex-start",
   },
   category: {
     color: "#334155",
     fontSize: 15,
     fontWeight: "500",
+    textAlign: "center",
+  },
+  categoryOther: {
+    color: "#334155",
+    fontSize: 20,
+    fontWeight: "400",
+    textAlign: "center",
+  },
+  coursesOther: {
+    color: "#94a3b8",
+    fontSize: 11,
+    fontWeight: "400",
   },
   categoryBox: {
     width: "100%",
-    height: "14%",
-    position: "absolute",
-    top: "38%",
-    paddingHorizontal: "3%",
+    height: "100%",
+    paddingRight: "5%",
   },
   tab1: {
-    width: 10,
+    width: 40,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
@@ -197,8 +268,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   tab: {
-    width: 10,
-    height: 40,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#334155",
@@ -206,21 +275,20 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     width: "100%",
-    height: "8%",
+    height: 60,
     position: "absolute",
     bottom: 0,
     justifyContent: "space-around",
     alignItems: "center",
-    display: "flex",
     flexDirection: "row",
+    backgroundColor: "white",
     shadowColor: "#334155",
     shadowOpacity: 0.4,
     shadowRadius: 10,
+    elevation: 4,
+    zIndex: 10,
   },
   iconsBox: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "row",
     gap: 15,
     marginLeft: "29%",
@@ -244,6 +312,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#334155",
+
     borderRadius: 100,
     borderWidth: 5,
   },
@@ -255,16 +324,15 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: "5%",
     height: "auto",
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    // shadowColor: "#334155",
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    paddingBottom: "1%",
+    marginTop: "5%",
     gap: 10,
-    position: "absolute",
-    top: "5%",
-    shadowColor: "#334155",
-    shadowOffset: { width: 0, height: 4 }, // Only a vertical shadow
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
   },
   name: {
     color: "#334155",
@@ -272,11 +340,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   body: {
-    overflow: "hidden",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
     backgroundColor: "white",
   },
 });
