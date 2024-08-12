@@ -5,16 +5,16 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  Image,
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import React from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { auto } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-// import { AdvancedImage } from "@cloudinary/react";
+import { AdvancedImage } from "@cloudinary/react";
 // import { TextInput } from "react-native-gesture-handler";
+import Checkbox from "expo-checkbox";
+import { useState } from "react";
 
 export default function Profile() {
   const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
@@ -23,22 +23,18 @@ export default function Profile() {
     .format("auto")
     .quality("auto")
     .resize(auto().gravity(autoGravity()));
+  const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>
       <View style={styles.headerBox}>
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />
         </View>
-        <Text style={styles.headerText}>Профайлаа бөглөнө үү</Text>
+        <Text style={styles.headerText}>Бүртгэл үүсгэх</Text>
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
-          <Image
-            src={
-              "https://res.cloudinary.com/dsfypbtbn/image/upload/v1721285179/samples/man-portrait.jpg"
-            }
-            style={styles.profilePic}
-          />
+          <AdvancedImage cldImg={img} style={styles.profilePic} />
         </View>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>
@@ -65,12 +61,20 @@ export default function Profile() {
             placeholderTextColor={"gray"}
             style={styles.input}
           />
+          <View style={styles.rememberMeBox}>
+            <Checkbox
+              value={isChecked}
+              onValueChange={setChecked}
+              color={isChecked ? "#334155" : undefined}
+            />
+            <Text>Намайг санаx</Text>
+          </View>
         </View>
       </View>
       <TouchableOpacity style={styles.button}>
         <Link href="./signUp" style={styles.button1}>
           <View style={styles.button1}>
-            <Text style={styles.buttonText}>Үргэлжлүүлэх</Text>
+            <Text style={styles.buttonText}>Бүртгүүлэх</Text>
           </View>
         </Link>
       </TouchableOpacity>
@@ -79,6 +83,12 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  rememberMeBox: {
+    width: "90%",
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+  },
   button: {
     width: "80%",
     height: "7%",
@@ -146,7 +156,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    fontSize: 30,
+    fontSize: 35,
   },
   headerBox: {
     position: "absolute",

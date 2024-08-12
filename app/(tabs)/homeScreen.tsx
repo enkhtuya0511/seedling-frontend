@@ -59,7 +59,10 @@ export default function HomeScreen() {
       </View>
 
       {/* Scrollable Content */}
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.headerCard}>
           <View style={styles.textBox}>
             <Text style={styles.title}>Өдөр тутмын курсууд</Text>
@@ -73,7 +76,13 @@ export default function HomeScreen() {
         </View>
         {/* "Сэдвээр нь судлах" Section */}
         <View style={styles.scrollBox}>
-          <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
+          <View style={styles.titleBox}>
+            <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
+            <Link href="./courses">
+              <Icon name="arrow-right" style={styles.subjectTitle} />
+            </Link>
+          </View>
+
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -93,7 +102,12 @@ export default function HomeScreen() {
         {/* Other Sections */}
         {otherSections.map((sectionTitle, index) => (
           <View style={styles.otherSection} key={index}>
-            <Text style={styles.otherSectionTitle}>{sectionTitle}</Text>
+            <View style={styles.titleBox}>
+              <Text style={styles.otherSectionTitle}>{sectionTitle}</Text>
+              <Link href="./courses">
+                <Icon name="arrow-right" style={styles.subjectTitle} />
+              </Link>
+            </View>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -124,16 +138,16 @@ export default function HomeScreen() {
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./order" style={styles.tab1}>
+          <Link href="./schedule" style={styles.tab1}>
             <View style={styles.tab1}>
-              <Feather name="shopping-cart" style={styles.tabBarIcon} />
+              <Feather name="calendar" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./favorite" style={styles.tab1}>
+          <Link href="./YourCourses" style={styles.tab1}>
             <View style={styles.tab1}>
-              <Icon name="heart" style={styles.tabBarIcon} />
+              <Feather name="book" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
@@ -150,10 +164,18 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  titleBox: {
+    width: "90%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   scrollBox: {
     width: "100%",
     height: 180,
     marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
   otherSection: {
     width: "100%",
@@ -166,7 +188,6 @@ const styles = StyleSheet.create({
   subjectTitle: {
     color: "#334155",
     fontSize: 27,
-    marginLeft: "5%",
   },
   otherSectionTitle: {
     color: "#334155",
@@ -199,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: "5%",
+    padding: 10,
   },
   courses: {
     color: "#94a3b8",

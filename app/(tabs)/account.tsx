@@ -15,7 +15,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { auto } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 import { AdvancedImage } from "@cloudinary/react";
-import Ionicons from "react-native-vector-icons/EvilIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -52,99 +52,90 @@ export default function HomeScreen() {
           <Text style={styles.Username}>Энхбатын Бат-Од</Text>
           <Text style={styles.UserEmail}>batod825@gmail.com</Text>
         </View>
-        <Feather name="edit-3" style={styles.edit} />
+        <Link href="./personalInfo">
+          <Feather name="edit-3" style={styles.edit} />
+        </Link>
       </View>
 
       {/* Scrollable Content */}
       <ScrollView style={styles.scrollContent}>
-        <Link href="./homeScreen">
+        <Link href="./personalInfo">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
                 <Icon name="user" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>Personal Info</Text>
+              <Text style={styles.itemName}>Хувийн мэдээлэл</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./homeScreen">
+        <Link href="./notification">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
                 <Feather name="bell" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>Notification</Text>
+              <Text style={styles.itemName}>Мэдэгдэл</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./homeScreen">
-          <View style={styles.accountItem}>
-            <View style={styles.itemBox}>
-              <View style={styles.iconStyle}>
-                <Ionicons name="gear" style={styles.size} />
-              </View>
-              <Text style={styles.itemName}>Preferences</Text>
-            </View>
-            <Icon1 name="right" style={styles.size} />
-          </View>
-        </Link>
-        <Link href="./homeScreen">
+        <Link href="./Security">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
                 <Feather name="shield" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>Security</Text>
+              <Text style={styles.itemName}>Аюулгүй байдал</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./homeScreen">
+        {/* <Link href="./helpcenter">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
-                <Feather name="file-text" style={styles.size} />
+                <Ionicons name="help" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>language</Text>
-            </View>
-            <Icon1 name="right" style={styles.size} />
-          </View>
-        </Link>
-        {/* <Link href="./homeScreen">
-          <View style={styles.accountItem}>
-            <View style={styles.itemBox}>
-              <View style={styles.iconStyle}>
-                <Feather name="eye" style={styles.size} />
-              </View>
-              <Text style={styles.itemName}>language</Text>
+              <Text style={styles.itemName}>Тусламжийн төв</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link> */}
+        <Link href="./homeScreen">
+          <View style={styles.accountItem}>
+            <View style={styles.itemBox}>
+              <View style={styles.iconStyle}>
+                <Feather name="log-out" style={styles.size} />
+              </View>
+              <Text style={styles.itemName}>Гарах</Text>
+            </View>
+            <Icon1 name="right" style={styles.size} />
+          </View>
+        </Link>
       </ScrollView>
 
       {/* Tab Bar */}
       <View style={styles.tabBar}>
         <TouchableOpacity>
-          <Link href="./home" style={styles.tab1}>
+          <Link href="./homeScreen" style={styles.tab1}>
             <View style={styles.tab1}>
               <Octicons name="home" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./order" style={styles.tab1}>
+          <Link href="./schedule" style={styles.tab1}>
             <View style={styles.tab1}>
-              <Feather name="shopping-cart" style={styles.tabBarIcon} />
+              <Feather name="calendar" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./favorite" style={styles.tab1}>
+          <Link href="./YourCourses" style={styles.tab1}>
             <View style={styles.tab1}>
-              <Icon name="heart" style={styles.tabBarIcon} />
+              <Feather name="book" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
