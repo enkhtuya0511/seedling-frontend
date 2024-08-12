@@ -50,7 +50,7 @@ export default function HomeScreen() {
           <Link href="./account">
             <Icon name="arrowleft" style={styles.icon} />
           </Link>
-          <Text style={styles.text}>Судлах</Text>
+          <Text style={styles.text}>Subject name goes here</Text>
         </View>
       </View>
       <ScrollView style={styles.scrollBox} showsVerticalScrollIndicator={false}>
