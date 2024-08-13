@@ -47,7 +47,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.body}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       {/* Header */}
       <View style={styles.headerBox}>
         <View style={styles.border}>
@@ -80,8 +80,8 @@ export default function HomeScreen() {
           <Text style={styles.subjectTitle}>Таны курсууд</Text>
         </View>
         {subjectList.map((subject) => (
-          <Link href="" style={styles.courseBox1}>
-            <View style={styles.courseBox} key={subject.id}>
+          <View style={styles.courseBox1} key={subject.id}>
+            <Link href="" style={styles.courseBox}>
               <Text style={styles.category}>{subject.attributes.name}</Text>
               <View style={styles.infoBox}>
                 <View style={styles.tutorInfoBox}>
@@ -98,8 +98,8 @@ export default function HomeScreen() {
                   <Text>Date: 2024/8/25 Time: 13:50</Text>
                 </View>
               </View>
-            </View>
-          </Link>
+            </Link>
+          </View>
         ))}
       </ScrollView>
 

@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { useRouter } from "expo-router";
-import Checkbox from "expo-checkbox";
+// import Checkbox from "expo-checkbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { StatusBar } from "expo-status-bar";
 
@@ -16,7 +16,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isChecked, setChecked] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  // const [isChecked, setChecked] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -27,7 +28,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signUp", {
+      const response = await fetch("http://localhost:3000/api/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,6 +74,16 @@ export default function SignUp() {
             onChangeText={setEmail}
           />
           <View style={styles.namebox}>
+            <Text style={styles.inputName}>Утасны дугаар</Text>
+          </View>
+          <TextInput
+            placeholder="Oруулах"
+            placeholderTextColor={"gray"}
+            style={styles.input}
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+          />
+          <View style={styles.namebox}>
             <Text style={styles.inputName}>Нууц үг</Text>
           </View>
           <TextInput
@@ -94,14 +105,14 @@ export default function SignUp() {
             value={confirmPassword}
             onChangeText={setConfirmPassword}
           />
-          <View style={styles.rememberMeBox}>
+          {/* <View style={styles.rememberMeBox}>
             <Checkbox
               value={isChecked}
               onValueChange={setChecked}
               color={isChecked ? "#334155" : undefined}
             />
             <Text>Намайг санаx</Text>
-          </View>
+          </View> */}
           {error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </View>
@@ -162,7 +173,7 @@ const styles = StyleSheet.create({
     borderColor: "#334155",
     borderBottomWidth: 1,
     height: 40,
-    fontSize: 25,
+    fontSize: 22,
   },
   profileInfoBox: {
     width: "100%",
