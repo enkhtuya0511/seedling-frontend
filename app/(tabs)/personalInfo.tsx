@@ -16,6 +16,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import Feather from "react-native-vector-icons/Feather";
+import { StatusBar } from "expo-status-bar";
 
 export default function Profile() {
   const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
@@ -27,6 +28,7 @@ export default function Profile() {
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.headerBox2}>
           <Link href="./account">

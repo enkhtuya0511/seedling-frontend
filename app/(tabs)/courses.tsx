@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
+import { StatusBar } from "react-native";
 
 export default function HomeScreen() {
   const subjectList = [
@@ -45,6 +46,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.headerBox2}>
           <Link href="./account">

@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,15 +7,53 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Link } from "expo-router";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import { useRouter } from "expo-router";
 import Checkbox from "expo-checkbox";
-import { useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { StatusBar } from "expo-status-bar";
 
-export default function Profile() {
+export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isChecked, setChecked] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/signUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: "Your Full Name",
+          email,
+          phoneNumber: "Your Phone Number",
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        const { message } = await response.json();
+        throw new Error(message);
+      }
+
+      router.push("./homeScreen");
+    } catch (error: any) {
+      setError(error.message || "Failed to sign up");
+    }
+  };
+
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />
@@ -24,28 +63,36 @@ export default function Profile() {
       <View style={styles.profilebox}>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>
-            <Text style={styles.inputName}>Mэйл хаяг</Text>
+            <Text style={styles.inputName}>Имэйл</Text>
           </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Имэйл"
             placeholderTextColor={"gray"}
             style={styles.input}
+            value={email}
+            onChangeText={setEmail}
           />
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Нууц үг</Text>
           </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Нууц үг"
             placeholderTextColor={"gray"}
             style={styles.input}
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Нууц үгээ батлаx</Text>
           </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Нууц үгээ батлаx"
             placeholderTextColor={"gray"}
             style={styles.input}
+            secureTextEntry
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
           <View style={styles.rememberMeBox}>
             <Checkbox
@@ -55,20 +102,37 @@ export default function Profile() {
             />
             <Text>Намайг санаx</Text>
           </View>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </View>
-      <TouchableOpacity style={styles.button}>
-        <Link href="./homeScreen" style={styles.button1}>
-          <View style={styles.button1}>
-            <Text style={styles.buttonText}>Бүртгүүлэх</Text>
-          </View>
-        </Link>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Бүртгүүлэх</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  logo: {
+    color: "#334155",
+    fontSize: 40,
+  },
+  border: {
+    borderColor: "#334155",
+    borderWidth: 4,
+    borderRadius: 40,
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputName: {
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  namebox: {
+    width: "90%",
+  },
   rememberMeBox: {
     width: "90%",
     display: "flex",
@@ -88,24 +152,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: "8%",
   },
-  button1: {
-    width: 242,
-    height: 53,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   buttonText: {
     fontWeight: "700",
     fontSize: 20,
     color: "white",
-  },
-  inputName: {
-    fontSize: 15,
-    fontWeight: "bold",
-  },
-  namebox: {
-    width: "90%",
   },
   input: {
     width: "90%",
@@ -120,26 +170,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 20,
   },
-  profilePicBox: {
-    width: "100%",
-    height: 100,
-    alignItems: "center",
-  },
   profilebox: {
     width: "100%",
     height: "70%",
     display: "flex",
     alignItems: "center",
     gap: 40,
-  },
-  border: {
-    borderColor: "#334155",
-    borderWidth: 4,
-    borderRadius: 40,
-    width: 60,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
   },
   headerText: {
     fontSize: 35,
@@ -155,16 +191,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  profilePic: {
-    width: 100,
-    height: 100,
-    position: "absolute",
-    borderRadius: 100,
-  },
-  logo: {
-    color: "#334155",
-    fontSize: 40,
-  },
   body: {
     overflow: "hidden",
     width: "100%",
@@ -172,5 +198,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+  },
+  error: {
+    color: "red",
+    marginTop: 10,
   },
 });

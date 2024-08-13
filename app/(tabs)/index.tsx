@@ -3,6 +3,7 @@ import { Link } from "expo-router";
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -14,6 +15,7 @@ export default function HomeScreen() {
   }
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <Icon name="book-reader" style={styles.logo} />
       <View style={styles.textBox1}>
         <Text style={styles.textbox}>Tutorhub-д тавтай</Text>

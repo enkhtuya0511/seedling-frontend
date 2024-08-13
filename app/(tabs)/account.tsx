@@ -10,10 +10,12 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/AntDesign";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       {/* Header */}
       <View style={styles.headerBox}>
         <View style={styles.border}>

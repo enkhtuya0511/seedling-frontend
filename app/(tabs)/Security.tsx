@@ -4,12 +4,14 @@ import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useState } from "react";
 import Feather from "react-native-vector-icons/Feather";
+import { StatusBar } from "expo-status-bar";
 
 export default function Profile() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.headerBox2}>
           <Link href="./account">

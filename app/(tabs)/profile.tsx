@@ -11,11 +11,13 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 // import { TextInput } from "react-native-gesture-handler";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 
 export default function Profile() {
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />

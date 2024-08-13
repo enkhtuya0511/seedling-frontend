@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Octicons from "react-native-vector-icons/Octicons";
 import Icon1 from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
+import { StatusBar } from "expo-status-bar";
 
 const CalendarScreen = () => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -39,6 +40,7 @@ const CalendarScreen = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.border}>
           <Icon name="book-reader" style={styles.logo} />
