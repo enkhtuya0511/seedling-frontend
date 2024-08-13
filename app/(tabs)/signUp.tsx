@@ -8,21 +8,10 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { auto } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
-// import { TextInput } from "react-native-gesture-handler";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 
 export default function Profile() {
-  const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
-  const img = cld
-    .image("samples/man-portrait")
-    .format("auto")
-    .quality("auto")
-    .resize(auto().gravity(autoGravity()));
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>

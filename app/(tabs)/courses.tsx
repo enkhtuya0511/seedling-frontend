@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   courseBox: {
     backgroundColor: "#F6F7FB",
-    width: "100%",
+    width: 180,
     height: "100%",
     padding: 15,
     shadowColor: "#334155",
