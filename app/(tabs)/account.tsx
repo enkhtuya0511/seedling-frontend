@@ -6,33 +6,12 @@ import {
   ScrollView,
 } from "react-native";
 import { Link } from "expo-router";
-import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/AntDesign";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { auto } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function HomeScreen() {
-  const [fontsLoaded] = useFonts({
-    Playwrite: require("@/assets/fonts/Playwrite.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  const cld = new Cloudinary({ cloud: { cloudName: "dsfypbtbn" } });
-  const img = cld
-    .image("samples/man-portrait")
-    .format("auto")
-    .quality("auto")
-    .resize(auto().gravity(autoGravity()));
-
   return (
     <View style={styles.body}>
       {/* Header */}
@@ -47,7 +26,7 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.userInfo}>
-        <AdvancedImage cldImg={img} style={styles.profilePic} />
+        <View style={styles.profilePic}></View>
         <View style={styles.emailAndNameBox}>
           <Text style={styles.Username}>Энхбатын Бат-Од</Text>
           <Text style={styles.UserEmail}>batod825@gmail.com</Text>
@@ -133,14 +112,14 @@ export default function HomeScreen() {
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./YourCourses" style={styles.tab1}>
+          <Link href="./exploreCourses" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="book" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tab}>
-          <Link href="./account" style={styles.tab1}>
+          <Link href="/account" style={styles.tab1}>
             <View style={styles.tab1}>
               <Icon name="user" style={styles.tabBarIcon} />
             </View>
@@ -213,6 +192,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 100,
+    backgroundColor: "lime",
   },
   scrollContent: {
     paddingBottom: 80,
@@ -304,11 +284,7 @@ const styles = StyleSheet.create({
     height: "auto",
     flexDirection: "row",
     alignItems: "center",
-    // shadowColor: "#334155",
-    // shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
-    paddingBottom: "1%",
+    // paddingBottom: "1%",
     position: "absolute",
     top: "5%",
     gap: 10,

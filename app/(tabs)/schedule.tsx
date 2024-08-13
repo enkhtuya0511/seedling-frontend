@@ -12,6 +12,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Octicons from "react-native-vector-icons/Octicons";
+import Icon1 from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 
 const CalendarScreen = () => {
@@ -38,6 +39,16 @@ const CalendarScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerBox}>
+        <View style={styles.border}>
+          <Icon name="book-reader" style={styles.logo} />
+        </View>
+        <Text style={styles.name}>TutorHub</Text>
+        <View style={styles.iconsBox}>
+          <Icon1 name="search" style={styles.logo} />
+          <Icon1 name="bell" style={styles.logo} />
+        </View>
+      </View>
       <Calendar
         onDayPress={onDayPress}
         markedDates={schedules}
@@ -76,14 +87,14 @@ const CalendarScreen = () => {
           </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tab}>
-          <Link href="./schedule" style={styles.tab1}>
+          <Link href="/schedule" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="calendar" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="/YourCourses" style={styles.tab1}>
+          <Link href="./exploreCourses" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="book" style={styles.tabBarIcon} />
             </View>
@@ -102,6 +113,39 @@ const CalendarScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  name: {
+    color: "#334155",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  iconsBox: {
+    flexDirection: "row",
+    gap: 15,
+    marginLeft: "29%",
+  },
+  border: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#334155",
+    borderRadius: 100,
+    borderWidth: 4,
+  },
+  logo: {
+    color: "#334155",
+    fontSize: 30,
+  },
+  headerBox: {
+    width: "100%",
+    paddingHorizontal: "5%",
+    height: "auto",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: "1%",
+    marginTop: "10%",
+    gap: 10,
+  },
   tab1: {
     width: 40,
     height: 40,
