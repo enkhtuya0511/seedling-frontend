@@ -12,6 +12,8 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import Icon1 from "react-native-vector-icons/Feather";
+import { Image } from "expo-image";
 
 export default function Profile() {
   const [isChecked, setChecked] = useState(false);
@@ -26,30 +28,27 @@ export default function Profile() {
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
-          <View style={styles.profilePic}></View>
+          <Image
+            source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+            style={styles.profilePic}
+          />
+          <TouchableOpacity style={styles.editbox}>
+            <Icon1 name="edit-2" style={styles.edit} />
+          </TouchableOpacity>
         </View>
         <View style={styles.profileInfoBox}>
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Бүтэн нэр</Text>
-          </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Бүтэн нэр"
             placeholderTextColor={"gray"}
             style={styles.input}
           />
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Утасны дугаар</Text>
-          </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Утасны дугаар"
             placeholderTextColor={"gray"}
             style={styles.input}
           />
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Төрсөн өдөр</Text>
-          </View>
           <TextInput
-            placeholder="Oруулах"
+            placeholder="Төрсөн өдөр"
             placeholderTextColor={"gray"}
             style={styles.input}
           />
@@ -75,6 +74,19 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  editbox: {
+    borderRadius: 40,
+    borderColor: "black",
+    borderWidth: 2,
+    padding: 2,
+    marginLeft: 60,
+  },
+  edit: {
+    fontSize: 14,
+  },
+  box: {
+    width: "90%",
+  },
   rememberMeBox: {
     width: "90%",
     display: "flex",
@@ -117,8 +129,9 @@ const styles = StyleSheet.create({
     width: "90%",
     borderColor: "#334155",
     borderBottomWidth: 1,
-    height: 40,
+    height: 50,
     fontSize: 25,
+    paddingHorizontal: 10,
   },
   profileInfoBox: {
     width: "100%",
@@ -130,6 +143,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
     alignItems: "center",
+    justifyContent: "flex-end",
   },
   profilebox: {
     width: "100%",

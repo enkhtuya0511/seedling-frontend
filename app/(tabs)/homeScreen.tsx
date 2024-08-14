@@ -149,10 +149,11 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   infoBox: {
-    width: "90%",
+    width: "100%",
     borderColor: "rgb(100 116 139)",
     borderTopWidth: 1,
     gap: 10,
+    paddingTop: 8,
   },
   titleBox: {
     width: "90%",

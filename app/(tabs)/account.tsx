@@ -11,6 +11,7 @@ import Icon1 from "react-native-vector-icons/AntDesign";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
+import { Image } from "expo-image";
 
 export default function HomeScreen() {
   return (
@@ -28,7 +29,10 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.userInfo}>
-        <View style={styles.profilePic}></View>
+        <Image
+          source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+          style={styles.profilePic}
+        />
         <View style={styles.emailAndNameBox}>
           <Text style={styles.Username}>Энхбатын Бат-Од</Text>
           <Text style={styles.UserEmail}>batod825@gmail.com</Text>

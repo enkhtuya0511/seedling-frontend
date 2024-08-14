@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 80,
-    paddingTop: "8%",
     alignItems: "center",
   },
   subjectTitle: {
