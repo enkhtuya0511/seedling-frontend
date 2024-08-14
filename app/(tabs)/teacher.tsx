@@ -55,64 +55,34 @@ export default function HomeScreen() {
         </View>
         <Text style={styles.name}>TutorHub</Text>
         <View style={styles.iconsBox}>
-          <Icon1 name="search" style={styles.logo} />
           <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
-
-      {/* Scrollable Content */}
-
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.headerCard}>
-          <View style={styles.textBox}>
-            <Text style={styles.title}>Өдөр тутмын курсууд</Text>
-            <Text style={styles.subtitle}>Some kind of text</Text>
-          </View>
-          <View style={styles.border1}>
-            <Icon name="book-reader" style={styles.logo1} />
+      <View style={styles.teacherInfo}>
+        <View style={styles.teacherInfohaederbox}>
+          <View style={styles.tutorPic}></View>
+          <View style={styles.infobox}>
+            <Text style={styles.titleText}>Багшийн нэр:</Text>
+            <Text style={styles.info}>John Paul</Text>
+            <Text style={styles.titleText}>Төрсөн огноо</Text>
+            <Text style={styles.info}>2000/8/25</Text>
+            <Text style={styles.titleText}>Сэдэв:</Text>
+            <Text style={styles.info}>Математик</Text>
           </View>
         </View>
-        {/* "Сэдвээр нь судлах" Section */}
-        <View style={styles.titleBox}>
-          <Text style={styles.subjectTitle}>Таны курсууд</Text>
+        <View style={styles.teacherText}>
+          <Text>some type of text</Text>
         </View>
-        {subjectList.map((subject) => (
-          <View style={styles.courseBox1} key={subject.id}>
-            <Link href="" style={styles.courseBox}>
-              <Text style={styles.category}>{subject.attributes.name}</Text>
-              <View style={styles.infoBox}>
-                <View style={styles.tutorInfoBox}>
-                  <View style={styles.border}>
-                    <Icon name="book-reader" style={styles.logo} />
-                  </View>
-                  <View>
-                    <Text style={styles.title}>Tutor Name</Text>
-                    <Text>Age: 20</Text>
-                  </View>
-                </View>
-                <View style={styles.gap}>
-                  <Text>Schedule</Text>
-                  <Text>Date: 2024/8/25 Time: 13:50</Text>
-                </View>
-              </View>
-            </Link>
-          </View>
-        ))}
-      </ScrollView>
-
-      {/* Tab Bar */}
+      </View>
       <View style={styles.tabBar}>
-        <TouchableOpacity style={styles.tab}>
+        <TouchableOpacity>
           <Link href="/homeScreen" style={styles.tab1}>
             <View style={styles.tab1}>
               <Octicons name="home" style={styles.tabBarIcon1} />
             </View>
           </Link>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.tab}>
           <Link href="./teacherSave" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="bookmark" style={styles.tabBarIcon} />
@@ -139,141 +109,37 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  gap: {
+  teacherText: {
+    width: "100%",
+  },
+  infobox: {
     gap: 5,
-  },
-  tutorInfoBox: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  infoBox: {
-    width: "90%",
-    borderColor: "rgb(100 116 139)",
-    borderTopWidth: 1,
-    gap: 10,
-  },
-  titleBox: {
-    width: "90%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
-  },
-  scrollBox: {
-    width: "100%",
-    height: 180,
-    marginTop: 20,
     justifyContent: "center",
-    alignItems: "center",
   },
-  otherSection: {
-    width: "100%",
-    height: 200,
+  info: {
+    fontSize: 20,
+    fontWeight: "600",
   },
-  scrollContent: {
-    paddingBottom: 80,
-    paddingTop: "8%",
-    alignItems: "center",
-  },
-  subjectTitle: {
-    color: "#334155",
-    fontSize: 27,
-  },
-  otherSectionTitle: {
-    color: "#334155",
-    fontSize: 22,
-    marginLeft: "5%",
-  },
-  subtitle: {
-    color: "#94a3b8",
+  titleText: {
     fontSize: 15,
   },
-  title: {
-    color: "#334155",
-    fontSize: 20,
+  tutorPic: {
+    width: "38%",
+    height: "100%",
+    borderWidth: 2,
+    borderColor: "black",
   },
-  textBox: {
-    width: "60%",
-    height: "90%",
+  teacherInfohaederbox: {
+    width: "100%",
+    height: "22%",
+    display: "flex",
+    flexDirection: "row",
     gap: 20,
   },
-  headerCard: {
+  teacherInfo: {
     width: "90%",
-    height: 150,
-    backgroundColor: "#F6F7FB",
-    shadowColor: "#334155",
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    borderRadius: 20,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginHorizontal: "5%",
-    padding: 10,
-  },
-  courses: {
-    color: "#94a3b8",
-    fontSize: 11,
-    fontWeight: "500",
-  },
-  courseBox1: {
-    width: "90%",
-    height: "10%",
-    margin: 10,
-    marginBottom: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  courseBox: {
-    backgroundColor: "#F6F7FB",
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#334155",
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    alignItems: "flex-start",
-    gap: 10,
-    width: "100%",
-    height: "100%",
-  },
-  courseBoxOther: {
-    backgroundColor: "#F6F7FB",
-    width: "20%",
     height: "80%",
-    margin: 10,
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#334155",
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    alignItems: "flex-start",
-  },
-  category: {
-    color: "#334155",
-    fontSize: 15,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-  categoryOther: {
-    color: "#334155",
-    fontSize: 20,
-    fontWeight: "400",
-    textAlign: "center",
-  },
-  coursesOther: {
-    color: "#94a3b8",
-    fontSize: 11,
-    fontWeight: "400",
-  },
-  categoryBox: {
-    width: "100%",
-    height: "100%",
-    paddingRight: "5%",
+    gap: 20,
   },
   tab1: {
     width: 40,
@@ -313,7 +179,7 @@ const styles = StyleSheet.create({
   iconsBox: {
     flexDirection: "row",
     gap: 15,
-    marginLeft: "29%",
+    marginLeft: "40%",
   },
   border: {
     width: 50,
@@ -351,6 +217,7 @@ const styles = StyleSheet.create({
     paddingBottom: "1%",
     marginTop: "10%",
     gap: 10,
+    marginBottom: "3%",
   },
   name: {
     color: "#334155",
@@ -360,5 +227,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: "white",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
   },
 });

@@ -107,9 +107,9 @@ export default function HomeScreen() {
           </Link>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Link href="./schedule" style={styles.tab1}>
+          <Link href="./teacherSave" style={styles.tab1}>
             <View style={styles.tab1}>
-              <Feather name="calendar" style={styles.tabBarIcon} />
+              <Feather name="bookmark" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>

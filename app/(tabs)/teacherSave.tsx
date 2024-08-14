@@ -47,7 +47,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.body}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       {/* Header */}
       <View style={styles.headerBox}>
         <View style={styles.border}>
@@ -66,55 +66,26 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* "Сэдвээр нь судлах" Section */}
-        <View style={styles.scrollBox}>
-          <View style={styles.titleBox}>
-            <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
-            <Link href="./courses">
-              <Icon name="arrow-right" style={styles.subjectTitle} />
-            </Link>
-          </View>
-
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.categoryBox}
-          >
-            {subjectList.map((subject) => (
-              <View style={styles.courseBox} key={subject.id}>
-                <Text style={styles.category}>{subject.attributes.name}</Text>
-                <Text style={styles.courses}>
-                  {subject.attributes.courses} курсууд
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* Other Sections */}
-        {otherSections.map((sectionTitle, index) => (
-          <View style={styles.otherSection} key={index}>
-            <View style={styles.titleBox}>
-              <Text style={styles.otherSectionTitle}>{sectionTitle}</Text>
-              <Link href="./courses">
-                <Icon name="arrow-right" style={styles.subjectTitle} />
-              </Link>
-            </View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={styles.categoryBox}
-            >
-              {subjectList.map((subject) => (
-                <View style={styles.courseBoxOther} key={subject.id}>
-                  <Text style={styles.categoryOther}>
-                    {subject.attributes.name}
-                  </Text>
-                  <Text style={styles.coursesOther}>
-                    {subject.attributes.courses} курсууд
-                  </Text>
+        {subjectList.map((subject) => (
+          <View style={styles.courseBox1} key={subject.id}>
+            <Link href="./teacher" style={styles.courseBox}>
+              <Text style={styles.category}>Багш</Text>
+              <View style={styles.infoBox}>
+                <View style={styles.tutorInfoBox}>
+                  <View style={styles.border}>
+                    <Icon name="book-reader" style={styles.logo} />
+                  </View>
+                  <View>
+                    <Text style={styles.title}>Tutor Name</Text>
+                    <Text>Age: 20</Text>
+                  </View>
                 </View>
-              ))}
-            </ScrollView>
+                <View style={styles.gap}>
+                  <Text>Сэдэв:</Text>
+                  <Text>{subject.attributes.name}</Text>
+                </View>
+              </View>
+            </Link>
           </View>
         ))}
       </ScrollView>
@@ -122,21 +93,21 @@ export default function HomeScreen() {
       {/* Tab Bar */}
       <View style={styles.tabBar}>
         <TouchableOpacity>
-          <Link href="./homeScreen" style={styles.tab1}>
+          <Link href="/homeScreen" style={styles.tab1}>
             <View style={styles.tab1}>
               <Octicons name="home" style={styles.tabBarIcon1} />
             </View>
           </Link>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.tab}>
           <Link href="./teacherSave" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="bookmark" style={styles.tabBarIcon} />
             </View>
           </Link>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Link href="/exploreCourses" style={styles.tab1}>
+        <TouchableOpacity>
+          <Link href="./exploreCourses" style={styles.tab1}>
             <View style={styles.tab1}>
               <Feather name="book" style={styles.tabBarIcon} />
             </View>
@@ -155,11 +126,32 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  bottominfoBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  gap: {
+    gap: 5,
+  },
+  tutorInfoBox: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  infoBox: {
+    width: "100%",
+    borderColor: "rgb(100 116 139)",
+    borderTopWidth: 1,
+    gap: 10,
+  },
   titleBox: {
     width: "90%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 10,
   },
   scrollBox: {
     width: "100%",
@@ -174,6 +166,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 80,
+    paddingTop: "8%",
+    alignItems: "center",
   },
   subjectTitle: {
     color: "#334155",
@@ -217,18 +211,27 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: "500",
   },
+  courseBox1: {
+    width: "90%",
+    height: "10%",
+    margin: 10,
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   courseBox: {
     backgroundColor: "#F6F7FB",
-    width: "15%",
-    height: "80%",
-    margin: 10,
     borderRadius: 20,
     padding: 20,
     shadowColor: "#334155",
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 4,
-    alignItems: "flex-start",
+    alignItems: "center",
+    gap: 10,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
   },
   courseBoxOther: {
     backgroundColor: "#F6F7FB",
@@ -338,10 +341,6 @@ const styles = StyleSheet.create({
     height: "auto",
     flexDirection: "row",
     alignItems: "center",
-    // shadowColor: "#334155",
-    // shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
     paddingBottom: "1%",
     marginTop: "10%",
     gap: 10,
