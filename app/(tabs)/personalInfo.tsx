@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
-import Feather from "react-native-vector-icons/Feather";
+import Icon1 from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
 
@@ -30,6 +30,9 @@ export default function Profile() {
             source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
             style={styles.profilePic}
           />
+          <TouchableOpacity style={styles.editbox}>
+            <Icon1 name="edit-2" style={styles.edit} />
+          </TouchableOpacity>
         </View>
         <View style={styles.profileInfoBox}>
           <View style={styles.namebox}>
@@ -71,6 +74,16 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  editbox: {
+    borderRadius: 40,
+    borderColor: "black",
+    borderWidth: 2,
+    padding: 2,
+    marginLeft: 60,
+  },
+  edit: {
+    fontSize: 14,
+  },
   headerBox2: {
     display: "flex",
     justifyContent: "center",
@@ -137,11 +150,13 @@ const styles = StyleSheet.create({
   },
   profilePicBox: {
     width: "90%",
-    height: 120,
+    height: 100,
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#e2e8f0",
     marginBottom: 20,
+    justifyContent: "flex-end",
+    paddingBottom: 10,
   },
   profilebox: {
     width: "100%",
