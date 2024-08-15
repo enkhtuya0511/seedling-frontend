@@ -4,10 +4,12 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useCoursesQuery } from "@/generated";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
+  const { data, loading, error } = useCoursesQuery();
+  console.log("courses", data)
   return (
     <Tabs
       screenOptions={{
