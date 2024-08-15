@@ -29,8 +29,6 @@ export default function PersonalInfo() {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-    } else {
-      Alert.alert("Image selection was canceled.");
     }
   };
 
@@ -97,7 +95,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2,
     padding: 2,
-    marginLeft: 60,
+    marginLeft: 75,
+    backgroundColor: "white",
   },
   edit: {
     fontSize: 14,
@@ -206,7 +205,6 @@ const styles = StyleSheet.create({
   profilePic: {
     width: 100,
     height: 100,
-    position: "absolute",
     borderRadius: 100,
   },
   logo: {

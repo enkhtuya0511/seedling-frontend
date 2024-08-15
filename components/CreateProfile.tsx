@@ -8,14 +8,30 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Icon1 from "react-native-vector-icons/Feather";
 import { Image } from "expo-image";
+import * as ImagePicker from "expo-image-picker";
 
 export default function CreateProfile() {
-  const [isChecked, setChecked] = useState(false);
+  const [image, setImage] = useState(
+    "https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+  );
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -27,11 +43,8 @@ export default function CreateProfile() {
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
-          <Image
-            source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
-            style={styles.profilePic}
-          />
-          <TouchableOpacity style={styles.editbox}>
+          <Image source={{ uri: image }} style={styles.profilePic} />
+          <TouchableOpacity style={styles.editbox} onPress={pickImage}>
             <Icon1 name="edit-2" style={styles.edit} />
           </TouchableOpacity>
         </View>
@@ -51,14 +64,6 @@ export default function CreateProfile() {
             placeholderTextColor={"gray"}
             style={styles.input}
           />
-          <View style={styles.rememberMeBox}>
-            <Checkbox
-              value={isChecked}
-              onValueChange={setChecked}
-              color={isChecked ? "#334155" : undefined}
-            />
-            <Text>Намайг санаx</Text>
-          </View>
         </View>
       </View>
       <TouchableOpacity style={styles.button}>
@@ -179,7 +184,6 @@ const styles = StyleSheet.create({
     height: 100,
     position: "absolute",
     borderRadius: 100,
-    backgroundColor: "lime",
   },
   logo: {
     color: "#334155",

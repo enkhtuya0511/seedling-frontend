@@ -19,7 +19,6 @@ export default function ExploreCourses() {
         <Text style={styles.name}>TutorHub</Text>
         <View style={styles.iconsBox}>
           <Icon1 name="search" style={styles.logo} />
-          <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
 
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
   iconsBox: {
     flexDirection: "row",
     gap: 15,
-    marginLeft: "29%",
+    marginLeft: "35%",
   },
   border: {
     width: 50,

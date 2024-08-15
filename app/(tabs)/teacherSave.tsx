@@ -20,7 +20,6 @@ export default function SavedTeachers() {
         <Text style={styles.name}>TutorHub</Text>
         <View style={styles.iconsBox}>
           <Icon1 name="search" style={styles.logo} />
-          <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
 

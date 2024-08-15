@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     alignItems: "flex-start",
     gap: 10,
-    width: 370,
+    width: "165%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
