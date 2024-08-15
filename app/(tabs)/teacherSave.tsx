@@ -67,8 +67,8 @@ export default function HomeScreen() {
       >
         {/* "Сэдвээр нь судлах" Section */}
         {subjectList.map((subject) => (
-          <View style={styles.courseBox1} key={subject.id}>
-            <Link href="./teacher" style={styles.courseBox}>
+          <Link href="./teacher" style={styles.courseBox1} key={subject.id}>
+            <View style={styles.courseBox}>
               <Text style={styles.category}>Багш</Text>
               <View style={styles.infoBox}>
                 <View style={styles.tutorInfoBox}>
@@ -85,8 +85,8 @@ export default function HomeScreen() {
                   <Text>{subject.attributes.name}</Text>
                 </View>
               </View>
-            </Link>
-          </View>
+            </View>
+          </Link>
         ))}
       </ScrollView>
 
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     borderColor: "rgb(100 116 139)",
     borderTopWidth: 1,
     gap: 10,
+    paddingTop: 10,
   },
   titleBox: {
     width: "90%",
@@ -225,9 +226,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 4,
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: 10,
-    width: "100%",
+    width: 370,
     height: "100%",
     justifyContent: "center",
   },

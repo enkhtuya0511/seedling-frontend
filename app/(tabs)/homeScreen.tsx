@@ -12,6 +12,7 @@ import Icon1 from "react-native-vector-icons/Fontisto";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
+import { Image } from "expo-image";
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -56,52 +57,53 @@ export default function HomeScreen() {
         <Text style={styles.name}>TutorHub</Text>
         <View style={styles.iconsBox}>
           <Icon1 name="search" style={styles.logo} />
-          <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
 
       {/* Scrollable Content */}
-
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.headerCard}>
-          <View style={styles.textBox}>
-            <Text style={styles.title}>Өдөр тутмын курсууд</Text>
-            <Text style={styles.subtitle}>Some kind of text</Text>
+      <View style={styles.scrollBox}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.headerCard}>
+            <View style={styles.textBox}>
+              <Text style={styles.title}>Өдөр тутмын курсууд</Text>
+              <Text style={styles.subtitle}>Some kind of text</Text>
+            </View>
+            <View style={styles.border1}>
+              <Icon name="book-reader" style={styles.logo1} />
+            </View>
           </View>
-          <View style={styles.border1}>
-            <Icon name="book-reader" style={styles.logo1} />
+          {/* "Сэдвээр нь судлах" Section */}
+          <View style={styles.titleBox}>
+            <Text style={styles.subjectTitle}>Таны курсууд</Text>
           </View>
-        </View>
-        {/* "Сэдвээр нь судлах" Section */}
-        <View style={styles.titleBox}>
-          <Text style={styles.subjectTitle}>Таны курсууд</Text>
-        </View>
-        {subjectList.map((subject) => (
-          <View style={styles.courseBox1} key={subject.id}>
-            <Link href="" style={styles.courseBox}>
-              <Text style={styles.category}>{subject.attributes.name}</Text>
-              <View style={styles.infoBox}>
-                <View style={styles.tutorInfoBox}>
-                  <View style={styles.border}>
-                    <Icon name="book-reader" style={styles.logo} />
+          {subjectList.map((subject) => (
+            <Link href="" style={styles.courseBox1} key={subject.id}>
+              <View style={styles.courseBox}>
+                <Text style={styles.category}>{subject.attributes.name}</Text>
+                <View style={styles.infoBox}>
+                  <View style={styles.tutorInfoBox}>
+                    <Image
+                      source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+                      style={styles.profilePic}
+                    />
+                    <View>
+                      <Text style={styles.title}>Tutor Name</Text>
+                      <Text>Age: 20</Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={styles.title}>Tutor Name</Text>
-                    <Text>Age: 20</Text>
+                  <View style={styles.gap}>
+                    <Text>Schedule</Text>
+                    <Text>Date: 2024/8/25 Time: 13:50</Text>
                   </View>
-                </View>
-                <View style={styles.gap}>
-                  <Text>Schedule</Text>
-                  <Text>Date: 2024/8/25 Time: 13:50</Text>
                 </View>
               </View>
             </Link>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </View>
 
       {/* Tab Bar */}
       <View style={styles.tabBar}>
@@ -139,6 +141,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  profilePic: {
+    width: 60,
+    height: 60,
+    borderRadius: 100,
+  },
   gap: {
     gap: 5,
   },
@@ -154,6 +161,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     gap: 10,
     paddingTop: 8,
+    height: "40%",
   },
   titleBox: {
     width: "90%",
@@ -164,7 +172,7 @@ const styles = StyleSheet.create({
   },
   scrollBox: {
     width: "100%",
-    height: 180,
+    height: "80%",
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -222,7 +230,6 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     margin: 10,
-    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -236,8 +243,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     alignItems: "flex-start",
     gap: 10,
-    width: "100%",
+    width: 370,
     height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   courseBoxOther: {
     backgroundColor: "#F6F7FB",
@@ -312,7 +321,7 @@ const styles = StyleSheet.create({
   iconsBox: {
     flexDirection: "row",
     gap: 15,
-    marginLeft: "29%",
+    marginLeft: "35%",
   },
   border: {
     width: 50,

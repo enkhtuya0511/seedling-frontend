@@ -49,7 +49,7 @@ export default function HomeScreen() {
       <StatusBar style="dark" />
       <View style={styles.headerBox}>
         <View style={styles.headerBox2}>
-          <Link href="./account">
+          <Link href="./exploreCourses">
             <Icon name="arrowleft" style={styles.icon} />
           </Link>
           <Text style={styles.text}>Судлах</Text>
@@ -58,8 +58,8 @@ export default function HomeScreen() {
       <ScrollView style={styles.scrollBox} showsVerticalScrollIndicator={false}>
         <View style={styles.courseContainer}>
           {subjectList.map((subject) => (
-            <Link href="./subject" style={styles.courseBox1}>
-              <View style={styles.courseBox} key={subject.id}>
+            <Link key={subject.id} href="./subject" style={styles.courseBox1}>
+              <View style={styles.courseBox}>
                 <Text style={styles.category}>{subject.attributes.name}</Text>
                 <Text style={styles.courses}>
                   {subject.attributes.courses} курсууд
@@ -75,8 +75,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   scrollBox: {
-    marginTop: "25%",
     width: "100%",
+    marginTop: "10%",
   },
   courseContainer: {
     flexDirection: "row",
@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   },
   courseBox: {
     backgroundColor: "#F6F7FB",
-    width: 180,
-    height: "100%",
+    width: 170,
+    height: 80,
     padding: 15,
     shadowColor: "#334155",
     shadowOffset: { width: 2, height: 4 },
@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   courseBox1: {
-    width: "48%",
-    height: "8%",
+    width: 170,
     marginBottom: 20,
+    aspectRatio: 1.5,
   },
   headerBox2: {
     display: "flex",
@@ -126,19 +126,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   headerBox: {
-    position: "absolute",
-    top: "5%",
-    display: "flex",
-    flexDirection: "row",
     width: "90%",
-    height: "auto",
+    flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: "10%",
   },
   body: {
     flex: 1,
     backgroundColor: "white",
-    height: "100%",
-    width: "100%",
     alignItems: "center",
   },
 });

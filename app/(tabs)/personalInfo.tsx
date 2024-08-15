@@ -1,18 +1,39 @@
-"use client";
+import { useState } from "react";
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
 import Icon1 from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
+import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
 export default function Profile() {
+  const [image, setImage] = useState(
+    "https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+  );
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    } else {
+      Alert.alert("Image selection was canceled.");
+    }
+  };
+
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -26,11 +47,8 @@ export default function Profile() {
       </View>
       <View style={styles.profilebox}>
         <View style={styles.profilePicBox}>
-          <Image
-            source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
-            style={styles.profilePic}
-          />
-          <TouchableOpacity style={styles.editbox}>
+          <Image source={{ uri: image }} style={styles.profilePic} />
+          <TouchableOpacity style={styles.editbox} onPress={pickImage}>
             <Icon1 name="edit-2" style={styles.edit} />
           </TouchableOpacity>
         </View>

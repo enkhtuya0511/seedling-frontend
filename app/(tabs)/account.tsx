@@ -55,39 +55,29 @@ export default function HomeScreen() {
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./notification">
+
+        <Link href="./homeScreen">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
-                <Feather name="bell" style={styles.size} />
+                <Icon name="chalkboard-teacher" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>Мэдэгдэл</Text>
+              <Text style={styles.itemName}>Багш болох</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./Security">
+        <Link href="./homeScreen">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
               <View style={styles.iconStyle}>
-                <Feather name="shield" style={styles.size} />
+                <Icon1 name="key" style={styles.size} />
               </View>
-              <Text style={styles.itemName}>Аюулгүй байдал</Text>
+              <Text style={styles.itemName}>Нууц үг солих</Text>
             </View>
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        {/* <Link href="./helpcenter">
-          <View style={styles.accountItem}>
-            <View style={styles.itemBox}>
-              <View style={styles.iconStyle}>
-                <Ionicons name="help" style={styles.size} />
-              </View>
-              <Text style={styles.itemName}>Тусламжийн төв</Text>
-            </View>
-            <Icon1 name="right" style={styles.size} />
-          </View>
-        </Link> */}
         <Link href="./homeScreen">
           <View style={styles.accountItem}>
             <View style={styles.itemBox}>
@@ -198,7 +188,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 100,
-    backgroundColor: "lime",
   },
   scrollContent: {
     paddingBottom: 80,
