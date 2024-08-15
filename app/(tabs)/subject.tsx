@@ -9,7 +9,7 @@ import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
 import { StatusBar } from "expo-status-bar";
 
-export default function HomeScreen() {
+export default function Subject() {
   const subjectList = [
     { id: 1, attributes: { name: "Шинжлэх ухаан", courses: "32" } },
     { id: 2, attributes: { name: "Математик", courses: "61" } },

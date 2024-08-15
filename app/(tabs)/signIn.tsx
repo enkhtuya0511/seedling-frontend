@@ -13,7 +13,7 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
-export default function Profile() {
+export default function SignIn() {
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>

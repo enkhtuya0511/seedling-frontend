@@ -14,7 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
-export default function Profile() {
+export default function PersonalInfo() {
   const [image, setImage] = useState(
     "https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
   );

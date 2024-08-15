@@ -1,18 +1,9 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
-import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 import { StatusBar } from "expo-status-bar";
 
-export default function HomeScreen() {
-  const [fontsLoaded] = useFonts({
-    Playwrite: require("@/assets/fonts/Playwrite.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
+export default function Home() {
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -22,7 +13,7 @@ export default function HomeScreen() {
         <Text style={styles.textbox}>морил</Text>
       </View>
       <TouchableOpacity style={styles.tutortbtn}>
-        <Link href="./profile" style={styles.studentbtn1}>
+        <Link href="./signUp" style={styles.studentbtn1}>
           <View style={styles.studentbtn2}>
             <Text style={styles.btntext}>Эхэлцгээе</Text>
           </View>

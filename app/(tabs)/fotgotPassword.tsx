@@ -6,15 +6,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-// import { TextInput } from "react-native-gesture-handler";
-import Checkbox from "expo-checkbox";
-import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
-export default function Profile() {
-  const [isChecked, setChecked] = useState(false);
+export default function ForgotPassword() {
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />

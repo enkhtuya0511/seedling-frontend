@@ -13,7 +13,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
 
-export default function HomeScreen() {
+export default function Account() {
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />

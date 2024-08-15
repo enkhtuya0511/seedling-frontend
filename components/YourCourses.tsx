@@ -1,60 +1,66 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import Icon1 from "react-native-vector-icons/Fontisto";
-import Octicons from "react-native-vector-icons/Octicons";
-import Feather from "react-native-vector-icons/Feather";
+import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
-import YourCourses from "../../components/YourCourses";
 
-export default function HomeScreen() {
+export default function YourCourses() {
+  const subjectList = [
+    { id: 1, attributes: { name: "Шинжлэх ухаан", courses: "32" } },
+    { id: 2, attributes: { name: "Математик", courses: "61" } },
+    { id: 3, attributes: { name: "Нийгмийн судлал", courses: "25" } },
+    { id: 4, attributes: { name: "Урлаг", courses: "17" } },
+    { id: 5, attributes: { name: "Түүх", courses: "19" } },
+    { id: 6, attributes: { name: "Хөгжим", courses: "12" } },
+    { id: 7, attributes: { name: "Гадаад хэл", courses: "53" } },
+    {
+      id: 8,
+      attributes: { name: "Компьютерийн шинжлэх ухаан", courses: "20" },
+    },
+  ];
   return (
     <View style={styles.body}>
-      <StatusBar style="light" />
-      {/* Header */}
-      <View style={styles.headerBox}>
-        <View style={styles.border}>
-          <Icon name="book-reader" style={styles.logo} />
+      <StatusBar style="dark" />
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.headerCard}>
+          <View style={styles.textBox}>
+            <Text style={styles.title}>Өдөр тутмын курсууд</Text>
+            <Text style={styles.subtitle}>Some kind of text</Text>
+          </View>
+          <View style={styles.border1}>
+            <Icon name="book-reader" style={styles.logo1} />
+          </View>
         </View>
-        <Text style={styles.name}>TutorHub</Text>
-        <View style={styles.iconsBox}>
-          <Icon1 name="search" style={styles.logo} />
+        <View style={styles.titleBox}>
+          <Text style={styles.subjectTitle}>Таны курсууд</Text>
         </View>
-      </View>
-
-      {/* Scrollable Content */}
-      <YourCourses></YourCourses>
-      {/* Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity style={styles.tab}>
-          <Link href="/homeScreen" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Octicons name="home" style={styles.tabBarIcon1} />
+        {subjectList.map((subject) => (
+          <Link href="" style={styles.courseBox1} key={subject.id}>
+            <View style={styles.courseBox}>
+              <Text style={styles.category}>{subject.attributes.name}</Text>
+              <View style={styles.infoBox}>
+                <View style={styles.tutorInfoBox}>
+                  <Image
+                    source="https://res-console.cloudinary.com/dsfypbtbn/thumbnails/transform/v1/image/upload/v1/c2FtcGxlcy9tYW4tcG9ydHJhaXQ=/template_primary"
+                    style={styles.profilePic}
+                  />
+                  <View>
+                    <Text style={styles.title}>Tutor Name</Text>
+                    <Text>Age: 20</Text>
+                  </View>
+                </View>
+                <View style={styles.gap}>
+                  <Text>Schedule</Text>
+                  <Text>Date: 2024/8/25 Time: 13:50</Text>
+                </View>
+              </View>
             </View>
           </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./teacherSave" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="bookmark" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./exploreCourses" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="book" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./account" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Icon name="user" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-      </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }

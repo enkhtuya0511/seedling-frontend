@@ -8,14 +8,13 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
-// import { TextInput } from "react-native-gesture-handler";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Icon1 from "react-native-vector-icons/Feather";
 import { Image } from "expo-image";
 
-export default function Profile() {
+export default function CreateProfile() {
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>

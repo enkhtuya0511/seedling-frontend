@@ -13,7 +13,7 @@ import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 
-export default function HomeScreen() {
+export default function Teacher() {
   const [fontsLoaded] = useFonts({
     Playwrite: require("@/assets/fonts/Playwrite.ttf"),
   });
