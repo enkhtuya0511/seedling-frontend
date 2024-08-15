@@ -1,13 +1,9 @@
-import {
-  Image,
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 import { useFonts } from "expo-font";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -19,80 +15,99 @@ export default function HomeScreen() {
   }
   return (
     <View style={styles.body}>
+      <StatusBar style="dark" />
+      <Icon name="book-reader" style={styles.logo} />
       <View style={styles.textBox1}>
-        <Text style={styles.textbox}>Welcoeme to</Text>
-        <Text style={styles.textbox}>TutorHub</Text>
+        <Text style={styles.textbox}>Tutorhub-д тавтай</Text>
+        <Text style={styles.textbox}>морил</Text>
       </View>
-      <View style={styles.buttonBox}>
-        <TouchableOpacity style={styles.studentbtn}>
-          <Text style={styles.btntext}>Student</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tutortbtn}>
-          <Text style={styles.btntext}>Tutor</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.orBox}>
-        <Text style={styles.styleText}>Or</Text>
-      </View>
+      <TouchableOpacity style={styles.tutortbtn}>
+        <Link href="./profile" style={styles.studentbtn1}>
+          <View style={styles.studentbtn2}>
+            <Text style={styles.btntext}>Эхэлцгээе</Text>
+          </View>
+        </Link>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.tutortbtn1}>
+        <Link href="./signIn" style={styles.studentbtn1}>
+          <View style={styles.studentbtn2}>
+            <Text style={styles.btntext1}>Нэвтрэх</Text>
+          </View>
+        </Link>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  textBox1: {
+  logo: {
+    color: "#334155",
+    fontSize: 90,
     position: "absolute",
     top: "30%",
+  },
+  textBox1: {
+    position: "absolute",
+    top: "40%",
     justifyContent: "center",
     alignItems: "center",
   },
   textbox: {
-    fontFamily: "Playwrite",
-    fontSize: 30,
-    color: "orange",
+    fontFamily: "sans-serif",
+    fontSize: 40,
+    color: "#334155",
   },
-  styleText: {
-    fontSize: 15,
-  },
-  orBox: {
-    position: "absolute",
-    backgroundColor: "white",
-    bottom: "17.5%",
+  btntext1: {
+    color: "#334155",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginLeft: "2%",
   },
   btntext: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
   },
-  buttonBox: {
-    width: "100%",
-    height: "17%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    position: "absolute",
-    bottom: "10%",
-  },
   body: {
+    overflow: "hidden",
     width: "100%",
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
   },
-  studentbtn: {
-    width: "70%",
-    height: "38%",
-    backgroundColor: "orange",
-    borderRadius: 48,
+  studentbtn1: {
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+  },
+  studentbtn2: {
+    width: "320%",
+    height: "100%",
+    justifyContent: "center",
+    display: "flex",
     alignItems: "center",
   },
   tutortbtn: {
-    width: "70%",
-    height: "38%",
-    backgroundColor: "orange",
+    width: "80%",
+    height: "7%",
+    backgroundColor: "#334155",
     borderRadius: 48,
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    bottom: "20%",
+  },
+  tutortbtn1: {
+    width: "80%",
+    height: "7%",
+    backgroundColor: "rgb(232, 233, 235)",
+    borderRadius: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: "10%",
   },
 });
