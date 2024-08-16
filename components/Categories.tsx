@@ -1,15 +1,9 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/AntDesign";
-import { StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
-export default function Courses() {
+export default function Categories() {
   const subjectList = [
     { id: 1, attributes: { name: "Шинжлэх ухаан", courses: "32" } },
     { id: 2, attributes: { name: "Математик", courses: "61" } },
@@ -61,9 +55,7 @@ export default function Courses() {
             <Link key={subject.id} href="./subject" style={styles.courseBox1}>
               <View style={styles.courseBox}>
                 <Text style={styles.category}>{subject.attributes.name}</Text>
-                <Text style={styles.courses}>
-                  {subject.attributes.courses} курсууд
-                </Text>
+                <Text style={styles.courses}>{subject.attributes.courses} курсууд</Text>
               </View>
             </Link>
           ))}

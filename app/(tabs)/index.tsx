@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { StatusBar } from "expo-status-bar";
 
-export default function Home() {
+export default function HomeScreen() {
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -13,7 +13,7 @@ export default function Home() {
         <Text style={styles.textbox}>морил</Text>
       </View>
       <TouchableOpacity style={styles.tutortbtn}>
-        <Link href="./signUp" style={styles.studentbtn1}>
+        <Link href="./profile" style={styles.studentbtn1}>
           <View style={styles.studentbtn2}>
             <Text style={styles.btntext}>Эхэлцгээе</Text>
           </View>

@@ -1,19 +1,12 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/AntDesign";
-import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
 
-export default function Account() {
+export default function Profile() {
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -90,38 +83,6 @@ export default function Account() {
           </View>
         </Link>
       </ScrollView>
-
-      {/* Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity>
-          <Link href="./homeScreen" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Octicons name="home" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./teacherSave" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="bookmark" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./exploreCourses" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="book" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Link href="/account" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Icon name="user" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }

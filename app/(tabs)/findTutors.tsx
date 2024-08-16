@@ -1,13 +1,26 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/Fontisto";
-import Octicons from "react-native-vector-icons/Octicons";
-import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
-import CoursesToExplore from "../../components/CoursesToExplore";
 
-export default function ExploreCourses() {
+export default function FindTutors() {
+  const subjectList = [
+    { id: 1, attributes: { name: "Шинжлэх ухаан", courses: "32" } },
+    { id: 2, attributes: { name: "Математик", courses: "61" } },
+    { id: 3, attributes: { name: "Нийгмийн судлал", courses: "25" } },
+    { id: 4, attributes: { name: "Урлаг", courses: "17" } },
+    { id: 5, attributes: { name: "Түүх", courses: "19" } },
+    { id: 6, attributes: { name: "Хөгжим", courses: "12" } },
+    { id: 7, attributes: { name: "Гадаад хэл", courses: "53" } },
+    {
+      id: 8,
+      attributes: { name: "Компьютерийн шинжлэх ухаан", courses: "20" },
+    },
+  ];
+
+  const otherSections = ["Өдөр тутмын курсууд", "Математик", "Түүх", "Хөгжим", "Гадаад хэл", "Нийгмийн судлал"];
+
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -19,43 +32,51 @@ export default function ExploreCourses() {
         <Text style={styles.name}>TutorHub</Text>
         <View style={styles.iconsBox}>
           <Icon1 name="search" style={styles.logo} />
+          <Icon1 name="bell" style={styles.logo} />
         </View>
       </View>
 
       {/* Scrollable Content */}
-      <CoursesToExplore></CoursesToExplore>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        {/* "Сэдвээр нь судлах" Section */}
+        <View style={styles.scrollBox}>
+          <View style={styles.titleBox}>
+            <Text style={styles.subjectTitle}>Сэдвээр нь судлах</Text>
+            <Link href="./courses">
+              <Icon name="arrow-right" style={styles.subjectTitle} />
+            </Link>
+          </View>
 
-      {/* Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity>
-          <Link href="./homeScreen" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Octicons name="home" style={styles.tabBarIcon1} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryBox}>
+            {subjectList.map((subject) => (
+              <View style={styles.courseBox} key={subject.id}>
+                <Text style={styles.category}>{subject.attributes.name}</Text>
+                <Text style={styles.courses}>{subject.attributes.courses} курсууд</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Other Sections */}
+        {otherSections.map((sectionTitle, index) => (
+          <View style={styles.otherSection} key={index}>
+            <View style={styles.titleBox}>
+              <Text style={styles.otherSectionTitle}>{sectionTitle}</Text>
+              <Link href="./courses">
+                <Icon name="arrow-right" style={styles.subjectTitle} />
+              </Link>
             </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./teacherSave" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="bookmark" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Link href="/exploreCourses" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="book" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./account" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Icon name="user" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-      </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryBox}>
+              {subjectList.map((subject) => (
+                <View style={styles.courseBoxOther} key={subject.id}>
+                  <Text style={styles.categoryOther}>{subject.attributes.name}</Text>
+                  <Text style={styles.coursesOther}>{subject.attributes.courses} курсууд</Text>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -209,7 +230,7 @@ const styles = StyleSheet.create({
   iconsBox: {
     flexDirection: "row",
     gap: 15,
-    marginLeft: "35%",
+    marginLeft: "29%",
   },
   border: {
     width: 50,
