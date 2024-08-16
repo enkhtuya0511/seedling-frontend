@@ -1,20 +1,9 @@
-"use client";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import { Link } from "expo-router";
-import Icon from "react-native-vector-icons/FontAwesome5";
-// import { TextInput } from "react-native-gesture-handler";
-import Checkbox from "expo-checkbox";
-import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function Profile() {
-  const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -33,27 +22,11 @@ export default function Profile() {
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Mэйл хаяг</Text>
           </View>
-          <TextInput
-            placeholder="Oруулах"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-          />
+          <TextInput placeholder="Oруулах" placeholderTextColor={"gray"} style={styles.input} />
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Hууц үг</Text>
           </View>
-          <TextInput
-            placeholder="Oруулах"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-          />
-          <View style={styles.rememberMeBox}>
-            <Checkbox
-              value={isChecked}
-              onValueChange={setChecked}
-              color={isChecked ? "#334155" : undefined}
-            />
-            <Text>Намайг санаx</Text>
-          </View>
+          <TextInput placeholder="Oруулах" placeholderTextColor={"gray"} style={styles.input} />
         </View>
         <Link href="./fotgotPassword">
           <Text style={styles.forgotpw}>Нууц үгээ мартсан</Text>
@@ -93,12 +66,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  rememberMeBox: {
-    width: "90%",
-    display: "flex",
-    flexDirection: "row",
-    gap: 10,
   },
   button: {
     width: "80%",

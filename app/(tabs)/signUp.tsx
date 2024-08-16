@@ -1,14 +1,7 @@
 "use client";
+
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
-import { useRouter } from "expo-router";
-// import Checkbox from "expo-checkbox";
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { StatusBar } from "expo-status-bar";
 
@@ -17,39 +10,14 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [isChecked, setChecked] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-
-    try {
-      const response = await fetch("http://localhost:3000/api/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: "Your Full Name",
-          email,
-          phoneNumber: "Your Phone Number",
-          password,
-        }),
-      });
-
-      if (!response.ok) {
-        const { message } = await response.json();
-        throw new Error(message);
-      }
-
-      router.push("./homeScreen");
-    } catch (error: any) {
-      setError(error.message || "Failed to sign up");
-    }
+    //signup logic
   };
 
   return (
@@ -66,13 +34,7 @@ export default function SignUp() {
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Имэйл</Text>
           </View>
-          <TextInput
-            placeholder="Имэйл"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-          />
+          <TextInput placeholder="Имэйл" placeholderTextColor={"gray"} style={styles.input} value={email} onChangeText={setEmail} />
           <View style={styles.namebox}>
             <Text style={styles.inputName}>Утасны дугаар</Text>
           </View>
@@ -105,14 +67,6 @@ export default function SignUp() {
             value={confirmPassword}
             onChangeText={setConfirmPassword}
           />
-          {/* <View style={styles.rememberMeBox}>
-            <Checkbox
-              value={isChecked}
-              onValueChange={setChecked}
-              color={isChecked ? "#334155" : undefined}
-            />
-            <Text>Намайг санаx</Text>
-          </View> */}
           {error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </View>

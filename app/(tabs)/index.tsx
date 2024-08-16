@@ -1,18 +1,9 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
-import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
-  const [fontsLoaded] = useFonts({
-    Playwrite: require("@/assets/fonts/Playwrite.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />

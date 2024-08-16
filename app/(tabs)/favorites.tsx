@@ -1,22 +1,11 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { Link } from "expo-router";
-import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/Fontisto";
-import Octicons from "react-native-vector-icons/Octicons";
-import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "@/styles/teacherSave-style";
 
-export default function HomeScreen() {
-  const [fontsLoaded] = useFonts({
-    Playwrite: require("@/assets/fonts/Playwrite.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
+export default function Favorites() {
   const subjectList = [
     { id: 1, attributes: { name: "Шинжлэх ухаан", courses: "32" } },
     { id: 2, attributes: { name: "Математик", courses: "61" } },
@@ -29,15 +18,6 @@ export default function HomeScreen() {
       id: 8,
       attributes: { name: "Компьютерийн шинжлэх ухаан", courses: "20" },
     },
-  ];
-
-  const otherSections = [
-    "Өдөр тутмын курсууд",
-    "Математик",
-    "Түүх",
-    "Хөгжим",
-    "Гадаад хэл",
-    "Нийгмийн судлал",
   ];
 
   return (
@@ -56,10 +36,7 @@ export default function HomeScreen() {
       </View>
 
       {/* Scrollable Content */}
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* "Сэдвээр нь судлах" Section */}
         {subjectList.map((subject) => (
           <Link href="./teacher" style={styles.courseBox1} key={subject.id}>
@@ -84,38 +61,6 @@ export default function HomeScreen() {
           </Link>
         ))}
       </ScrollView>
-
-      {/* Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity>
-          <Link href="/homeScreen" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Octicons name="home" style={styles.tabBarIcon1} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Link href="./teacherSave" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="bookmark" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./exploreCourses" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Feather name="book" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Link href="./account" style={styles.tab1}>
-            <View style={styles.tab1}>
-              <Icon name="user" style={styles.tabBarIcon} />
-            </View>
-          </Link>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
