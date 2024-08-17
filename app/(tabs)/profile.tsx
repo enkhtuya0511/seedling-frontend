@@ -18,7 +18,7 @@ export default function Profile() {
         {user?.profilePic.length === 0 ? (
           <Image source={require("../../assets/images/user.jpg")} style={styles.profilePic} />
         ) : (
-          <Image source={{ uri: "https://avatar.iran.liara.run/public/86" }} style={styles.profilePic} />
+          <Image source={{ uri: user?.profilePic }} style={styles.profilePic} />
         )}
         <View style={styles.textContainer}>
           <Text style={styles.username}>{user?.fullName}</Text>
