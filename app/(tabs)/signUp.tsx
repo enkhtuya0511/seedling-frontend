@@ -52,8 +52,13 @@ export default function signUp() {
                 <TextInput style={styles.input} placeholder="Бүтэн нэр" />
                 <TextInput style={styles.input} placeholder="Утасны дугаар" keyboardType="phone-pad" />
                 <TextInput style={styles.input} placeholder="Мэйл хаяг" keyboardType="email-address" />
-                <TextInput style={styles.input} placeholder="Нууц үг" />
-                <TextInput style={styles.input} placeholder="Нууц үгээ батлах" />
+                <TextInput style={styles.input} placeholder="Нууц үг" placeholderTextColor={"#828282"} secureTextEntry={true} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Нууц үгээ батлах"
+                  placeholderTextColor={"#828282"}
+                  secureTextEntry={true}
+                />
               </View>
               <Pressable style={styles.button}>
                 <Text style={styles.buttonText}>Бүртгүүлэх</Text>

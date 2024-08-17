@@ -1,12 +1,14 @@
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icon1 from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
+import { useAuth } from "@/contexts/AuthProvider";
 
 export default function Profile() {
+  const { onLogout } = useAuth();
   return (
     <View style={styles.body}>
       <StatusBar style="dark" />
@@ -16,9 +18,6 @@ export default function Profile() {
           <Icon name="book-reader" style={styles.logo} />
         </View>
         <Text style={styles.name}>TutorHub</Text>
-        {/* <View style={styles.iconsBox}>
-          <Icon1 name="dots-horizontal-circle-outline" style={styles.logo} />
-        </View> */}
       </View>
 
       <View style={styles.userInfo}>
@@ -71,17 +70,17 @@ export default function Profile() {
             <Icon1 name="right" style={styles.size} />
           </View>
         </Link>
-        <Link href="./homeScreen">
-          <View style={styles.accountItem}>
-            <View style={styles.itemBox}>
-              <View style={styles.iconStyle}>
-                <Feather name="log-out" style={styles.size} />
-              </View>
-              <Text style={styles.itemName}>Гарах</Text>
+        <View style={styles.accountItem}>
+          <View style={styles.itemBox}>
+            <View style={styles.iconStyle}>
+              <Feather name="log-out" style={styles.size} />
             </View>
-            <Icon1 name="right" style={styles.size} />
+            <Pressable onPress={onLogout}>
+              <Text style={styles.itemName}>Гарах</Text>
+            </Pressable>
           </View>
-        </Link>
+          <Icon1 name="right" style={styles.size} />
+        </View>
       </ScrollView>
     </View>
   );
