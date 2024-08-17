@@ -30,12 +30,11 @@ export default function signIn() {
             <Text style={styles.buttonText}>Нэвтрэх</Text>
           </Pressable>
         </View>
-        <Text style={{ color: "#b3b3b3", marginTop: 20 }}>
-          Аккаунтгүй юу?{" "}
-          <Link href={"/signUp"} style={{ color: "#fff" }}>
-            Бүртгүүлэх
-          </Link>
-        </Text>
+        <Link href={"/signUp"}>
+          <Text style={{ color: "#b3b3b3", marginTop: 20 }}>
+            Аккаунтгүй юу? <Text style={{ color: "#fff" }}>Бүртгүүлэх</Text>
+          </Text>
+        </Link>
       </View>
     </TouchableWithoutFeedback>
   );

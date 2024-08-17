@@ -10,7 +10,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#ffffff",
-          display: route.name === "index" || route.name === "signIn" ? "none" : "flex",
+          display: route.name === "index" || route.name === "signIn" || route.name === "signUp" ? "none" : "flex",
           paddingTop: 10,
         },
         tabBarButton: ["index", "signIn"].includes(route.name)

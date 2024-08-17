@@ -1,171 +1,72 @@
-"use client";
-
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { StatusBar } from "expo-status-bar";
+import { Link } from "expo-router";
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Pressable,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Feather from "@expo/vector-icons/Feather";
+import { styles } from "@/styles/signUp-style";
 
-export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState("");
+export default function signUp() {
+  const [image, setImage] = useState<string | null>(null);
 
-  const handleSignUp = async () => {
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
-    //signup logic
   };
-
   return (
-    <View style={styles.body}>
-      <StatusBar style="dark" />
-      <View style={styles.headerBox}>
-        <View style={styles.border}>
-          <Icon name="book-reader" style={styles.logo} />
-        </View>
-        <Text style={styles.headerText}>Бүртгэл үүсгэх</Text>
-      </View>
-      <View style={styles.profilebox}>
-        <View style={styles.profileInfoBox}>
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Имэйл</Text>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.container}>
+            <View style={styles.context}>
+              <View style={styles.innerContainer}>
+                <Text style={styles.title}>Xyвийн мэдээлэл 📝</Text>
+                <View style={{ position: "relative" }}>
+                  {image ? (
+                    <Image source={{ uri: image }} style={styles.profileImage} />
+                  ) : (
+                    <Image source={require("../../assets/images/profilePic.png")} style={styles.profileImage} />
+                  )}
+                  <Pressable style={styles.updatePic} onPress={pickImage}>
+                    <Feather name="edit-2" size={18} color="black" />
+                  </Pressable>
+                </View>
+                <TextInput style={styles.input} placeholder="Бүтэн нэр" />
+                <TextInput style={styles.input} placeholder="Утасны дугаар" keyboardType="phone-pad" />
+                <TextInput style={styles.input} placeholder="Мэйл хаяг" keyboardType="email-address" />
+                <TextInput style={styles.input} placeholder="Нууц үг" />
+                <TextInput style={styles.input} placeholder="Нууц үгээ батлах" />
+              </View>
+              <Pressable style={styles.button}>
+                <Text style={styles.buttonText}>Бүртгүүлэх</Text>
+              </Pressable>
+            </View>
+            <Link href={"/signIn"}>
+              <Text style={{ color: "#b3b3b3", marginTop: 20 }}>
+                Аккаунттай юу? <Text style={{ color: "#fff" }}>Нэвтрэх</Text>
+              </Text>
+            </Link>
           </View>
-          <TextInput placeholder="Имэйл" placeholderTextColor={"gray"} style={styles.input} value={email} onChangeText={setEmail} />
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Утасны дугаар</Text>
-          </View>
-          <TextInput
-            placeholder="Oруулах"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-          />
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Нууц үг</Text>
-          </View>
-          <TextInput
-            placeholder="Нууц үг"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-          <View style={styles.namebox}>
-            <Text style={styles.inputName}>Нууц үгээ батлаx</Text>
-          </View>
-          <TextInput
-            placeholder="Нууц үгээ батлаx"
-            placeholderTextColor={"gray"}
-            style={styles.input}
-            secureTextEntry
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-          />
-          {error ? <Text style={styles.error}>{error}</Text> : null}
-        </View>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Бүртгүүлэх</Text>
-      </TouchableOpacity>
-    </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    color: "#334155",
-    fontSize: 40,
-  },
-  border: {
-    borderColor: "#334155",
-    borderWidth: 4,
-    borderRadius: 40,
-    width: 60,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  inputName: {
-    fontSize: 15,
-    fontWeight: "bold",
-  },
-  namebox: {
-    width: "90%",
-  },
-  rememberMeBox: {
-    width: "90%",
-    display: "flex",
-    flexDirection: "row",
-    gap: 10,
-  },
-  button: {
-    width: "80%",
-    height: "7%",
-    borderRadius: 40,
-    backgroundColor: "#334155",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "black",
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    position: "absolute",
-    bottom: "8%",
-  },
-  buttonText: {
-    fontWeight: "700",
-    fontSize: 20,
-    color: "white",
-  },
-  input: {
-    width: "90%",
-    borderColor: "#334155",
-    borderBottomWidth: 1,
-    height: 40,
-    fontSize: 22,
-  },
-  profileInfoBox: {
-    width: "100%",
-    height: "auto",
-    alignItems: "center",
-    gap: 20,
-  },
-  profilebox: {
-    width: "100%",
-    height: "70%",
-    display: "flex",
-    alignItems: "center",
-    gap: 40,
-  },
-  headerText: {
-    fontSize: 35,
-  },
-  headerBox: {
-    position: "absolute",
-    top: "5%",
-    display: "flex",
-    flexDirection: "row",
-    gap: 10,
-    width: "100%",
-    height: "auto",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  body: {
-    overflow: "hidden",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  error: {
-    color: "red",
-    marginTop: 10,
-  },
-});
