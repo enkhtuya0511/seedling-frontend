@@ -11,13 +11,27 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Feather from "@expo/vector-icons/Feather";
 import { styles } from "@/styles/signUp-style";
+import { useAuth } from "@/contexts/AuthProvider";
+import { SignUpInput } from "@/generated";
 
 export default function signUp() {
+  const { onSignUp, signUpLoading } = useAuth();
   const [image, setImage] = useState<string | null>(null);
+  const [inputData, setInputData] = useState({} as SignUpInput);
+  const [error, setError] = useState<string | null>(null);
+
+  const signUpHandler = () => {
+    setError(null);
+    if (!inputData.fullName || !inputData.phoneNumber || !inputData.email || !inputData.password) {
+      return setError("Бүх талбаруудыг бөглөх шаардлагатай.");
+    }
+    onSignUp(inputData);
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -26,10 +40,14 @@ export default function signUp() {
       aspect: [4, 3],
       quality: 1,
     });
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      setInputData((prev) => ({ ...prev, profilePic: result.assets[0].uri }));
     }
+  };
+
+  const handleData = (value: string, field: string) => {
+    setInputData((prev) => ({ ...prev, [field]: value }));
   };
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -49,19 +67,38 @@ export default function signUp() {
                     <Feather name="edit-2" size={18} color="black" />
                   </Pressable>
                 </View>
-                <TextInput style={styles.input} placeholder="Бүтэн нэр" />
-                <TextInput style={styles.input} placeholder="Утасны дугаар" keyboardType="phone-pad" />
-                <TextInput style={styles.input} placeholder="Мэйл хаяг" keyboardType="email-address" />
-                <TextInput style={styles.input} placeholder="Нууц үг" placeholderTextColor={"#828282"} secureTextEntry={true} />
                 <TextInput
-                  style={styles.input}
-                  placeholder="Нууц үгээ батлах"
+                  style={[styles.input, error && !inputData.fullName ? styles.inputError : null]}
+                  placeholder="Бүтэн нэр"
+                  onChangeText={(value) => handleData(value, "fullName")}
+                />
+                <TextInput
+                  style={[styles.input, error && !inputData.phoneNumber ? styles.inputError : null]}
+                  placeholder="Утасны дугаар"
+                  keyboardType="phone-pad"
+                  onChangeText={(value) => handleData(value, "phoneNumber")}
+                />
+                <TextInput
+                  style={[styles.input, error && !inputData.email ? styles.inputError : null]}
+                  placeholder="Мэйл хаяг"
+                  keyboardType="email-address"
+                  onChangeText={(value) => handleData(value, "email")}
+                />
+                <TextInput
+                  style={[styles.input, error && !inputData.password ? styles.inputError : null]}
+                  placeholder="Нууц үг"
                   placeholderTextColor={"#828282"}
                   secureTextEntry={true}
+                  onChangeText={(value) => handleData(value, "password")}
                 />
+                {error && <Text style={styles.errorText}>{error}</Text>}
               </View>
-              <Pressable style={styles.button}>
-                <Text style={styles.buttonText}>Бүртгүүлэх</Text>
+              <Pressable style={styles.button} onPress={signUpHandler} disabled={signUpLoading}>
+                {signUpLoading ? (
+                  <ActivityIndicator size="small" color="#20222a" />
+                ) : (
+                  <Text style={styles.buttonText}>Бүртгүүлэх</Text>
+                )}
               </Pressable>
             </View>
             <Link href={"/signIn"}>
