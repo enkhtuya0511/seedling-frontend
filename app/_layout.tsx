@@ -1,5 +1,5 @@
-import { Stack } from "expo-router";
 import "react-native-reanimated";
+import { Stack } from "expo-router";
 import ApolloProviders from "@/provider/apollo-provider";
 
 export default function RootLayout() {
