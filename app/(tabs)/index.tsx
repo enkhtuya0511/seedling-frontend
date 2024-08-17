@@ -1,104 +1,47 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { StatusBar } from "expo-status-bar";
+import PagerView from "react-native-pager-view";
+import { useRef } from "react";
+import { router } from "expo-router";
+import { StyleSheet, View } from "react-native";
+import { FirstView } from "@/components/subComponents/FirstView";
+import { SecondView } from "@/components/subComponents/SecondView";
 
 export default function HomeScreen() {
+  const pagerViewRef = useRef<PagerView>(null);
+  const loginHandler = () => {
+    router.push("/signIn");
+  };
+  const registerHandler = () => {
+    router.push("/signUp");
+  };
+
   return (
-    <View style={styles.body}>
-      <StatusBar style="dark" />
-      <Icon name="book-reader" style={styles.logo} />
-      <View style={styles.textBox1}>
-        <Text style={styles.textbox}>Tutorhub-д тавтай</Text>
-        <Text style={styles.textbox}>морил</Text>
-      </View>
-      <TouchableOpacity style={styles.tutortbtn}>
-        <Link href="./profile" style={styles.studentbtn1}>
-          <View style={styles.studentbtn2}>
-            <Text style={styles.btntext}>Эхэлцгээе</Text>
-          </View>
-        </Link>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.tutortbtn1}>
-        <Link href="./signIn" style={styles.studentbtn1}>
-          <View style={styles.studentbtn2}>
-            <Text style={styles.btntext1}>Нэвтрэх</Text>
-          </View>
-        </Link>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <PagerView style={styles.pagerView} initialPage={0} ref={pagerViewRef}>
+        <View style={styles.page}>
+          <FirstView
+            onStart={() => {
+              pagerViewRef.current?.setPage(1);
+            }}
+          />
+        </View>
+        <View style={styles.page}>
+          <SecondView onLogin={loginHandler} onRegister={registerHandler} />
+        </View>
+      </PagerView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  logo: {
-    color: "#334155",
-    fontSize: 90,
-    position: "absolute",
-    top: "30%",
+  container: {
+    flex: 1,
+    backgroundColor: "#181a21",
   },
-  textBox1: {
-    position: "absolute",
-    top: "40%",
+  pagerView: {
+    flex: 1,
+  },
+  page: {
+    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-  },
-  textbox: {
-    fontFamily: "sans-serif",
-    fontSize: 40,
-    color: "#334155",
-  },
-  btntext1: {
-    color: "#334155",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginLeft: "2%",
-  },
-  btntext: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  body: {
-    overflow: "hidden",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  studentbtn1: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    display: "flex",
-    alignItems: "center",
-  },
-  studentbtn2: {
-    width: "320%",
-    height: "100%",
-    justifyContent: "center",
-    display: "flex",
-    alignItems: "center",
-  },
-  tutortbtn: {
-    width: "80%",
-    height: "7%",
-    backgroundColor: "#334155",
-    borderRadius: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    bottom: "20%",
-  },
-  tutortbtn1: {
-    width: "80%",
-    height: "7%",
-    backgroundColor: "rgb(232, 233, 235)",
-    borderRadius: 48,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    bottom: "10%",
   },
 });
