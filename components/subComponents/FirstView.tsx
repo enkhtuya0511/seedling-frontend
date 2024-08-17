@@ -14,7 +14,7 @@ export const FirstView = ({ onStart }: Props) => {
 
     const timer = setTimeout(() => {
       onStart();
-    }, 3000);
+    }, 2500);
 
     return () => {
       clearTimeout(loaderTimer);
