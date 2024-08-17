@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, usePathname } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
-import { useUserLazyQuery, useLoginMutation, User, LoginInput } from "@/generated";
+import { useUserLazyQuery, useLoginMutation, User, LoginInput, useSignUpMutation, SignUpInput } from "@/generated";
 
 type Props = {
   children: React.ReactNode;
@@ -14,11 +14,14 @@ type AuthContextType = {
   onLogout: () => void;
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   loading: boolean;
+  onSignUp: (user: SignUpInput) => void;
+  signUpLoading: boolean;
 };
 const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: Props) => {
   const [loginMutation] = useLoginMutation();
+  const [signUpMutation, { loading: signUpLoading }] = useSignUpMutation();
   const [user, setUser] = useState<User | undefined>();
   const [getUser, { data: userdata, loading }] = useUserLazyQuery();
   const pathName = usePathname();
@@ -40,7 +43,6 @@ export const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     if (userdata) {
       setUser(userdata.user);
-      console.log("userdata", userdata.user);
       if (pathName === "/") {
         router.push("/home");
       }
@@ -55,7 +57,6 @@ export const AuthProvider = ({ children }: Props) => {
         },
       });
       if (data?.login) {
-        console.log("login res", data.login);
         AsyncStorage.setItem("@token", data.login.token as string);
 
         const userData = await getUser({
@@ -83,7 +84,24 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  return <AuthContext.Provider value={{ onLogout, onLogin, user, setUser, loading }}>{children}</AuthContext.Provider>;
+  const onSignUp = async (user: SignUpInput) => {
+    try {
+      const { data } = await signUpMutation({
+        variables: { input: user },
+      });
+      if (data?.signUp) {
+        router.push("/signIn");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ onLogout, onLogin, user, setUser, loading, signUpLoading, onSignUp }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = (): AuthContextType => {

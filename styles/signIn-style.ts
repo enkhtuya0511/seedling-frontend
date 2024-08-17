@@ -58,4 +58,12 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
+  },
+  inputError: {
+    borderColor: "red",
+    borderWidth: 1,
+  },
 });

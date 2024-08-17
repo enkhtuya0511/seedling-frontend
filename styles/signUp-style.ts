@@ -83,4 +83,12 @@ export const styles = StyleSheet.create({
     bottom: 15,
     right: 0,
   },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
+  },
+  inputError: {
+    borderColor: "red",
+    borderWidth: 1,
+  },
 });
