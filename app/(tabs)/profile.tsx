@@ -24,7 +24,7 @@ export default function Profile() {
           <Text style={styles.username}>{user?.fullName}</Text>
           <Text style={styles.email}>{user?.email}</Text>
         </View>
-        <Pressable onPress={() => router.push(`/profile/${user?._id}`)}>
+        <Pressable onPress={() => router.push(`/updateProfile/${user?._id}`)}>
           <Feather name="edit-3" size={30} color="#fff" />
         </Pressable>
       </View>
@@ -36,7 +36,7 @@ export default function Profile() {
           </View>
           <Text style={styles.itemText}>Хувийн мэдээлэл</Text>
         </View>
-        <Pressable onPress={() => router.push(`/profile/${user?._id}`)}>
+        <Pressable onPress={() => router.push(`/personalInfo`)}>
           <AntDesign name="right" size={24} color="#fff" />
         </Pressable>
       </View>
