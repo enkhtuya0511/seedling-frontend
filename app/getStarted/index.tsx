@@ -25,9 +25,24 @@ export default function getStarted() {
     if (field !== "priceRange") {
       setSearchInput((prev) => ({ ...prev, [field]: value }));
     } else {
-      setSearchInput((prev) => ({ ...prev, priceRange: { max: value[1].toString(), min: value[0].toString() } }));
+      setSearchInput((prev) => ({
+        ...prev,
+        priceRange: { max: value[1].toString(), min: value[0].toString() },
+      }));
     }
   }
+
+  const handlePress = (label: string, field: keyof GetTeachersInput) => {
+    setSearchInput((prev) => {
+      const currentFieldArray = (prev[field] || []) as string[];
+      if (currentFieldArray?.includes(label))
+        return {
+          ...prev,
+          [field]: currentFieldArray.filter((item) => item !== label),
+        };
+      else return { ...prev, [field]: [...currentFieldArray, label] };
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,11 +53,23 @@ export default function getStarted() {
           }}
           handleData={handleData}
         />
-        <SearchFirstView pagerViewRef={pagerViewRef} categoryId={searchInput.categoryId} handleData={handleData} />
+        <SearchFirstView
+          pagerViewRef={pagerViewRef}
+          categoryId={searchInput.categoryId}
+          handleData={handleData}
+        />
         <SearchSecondView pagerViewRef={pagerViewRef} handleData={handleData} />
-        <SearchThirdView pagerViewRef={pagerViewRef} />
-        <SearchFourthView pagerViewRef={pagerViewRef} />
-        <SearchFifthView />
+        <SearchThirdView
+          pagerViewRef={pagerViewRef}
+          handlePress={handlePress}
+          searchInput={searchInput}
+        />
+        <SearchFourthView
+          pagerViewRef={pagerViewRef}
+          handleData={handleData}
+          searchInput={searchInput}
+        />
+        <SearchFifthView searchInput={searchInput}/>
       </PagerView>
     </View>
   );

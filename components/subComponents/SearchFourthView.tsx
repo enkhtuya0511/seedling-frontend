@@ -1,20 +1,24 @@
 import { Pressable, Text, View } from "react-native";
-import { useState } from "react";
+import { GetTeachersInput } from "@/generated";
+import PagerView from "react-native-pager-view";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "@/styles/search-style";
-import PagerView from "react-native-pager-view";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
+  handleData: (arg: any, field: string) => void;
+  searchInput: GetTeachersInput;
 };
 
-export const SearchFourthView = ({ pagerViewRef }: Props) => {
-  const [priceRange, setRange] = useState<number[]>([0, 40000]);
+export const SearchFourthView = ({ pagerViewRef, handleData, searchInput }: Props) => {
   return (
     <View style={styles.container} key="5">
       <View style={styles.content}>
-        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => pagerViewRef.current?.setPage(3)}>
+        <Pressable
+          style={{ width: "100%", paddingLeft: 15 }}
+          onPress={() => pagerViewRef.current?.setPage(3)}
+        >
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
         <Text style={styles.text}>What's your budget for per lesson?</Text>
@@ -25,7 +29,7 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
             min={0}
             max={40000}
             step={1}
-            onValuesChange={(values) => setRange(values)}
+            onValuesChange={(values) =>handleData(values, "priceRange")}
             containerStyle={styles.sliderContainer}
             trackStyle={styles.track}
             selectedStyle={styles.selectedTrack}
@@ -33,11 +37,14 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
             pressedMarkerStyle={styles.pressedMarker}
           />
           <View style={styles.valuesContainer}>
-            <Text style={styles.valueText}>Min: {priceRange[0]}</Text>
-            <Text style={styles.valueText}>Max: {priceRange[1]}</Text>
+            <Text style={styles.valueText}>Min: {searchInput?.priceRange.min}</Text>
+            <Text style={styles.valueText}>Max: {searchInput?.priceRange.max}</Text>
           </View>
         </View>
-        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(5)}>
+        <Pressable
+          style={styles.button}
+          onPress={() => pagerViewRef.current?.setPage(5)}
+        >
           <Text style={styles.buttonText}>continue</Text>
         </Pressable>
       </View>
