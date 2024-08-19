@@ -10,9 +10,14 @@ import {
 } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 
 export default function Profile() {
   const { onLogout, user } = useAuth();
+  const [showView, setShowView] = useState(false);
+  const handlePress = () => {
+    setShowView(!showView);
+  };
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -78,12 +83,29 @@ export default function Profile() {
           <View style={styles.iconContainer}>
             <Feather name="log-out" size={24} color="#fff" />
           </View>
-          <Pressable onPress={onLogout}>
+          <Pressable onPress={handlePress}>
             <Text style={styles.itemText}>Гарах</Text>
           </Pressable>
         </View>
         <AntDesign name="right" size={24} color="#fff" />
       </View>
+      {showView && (
+        <View style={styles.logoutBox}>
+          <View style={styles.style}></View>
+          <View style={styles.logicBox}>
+            <Text style={styles.title}>Гарах</Text>
+            <Text style={styles.text}>Та гарахдаа итгэлтэй байна уу</Text>
+            <View style={styles.buttonsBox}>
+              <Pressable onPress={onLogout} style={styles.yes}>
+                <Text style={styles.itemText}>Тийм</Text>
+              </Pressable>
+              <Pressable onPress={handlePress} style={styles.no}>
+                <Text style={styles.itemTextNo}>Үгүй</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   );
 }

@@ -1,9 +1,77 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  yes: {
+    width: 100,
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
+    borderRadius: 10,
+  },
+  no: {
+    width: 100,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
+    borderRadius: 10,
+  },
+  text: {
+    color: "white",
+    marginBottom: 20,
+    fontSize: 15,
+  },
+  title: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  buttonsBox: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 50,
+  },
+  style: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+    opacity: 0.4,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logicBox: {
+    backgroundColor: "rgb(75 85 99)",
+    opacity: 1,
+    width: 300,
+    height: 150,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    shadowColor: "white",
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
+    gap: 10,
+  },
+  logoutBox: {
+    width: "111%",
+    height: "120%",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: "0%",
+    left: "0%",
+  },
   itemText: {
     fontSize: 19,
     color: "#fff",
+  },
+  itemTextNo: {
+    fontSize: 19,
+    color: "black",
   },
   iconContainer: {
     width: 60,
