@@ -2,13 +2,20 @@ import { Image } from "expo-image";
 import { useAuth } from "@/contexts/AuthProvider";
 import { View, Text, Pressable } from "react-native";
 import { styles } from "@/styles/settings-style";
-import { Feather, AntDesign, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import {
+  Feather,
+  AntDesign,
+  FontAwesome,
+  FontAwesome5,
+} from "@expo/vector-icons";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 export default function Profile() {
   const { onLogout, user } = useAuth();
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.headerContainer}>
         <Text style={styles.logo}>🌱</Text>
         <Text style={styles.name}>Аккаунт</Text>
@@ -16,7 +23,10 @@ export default function Profile() {
 
       <View style={styles.profileContainer}>
         {user?.profilePic.length === 0 ? (
-          <Image source={require("../../assets/images/user.jpg")} style={styles.profilePic} />
+          <Image
+            source={require("../../assets/images/user.jpg")}
+            style={styles.profilePic}
+          />
         ) : (
           <Image source={{ uri: user?.profilePic }} style={styles.profilePic} />
         )}
