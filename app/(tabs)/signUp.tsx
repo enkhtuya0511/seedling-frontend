@@ -18,7 +18,6 @@ import Feather from "@expo/vector-icons/Feather";
 import { styles } from "@/styles/signUp-style";
 import { useAuth } from "@/contexts/AuthProvider";
 import { SignUpInput } from "@/generated";
-import { StatusBar } from "expo-status-bar";
 
 export default function signUp() {
   const { onSignUp, signUpLoading } = useAuth();
@@ -61,7 +60,6 @@ export default function signUp() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <StatusBar style="light" />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.container}>
             <View style={styles.context}>
@@ -110,7 +108,6 @@ export default function signUp() {
                   placeholder="Мэйл хаяг"
                   keyboardType="email-address"
                   placeholderTextColor={"#828282"}
-                  a
                   onChangeText={(value) => handleData(value, "email")}
                 />
                 <TextInput
