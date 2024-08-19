@@ -3,11 +3,13 @@ import { View, Text, Pressable, ScrollView } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { styles } from "@/styles/home-style";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [value, setValue] = useState<string | null>("item 1");
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.headerContainer}>
         <Text style={styles.logo}>🌱</Text>
         <Text style={styles.name}>Seedling</Text>
@@ -15,7 +17,9 @@ export default function HomeScreen() {
 
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Tанд тохирох онлайн хувийн багш</Text>
-        <Text style={styles.desc}>Асуултанд хариулаад танд тохирох хувийн багшийг сонгоорой.</Text>
+        <Text style={styles.desc}>
+          Асуултанд хариулаад танд тохирох хувийн багшийг сонгоорой.
+        </Text>
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -33,7 +37,14 @@ export default function HomeScreen() {
           onChange={(item) => {
             setValue(item.label);
           }}
-          renderLeftIcon={() => <AntDesign style={styles.icon} color="black" name="Safety" size={20} />}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={20}
+            />
+          )}
         />
         <Pressable style={styles.button}>
           <Text>Эхлэх {"->"}</Text>
@@ -42,7 +53,9 @@ export default function HomeScreen() {
 
       <View style={styles.categoryContainer}>
         <Pressable>
-          <Text style={[styles.title, { color: "#fff" }]}>Төрлөөр нь судлах {"->"}</Text>
+          <Text style={[styles.title, { color: "#fff" }]}>
+            Төрлөөр нь судлах {"->"}
+          </Text>
         </Pressable>
         <View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -73,4 +86,13 @@ const data = [
   { label: "Item 8", value: "8" },
 ];
 
-const categories = ["Бизнес", "Мэдээллийн технологи", "Гадаад хэл", "Урлаг", "Эрүүл мэнд", "Хоол хийх", "Дизайн", "Биологи"];
+const categories = [
+  "Бизнес",
+  "Мэдээллийн технологи",
+  "Гадаад хэл",
+  "Урлаг",
+  "Эрүүл мэнд",
+  "Хоол хийх",
+  "Дизайн",
+  "Биологи",
+];
