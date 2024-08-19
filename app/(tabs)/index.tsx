@@ -4,6 +4,7 @@ import { router } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import { FirstView } from "@/components/subComponents/FirstView";
 import { SecondView } from "@/components/subComponents/SecondView";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const pagerViewRef = useRef<PagerView>(null);
@@ -16,6 +17,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <PagerView style={styles.pagerView} initialPage={0} ref={pagerViewRef}>
         <View style={styles.page}>
           <FirstView

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { GetTeachersInput, useGetTeachersQuery, useSubjectsByCategoryQuery } from "@/generated";
+import {
+  GetTeachersInput,
+  useGetTeachersQuery,
+  useSubjectsByCategoryQuery,
+} from "@/generated";
 import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import Categories from "@/components/Categories";
 import MultiSelectComponent from "@/components/MultiSelectCom";
@@ -7,6 +11,7 @@ import Price from "@/components/Price";
 import { days, times } from "@/utils/dummyData";
 import { styles } from "@/styles/findTutors-style";
 import Subjects from "@/components/Subjects";
+import { StatusBar } from "expo-status-bar";
 
 export default function findTutors() {
   const [searchInput, setSearchInput] = useState<GetTeachersInput>({
@@ -38,7 +43,10 @@ export default function findTutors() {
     if (field !== "priceRange") {
       setSearchInput((prev) => ({ ...prev, [field]: value }));
     } else {
-      setSearchInput((prev) => ({ ...prev, priceRange: { max: value[1].toString(), min: value[0].toString() } }));
+      setSearchInput((prev) => ({
+        ...prev,
+        priceRange: { max: value[1].toString(), min: value[0].toString() },
+      }));
     }
   }
 
@@ -49,15 +57,30 @@ export default function findTutors() {
   }, [searchInput.categoryId, refetch]);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <StatusBar style="light" />
       <View style={styles.container}>
         <Text>find teachers!</Text>
         <View>
           <Categories handleData={handleData} value={searchInput.categoryId} />
-          <MultiSelectComponent data={days} handleData={handleData} placeholder="Өдөр сонгох" field="availableDays" />
-          <MultiSelectComponent data={times} handleData={handleData} placeholder="Цаг сонгох" field="availableTimes" />
+          <MultiSelectComponent
+            data={days}
+            handleData={handleData}
+            placeholder="Өдөр сонгох"
+            field="availableDays"
+          />
+          <MultiSelectComponent
+            data={times}
+            handleData={handleData}
+            placeholder="Цаг сонгох"
+            field="availableTimes"
+          />
           <Price handleData={handleData} searchInput={searchInput} />
           {subjects?.subjectsByCategory && (
-            <Subjects handleData={handleData} searchInput={searchInput} subjects={subjects.subjectsByCategory} />
+            <Subjects
+              handleData={handleData}
+              searchInput={searchInput}
+              subjects={subjects.subjectsByCategory}
+            />
           )}
         </View>
         {loading ? (

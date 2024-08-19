@@ -2,7 +2,15 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthProvider";
 import { LoginInput } from "@/generated";
-import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard, Pressable, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import { styles } from "@/styles/signIn-style";
 
 export default function signIn() {
@@ -25,15 +33,25 @@ export default function signIn() {
           <View style={styles.innerContainer}>
             <Text style={styles.logo}>🌱</Text>
             <TextInput
-              style={[styles.input, error && !inputData.email ? styles.inputError : null]}
+              style={[
+                styles.input,
+                error && !inputData.email ? styles.inputError : null,
+              ]}
               placeholder="Мэйл хаяг"
               placeholderTextColor={"#828282"}
-              onChangeText={(value) => setInputData((prev) => ({ ...prev, email: value }))}
+              onChangeText={(value) =>
+                setInputData((prev) => ({ ...prev, email: value }))
+              }
               keyboardType="email-address"
             />
             <TextInput
-              style={[styles.input, error && !inputData.password ? styles.inputError : null]}
-              onChangeText={(value) => setInputData((prev) => ({ ...prev, password: value }))}
+              style={[
+                styles.input,
+                error && !inputData.password ? styles.inputError : null,
+              ]}
+              onChangeText={(value) =>
+                setInputData((prev) => ({ ...prev, password: value }))
+              }
               placeholder="Нууц үг"
               placeholderTextColor={"#828282"}
               secureTextEntry={true}
@@ -43,8 +61,16 @@ export default function signIn() {
               <Text style={styles.forgotPass}>Нууц үгээ мартсан уу?</Text>
             </Pressable>
           </View>
-          <Pressable style={styles.button} onPress={loginHandler} disabled={loading}>
-            {loading ? <ActivityIndicator size="small" color="#20222a" /> : <Text style={styles.buttonText}>Нэвтрэх</Text>}
+          <Pressable
+            style={styles.button}
+            onPress={loginHandler}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="#20222a" />
+            ) : (
+              <Text style={styles.buttonText}>Нэвтрэх</Text>
+            )}
           </Pressable>
         </View>
         <Link href={"/signUp"}>

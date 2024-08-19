@@ -2,11 +2,13 @@ import { useState } from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
 import { styles } from "@/styles/home-style";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
   const [value, setValue] = useState<string | null>("item 1");
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.headerContainer}>
         <Text style={styles.logo}>🌱</Text>
         <Text style={styles.name}>Seedling</Text>
@@ -22,7 +24,9 @@ export default function HomeScreen() {
 
       <View style={styles.categoryContainer}>
         <Pressable>
-          <Text style={[styles.title, { color: "#fff" }]}>Төрлөөр нь судлах {"->"}</Text>
+          <Text style={[styles.title, { color: "#fff" }]}>
+            Төрлөөр нь судлах {"->"}
+          </Text>
         </Pressable>
         <View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -53,4 +57,13 @@ const data = [
   { label: "Item 8", value: "8" },
 ];
 
-const categories = ["Бизнес", "Мэдээллийн технологи", "Гадаад хэл", "Урлаг", "Эрүүл мэнд", "Хоол хийх", "Дизайн", "Биологи"];
+const categories = [
+  "Бизнес",
+  "Мэдээллийн технологи",
+  "Гадаад хэл",
+  "Урлаг",
+  "Эрүүл мэнд",
+  "Хоол хийх",
+  "Дизайн",
+  "Биологи",
+];
