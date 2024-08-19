@@ -41,7 +41,7 @@ export type Course = {
   level?: Maybe<Array<Scalars['String']['output']>>;
   price: Scalars['String']['output'];
   reviewIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  topic?: Maybe<Array<Scalars['String']['output']>>;
+  subject: Scalars['String']['output'];
   videoLesson?: Maybe<Scalars['String']['output']>;
 };
 
@@ -52,7 +52,7 @@ export type CreateCourseInput = {
   description: Scalars['String']['input'];
   level?: InputMaybe<Array<Scalars['String']['input']>>;
   price: Scalars['String']['input'];
-  topic?: InputMaybe<Array<Scalars['String']['input']>>;
+  subject: Scalars['String']['input'];
   videoLesson?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -153,14 +153,21 @@ export type MutationUpdateUserArgs = {
   userId: Scalars['String']['input'];
 };
 
+export type PriceRangeInput = {
+  max: Scalars['String']['input'];
+  min: Scalars['String']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   categories?: Maybe<Array<Category>>;
   category: Category;
   course: Course;
   courses?: Maybe<Array<Course>>;
+  getTeachers?: Maybe<Array<Maybe<Course>>>;
   review: Review;
   reviews?: Maybe<Array<Review>>;
+  subjectsByCategory?: Maybe<Array<Scalars['String']['output']>>;
   user: User;
   users?: Maybe<Array<User>>;
 };
@@ -176,8 +183,18 @@ export type QueryCourseArgs = {
 };
 
 
+export type QueryGetTeachersArgs = {
+  input: GetTeachersInput;
+};
+
+
 export type QueryReviewArgs = {
   reviewId: Scalars['String']['input'];
+};
+
+
+export type QuerySubjectsByCategoryArgs = {
+  categoryId: Scalars['String']['input'];
 };
 
 
@@ -239,7 +256,7 @@ export type UpdateCourseInput = {
   level?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   price?: InputMaybe<Scalars['String']['input']>;
   reviewIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  topic?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  subject?: InputMaybe<Scalars['String']['input']>;
   videoLesson?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -272,6 +289,14 @@ export type User = {
   phoneNumber: Scalars['String']['output'];
   profilePic: Scalars['String']['output'];
   tutorProfile?: Maybe<TutorProfile>;
+};
+
+export type GetTeachersInput = {
+  availableDays?: InputMaybe<Array<Scalars['String']['input']>>;
+  availableTimes?: InputMaybe<Array<Scalars['String']['input']>>;
+  categoryId: Scalars['String']['input'];
+  priceRange: PriceRangeInput;
+  subject?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -318,14 +343,40 @@ export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __type
 export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CoursesQuery = { __typename?: 'Query', courses?: Array<{ __typename?: 'Course', _id: string, topic?: Array<string> | null, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null }> | null };
+export type CoursesQuery = { __typename?: 'Query', courses?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null }> | null };
 
 export type CourseQueryVariables = Exact<{
   courseId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type CourseQuery = { __typename?: 'Query', course: { __typename?: 'Course', _id: string, topic?: Array<string> | null, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } };
+export type CourseQuery = { __typename?: 'Query', course: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } };
+
+export type GetTeachersQueryVariables = Exact<{
+  input: GetTeachersInput;
+}>;
+
+
+export type GetTeachersQuery = { __typename?: 'Query', getTeachers?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } | null> | null };
+
+export type SubjectsByCategoryQueryVariables = Exact<{
+  categoryId: Scalars['String']['input'];
+}>;
+
+
+export type SubjectsByCategoryQuery = { __typename?: 'Query', subjectsByCategory?: Array<string> | null };
+
+export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesQuery = { __typename?: 'Query', categories?: Array<{ __typename?: 'Category', _id: string, name: string }> | null };
+
+export type CategoryQueryVariables = Exact<{
+  categoryId: Scalars['String']['input'];
+}>;
+
+
+export type CategoryQuery = { __typename?: 'Query', category: { __typename?: 'Category', _id: string, name: string } };
 
 
 export const UsersDocument = gql`
@@ -694,7 +745,7 @@ export const CoursesDocument = gql`
     query Courses {
   courses {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -756,7 +807,7 @@ export const CourseDocument = gql`
     query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -815,3 +866,224 @@ export type CourseQueryHookResult = ReturnType<typeof useCourseQuery>;
 export type CourseLazyQueryHookResult = ReturnType<typeof useCourseLazyQuery>;
 export type CourseSuspenseQueryHookResult = ReturnType<typeof useCourseSuspenseQuery>;
 export type CourseQueryResult = Apollo.QueryResult<CourseQuery, CourseQueryVariables>;
+export const GetTeachersDocument = gql`
+    query GetTeachers($input: getTeachersInput!) {
+  getTeachers(input: $input) {
+    _id
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+    `;
+export type GetTeachersProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<GetTeachersQuery, GetTeachersQueryVariables>
+    } & TChildProps;
+export function withGetTeachers<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  GetTeachersQuery,
+  GetTeachersQueryVariables,
+  GetTeachersProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, GetTeachersQuery, GetTeachersQueryVariables, GetTeachersProps<TChildProps, TDataName>>(GetTeachersDocument, {
+      alias: 'getTeachers',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useGetTeachersQuery__
+ *
+ * To run a query within a React component, call `useGetTeachersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTeachersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTeachersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetTeachersQuery(baseOptions: Apollo.QueryHookOptions<GetTeachersQuery, GetTeachersQueryVariables> & ({ variables: GetTeachersQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTeachersQuery, GetTeachersQueryVariables>(GetTeachersDocument, options);
+      }
+export function useGetTeachersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTeachersQuery, GetTeachersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTeachersQuery, GetTeachersQueryVariables>(GetTeachersDocument, options);
+        }
+export function useGetTeachersSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTeachersQuery, GetTeachersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetTeachersQuery, GetTeachersQueryVariables>(GetTeachersDocument, options);
+        }
+export type GetTeachersQueryHookResult = ReturnType<typeof useGetTeachersQuery>;
+export type GetTeachersLazyQueryHookResult = ReturnType<typeof useGetTeachersLazyQuery>;
+export type GetTeachersSuspenseQueryHookResult = ReturnType<typeof useGetTeachersSuspenseQuery>;
+export type GetTeachersQueryResult = Apollo.QueryResult<GetTeachersQuery, GetTeachersQueryVariables>;
+export const SubjectsByCategoryDocument = gql`
+    query SubjectsByCategory($categoryId: String!) {
+  subjectsByCategory(categoryId: $categoryId)
+}
+    `;
+export type SubjectsByCategoryProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>
+    } & TChildProps;
+export function withSubjectsByCategory<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  SubjectsByCategoryQuery,
+  SubjectsByCategoryQueryVariables,
+  SubjectsByCategoryProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables, SubjectsByCategoryProps<TChildProps, TDataName>>(SubjectsByCategoryDocument, {
+      alias: 'subjectsByCategory',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useSubjectsByCategoryQuery__
+ *
+ * To run a query within a React component, call `useSubjectsByCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjectsByCategoryQuery({
+ *   variables: {
+ *      categoryId: // value for 'categoryId'
+ *   },
+ * });
+ */
+export function useSubjectsByCategoryQuery(baseOptions: Apollo.QueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables> & ({ variables: SubjectsByCategoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+      }
+export function useSubjectsByCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+        }
+export function useSubjectsByCategorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+        }
+export type SubjectsByCategoryQueryHookResult = ReturnType<typeof useSubjectsByCategoryQuery>;
+export type SubjectsByCategoryLazyQueryHookResult = ReturnType<typeof useSubjectsByCategoryLazyQuery>;
+export type SubjectsByCategorySuspenseQueryHookResult = ReturnType<typeof useSubjectsByCategorySuspenseQuery>;
+export type SubjectsByCategoryQueryResult = Apollo.QueryResult<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>;
+export const CategoriesDocument = gql`
+    query Categories {
+  categories {
+    _id
+    name
+  }
+}
+    `;
+export type CategoriesProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<CategoriesQuery, CategoriesQueryVariables>
+    } & TChildProps;
+export function withCategories<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  CategoriesQuery,
+  CategoriesQueryVariables,
+  CategoriesProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, CategoriesQuery, CategoriesQueryVariables, CategoriesProps<TChildProps, TDataName>>(CategoriesDocument, {
+      alias: 'categories',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useCategoriesQuery__
+ *
+ * To run a query within a React component, call `useCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
+      }
+export function useCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
+        }
+export function useCategoriesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
+        }
+export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
+export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
+export type CategoriesSuspenseQueryHookResult = ReturnType<typeof useCategoriesSuspenseQuery>;
+export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const CategoryDocument = gql`
+    query Category($categoryId: String!) {
+  category(categoryId: $categoryId) {
+    _id
+    name
+  }
+}
+    `;
+export type CategoryProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<CategoryQuery, CategoryQueryVariables>
+    } & TChildProps;
+export function withCategory<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  CategoryQuery,
+  CategoryQueryVariables,
+  CategoryProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, CategoryQuery, CategoryQueryVariables, CategoryProps<TChildProps, TDataName>>(CategoryDocument, {
+      alias: 'category',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useCategoryQuery__
+ *
+ * To run a query within a React component, call `useCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoryQuery({
+ *   variables: {
+ *      categoryId: // value for 'categoryId'
+ *   },
+ * });
+ */
+export function useCategoryQuery(baseOptions: Apollo.QueryHookOptions<CategoryQuery, CategoryQueryVariables> & ({ variables: CategoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
+      }
+export function useCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
+        }
+export function useCategorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
+        }
+export type CategoryQueryHookResult = ReturnType<typeof useCategoryQuery>;
+export type CategoryLazyQueryHookResult = ReturnType<typeof useCategoryLazyQuery>;
+export type CategorySuspenseQueryHookResult = ReturnType<typeof useCategorySuspenseQuery>;
+export type CategoryQueryResult = Apollo.QueryResult<CategoryQuery, CategoryQueryVariables>;
