@@ -30,7 +30,7 @@ export default function findTutors() {
     },
     skip: !searchInput,
   });
-  console.log("data", data);
+  // console.log("data", data);
 
   const { data: subjects, refetch } = useSubjectsByCategoryQuery({
     variables: {

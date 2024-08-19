@@ -2,41 +2,25 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  image: {
+    height: "100%",
     width: "100%",
-    height: 300,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#fff",
-    textAlign: "center",
-    marginBottom: 15,
   },
   text: {
     fontSize: 14,
     lineHeight: 22,
     color: "#fff",
-    textAlign: "center",
-  },
-  contentWrapper: {
-    width: "100%",
-    height: "100%",
   },
   content: {
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 160,
     paddingHorizontal: 40,
     gap: 15,
   },
-  buttons: {
+  innerContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -44,7 +28,7 @@ export const styles = StyleSheet.create({
     gap: 7,
     paddingBottom: 100,
   },
-  loginButton: {
+  button: {
     width: 350,
     height: 53,
     backgroundColor: "#35383f",
@@ -53,21 +37,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
   },
-  registerButton: {
-    width: 350,
-    height: 53,
-    backgroundColor: "#e8e9eb",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 15,
-  },
-  registerButtonText: {
-    color: "#2c3448",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  loginButtonText: {
+  buttonText: {
     color: "#d7d8da",
     fontSize: 20,
     fontWeight: "bold",
@@ -93,11 +63,34 @@ export const styles = StyleSheet.create({
     backgroundColor: "#1a6",
   },
   valuesContainer: {
-    alignItems: "flex-end",
-    marginTop: 10,
+    display: "flex",
+    flexDirection: "row",
+    gap: 30,
   },
   valueText: {
     fontSize: 16,
     color: "#fff",
+  },
+  daysContainer: {
+    flexWrap: "wrap",
+    display: "flex",
+    width: "100%",
+    gap: 10,
+    flexDirection: "row",
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    paddingTop: 0,
+    paddingBottom: 100,
+  },
+  category: {
+    width: 150,
+    padding: 10,
+    height: 80,
+    backgroundColor: "#35383f",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 15,
   },
 });

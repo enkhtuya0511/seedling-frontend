@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { styles } from "@/styles/home-style";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 export default function HomeScreen() {
@@ -17,36 +16,8 @@ export default function HomeScreen() {
 
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Tанд тохирох онлайн хувийн багш</Text>
-        <Text style={styles.desc}>
-          Асуултанд хариулаад танд тохирох хувийн багшийг сонгоорой.
-        </Text>
-        <Dropdown
-          style={styles.dropdown}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          inputSearchStyle={styles.inputSearchStyle}
-          iconStyle={styles.iconStyle}
-          data={data}
-          search
-          maxHeight={300}
-          labelField="label"
-          valueField="value"
-          placeholder="Төрөл сонгох"
-          searchPlaceholder="Хайх..."
-          value={value}
-          onChange={(item) => {
-            setValue(item.label);
-          }}
-          renderLeftIcon={() => (
-            <AntDesign
-              style={styles.icon}
-              color="black"
-              name="Safety"
-              size={20}
-            />
-          )}
-        />
-        <Pressable style={styles.button}>
+        <Text style={styles.desc}>Асуултанд хариулаад танд тохирох хувийн багшийг сонгоорой.</Text>
+        <Pressable style={styles.button} onPress={() => router.push("/getStarted")}>
           <Text>Эхлэх {"->"}</Text>
         </Pressable>
       </View>

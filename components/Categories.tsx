@@ -1,4 +1,4 @@
-import { useCategoriesQuery, Category } from "@/generated";
+import { useCategoriesQuery } from "@/generated";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
 
