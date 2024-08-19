@@ -1,19 +1,20 @@
 import { Pressable, Text, View } from "react-native";
-import { days, times } from "@/utils/dummyData";
-import { styles } from "@/styles/search-style";
-import { AntDesign } from "@expo/vector-icons";
-import PagerView from "react-native-pager-view";
 import { GetTeachersInput } from "@/generated";
+import { handlePress } from "@/utils/services";
+import PagerView from "react-native-pager-view";
+import { days, times } from "@/utils/dummyData";
+import { AntDesign } from "@expo/vector-icons";
+import { styles } from "@/styles/search-style";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  handlePress: (arg: string, field: keyof GetTeachersInput) => void;
+  setSearchInput: (arg: GetTeachersInput) => void;
   searchInput: GetTeachersInput;
 };
 
 export const SearchThirdView = ({
   pagerViewRef,
-  handlePress,
+  setSearchInput,
   searchInput,
 }: Props) => {
   return (
@@ -41,7 +42,7 @@ export const SearchThirdView = ({
                   },
                 ]}
                 key={day.value}
-                onPress={() => handlePress(day.value, "availableDays")}
+                onPress={() => handlePress(day.value, "availableDays", setSearchInput)}
               >
                 <Text style={{ color: "#fff" }}>{day.label}</Text>
               </Pressable>
@@ -57,7 +58,7 @@ export const SearchThirdView = ({
                 },
               ]}
               key={time.value}
-              onPress={() => handlePress(time.value, "availableTimes")}
+              onPress={() => handlePress(time.value, "availableTimes", setSearchInput)}
             >
               <Text style={{ color: "#fff" }}>{time.label}</Text>
             </Pressable>

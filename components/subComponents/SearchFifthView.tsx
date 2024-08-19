@@ -1,6 +1,6 @@
 import { ActivityIndicator, Text, View } from "react-native";
-import { styles } from "@/styles/search-style";
 import { GetTeachersInput, useGetTeachersQuery } from "@/generated";
+import { styles } from "@/styles/search-style";
 
 type Props = {
   searchInput: GetTeachersInput;

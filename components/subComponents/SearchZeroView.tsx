@@ -1,22 +1,29 @@
 import { Pressable, Text, View } from "react-native";
-import { useState } from "react";
 import { router } from "expo-router";
-import { useCategoriesQuery } from "@/generated";
+import { GetTeachersInput, useCategoriesQuery } from "@/generated";
+import { handleData } from "@/utils/services";
 import { styles } from "@/styles/search-style";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 type Props = {
   onStart: () => void;
-  handleData: (arg: any, field: string) => void;
+  setSearchInput: (arg: GetTeachersInput) => void;
+  searchInput: GetTeachersInput;
 };
 
-export const SearchZeroView = ({ onStart, handleData }: Props) => {
+export const SearchZeroView = ({
+  onStart,
+  setSearchInput,
+  searchInput,
+}: Props) => {
   const { data } = useCategoriesQuery();
-  const [selected, setSelected] = useState<string | null>(null);
   return (
     <View style={styles.container} key="1">
       <View style={[styles.content, { paddingTop: 30 }]}>
-        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => router.back()}>
+        <Pressable
+          style={{ width: "100%", paddingLeft: 15 }}
+          onPress={() => router.back()}
+        >
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
         <Text style={{ color: "#fff" }}>I want to learn ...</Text>
@@ -24,19 +31,29 @@ export const SearchZeroView = ({ onStart, handleData }: Props) => {
           <View style={styles.daysContainer}>
             {data?.categories?.map((category) => (
               <Pressable
-                onPress={() => {
-                  handleData(category._id, "categoryId");
-                  setSelected(category._id);
-                }}
-                style={[styles.category, selected?.includes(category._id) && { backgroundColor: "pink" }]}
                 key={category._id}
+                onPress={() =>
+                  handleData(category._id, "categoryId", setSearchInput)
+                }
+                style={[
+                  styles.category,
+                  searchInput.categoryId?.includes(category._id) && {
+                    backgroundColor: "pink",
+                  },
+                ]}
               >
-                <Text style={{ color: "#fff", fontSize: 12 }}>{category.name}</Text>
+                <Text style={{ color: "#fff", fontSize: 12 }}>
+                  {category.name}
+                </Text>
               </Pressable>
             ))}
           </View>
         </View>
-        <Pressable style={styles.button} onPress={onStart} disabled={!selected}>
+        <Pressable
+          style={styles.button}
+          onPress={onStart}
+          disabled={!searchInput.categoryId}
+        >
           <Text style={styles.buttonText}>continue</Text>
         </Pressable>
       </View>

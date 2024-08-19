@@ -1,5 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 import { GetTeachersInput } from "@/generated";
+import { handleData } from "@/utils/services";
 import PagerView from "react-native-pager-view";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { AntDesign } from "@expo/vector-icons";
@@ -7,11 +8,11 @@ import { styles } from "@/styles/search-style";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  handleData: (arg: any, field: string) => void;
+  setSearchInput: (arg: GetTeachersInput) => void;
   searchInput: GetTeachersInput;
 };
 
-export const SearchFourthView = ({ pagerViewRef, handleData, searchInput }: Props) => {
+export const SearchFourthView = ({ pagerViewRef, setSearchInput, searchInput }: Props) => {
   return (
     <View style={styles.container} key="5">
       <View style={styles.content}>
@@ -29,7 +30,7 @@ export const SearchFourthView = ({ pagerViewRef, handleData, searchInput }: Prop
             min={0}
             max={40000}
             step={1}
-            onValuesChange={(values) =>handleData(values, "priceRange")}
+            onValuesChange={(values) =>handleData(values, "priceRange", setSearchInput)}
             containerStyle={styles.sliderContainer}
             trackStyle={styles.track}
             selectedStyle={styles.selectedTrack}

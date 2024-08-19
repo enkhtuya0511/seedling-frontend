@@ -1,13 +1,13 @@
-import PagerView from "react-native-pager-view";
-import { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useRef, useState } from "react";
+import { GetTeachersInput } from "@/generated";
+import PagerView from "react-native-pager-view";
 import { SearchZeroView } from "@/components/subComponents/SearchZeroView";
 import { SearchFirstView } from "@/components/subComponents/SearchFirstView";
 import { SearchSecondView } from "@/components/subComponents/SearchSecondView";
 import { SearchThirdView } from "@/components/subComponents/SearchThirdView";
 import { SearchFourthView } from "@/components/subComponents/SearchFourthView";
 import { SearchFifthView } from "@/components/subComponents/SearchFifthView";
-import { GetTeachersInput } from "@/generated";
 
 export default function getStarted() {
   const pagerViewRef = useRef<PagerView>(null);
@@ -21,29 +21,6 @@ export default function getStarted() {
     },
   });
 
-  function handleData(value: any, field: string) {
-    if (field !== "priceRange") {
-      setSearchInput((prev) => ({ ...prev, [field]: value }));
-    } else {
-      setSearchInput((prev) => ({
-        ...prev,
-        priceRange: { max: value[1].toString(), min: value[0].toString() },
-      }));
-    }
-  }
-
-  const handlePress = (label: string, field: keyof GetTeachersInput) => {
-    setSearchInput((prev) => {
-      const currentFieldArray = (prev[field] || []) as string[];
-      if (currentFieldArray?.includes(label))
-        return {
-          ...prev,
-          [field]: currentFieldArray.filter((item) => item !== label),
-        };
-      else return { ...prev, [field]: [...currentFieldArray, label] };
-    });
-  };
-
   return (
     <View style={styles.container}>
       <PagerView style={styles.container} initialPage={0} ref={pagerViewRef}>
@@ -51,25 +28,29 @@ export default function getStarted() {
           onStart={() => {
             pagerViewRef.current?.setPage(1);
           }}
-          handleData={handleData}
+          setSearchInput={setSearchInput}
+          searchInput={searchInput}
         />
         <SearchFirstView
           pagerViewRef={pagerViewRef}
           categoryId={searchInput.categoryId}
-          handleData={handleData}
+          setSearchInput={setSearchInput}
         />
-        <SearchSecondView pagerViewRef={pagerViewRef} handleData={handleData} />
+        <SearchSecondView
+          pagerViewRef={pagerViewRef}
+          setSearchInput={setSearchInput}
+        />
         <SearchThirdView
           pagerViewRef={pagerViewRef}
-          handlePress={handlePress}
           searchInput={searchInput}
+          setSearchInput={setSearchInput}
         />
         <SearchFourthView
           pagerViewRef={pagerViewRef}
-          handleData={handleData}
           searchInput={searchInput}
+          setSearchInput={setSearchInput}
         />
-        <SearchFifthView searchInput={searchInput}/>
+        <SearchFifthView searchInput={searchInput} />
       </PagerView>
     </View>
   );

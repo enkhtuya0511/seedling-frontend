@@ -3,13 +3,14 @@ import { AntDesign } from "@expo/vector-icons";
 import { styles } from "@/styles/search-style";
 import PagerView from "react-native-pager-view";
 import { useState } from "react";
+import { GetTeachersInput } from "@/generated";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  handleData: (arg: any, field: string) => void;
+  setSearchInput: (arg: GetTeachersInput) => void;
 };
 
-export const SearchSecondView = ({ pagerViewRef, handleData }: Props) => {
+export const SearchSecondView = ({ pagerViewRef, setSearchInput }: Props) => {
   const [selected, setSelected] = useState<string | null>(null);
   return (
     <View style={styles.container} key="3">
@@ -24,7 +25,7 @@ export const SearchSecondView = ({ pagerViewRef, handleData }: Props) => {
               style={[styles.button, selected?.includes(level) && { backgroundColor: "pink" }]}
               key={id}
               onPress={() => {
-                // handleData(level, "level");
+                // handleData(level, "level", setSearchInput);
                 setSelected(level);
               }}
             >
