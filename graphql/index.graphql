@@ -109,7 +109,7 @@ mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
 query Courses {
   courses {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -125,7 +125,7 @@ query Courses {
 query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -135,5 +135,39 @@ query Course($courseId: String) {
     availableTimes
     enrolledStudentIds
     reviewIds
+  }
+}
+
+query GetTeachers($input: getTeachersInput!) {
+  getTeachers(input: $input) {
+    _id
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+
+query SubjectsByCategory($categoryId: String!) {
+  subjectsByCategory(categoryId: $categoryId)
+}
+
+query Categories {
+  categories {
+    _id
+    name
+  }
+}
+
+query Category($categoryId: String!) {
+  category(categoryId: $categoryId) {
+    _id
+    name
   }
 }
