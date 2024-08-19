@@ -36,7 +36,10 @@ export default function Favorites() {
       </View>
 
       {/* Scrollable Content */}
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* "Сэдвээр нь судлах" Section */}
         {subjectList.map((subject) => (
           <Link href="./teacher" style={styles.courseBox1} key={subject.id}>

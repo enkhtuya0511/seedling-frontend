@@ -12,7 +12,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { styles } from "@/styles/signIn-style";
-import { StatusBar } from "expo-status-bar";
 
 export default function signIn() {
   const { onLogin, loading } = useAuth();
@@ -29,7 +28,6 @@ export default function signIn() {
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <StatusBar style="light" />
       <View style={styles.container}>
         <View style={styles.context}>
           <View style={styles.innerContainer}>
