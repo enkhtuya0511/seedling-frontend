@@ -10,9 +10,7 @@ type SearchContextType = {
   searchInput: GetTeachersInput;
 };
 
-const SearchContext = React.createContext<SearchContextType>(
-  {} as SearchContextType
-);
+const SearchContext = React.createContext<SearchContextType>({} as SearchContextType);
 
 export const SearchProvider = ({ children }: Props) => {
   const [searchInput, setSearchInput] = useState<GetTeachersInput>({
@@ -24,12 +22,7 @@ export const SearchProvider = ({ children }: Props) => {
       max: "40000",
     },
   });
-  console.log("searchInput", searchInput)
-  return (
-    <SearchContext.Provider value={{ setSearchInput, searchInput }}>
-      {children}
-    </SearchContext.Provider>
-  );
+  return <SearchContext.Provider value={{ setSearchInput, searchInput }}>{children}</SearchContext.Provider>;
 };
 
 export const useSearch = (): SearchContextType => {
