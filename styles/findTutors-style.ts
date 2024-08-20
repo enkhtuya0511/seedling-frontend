@@ -4,11 +4,13 @@ export const styles = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
+    backgroundColor: "#181a21",
+  },
+  scrollStyle: {
     display: "flex",
     alignItems: "center",
     paddingVertical: 50,
     paddingHorizontal: 20,
-    backgroundColor: "#181a21",
     gap: 20,
   },
   dropdown: {

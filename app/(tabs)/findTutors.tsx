@@ -39,47 +39,39 @@ export default function findTutors() {
     skip: !searchInput.categoryId,
   });
 
-  function handleData(value: any, field: string) {
-    if (field !== "priceRange") {
-      setSearchInput((prev) => ({ ...prev, [field]: value }));
-    } else {
-      setSearchInput((prev) => ({
-        ...prev,
-        priceRange: { max: value[1].toString(), min: value[0].toString() },
-      }));
-    }
-  }
-
   useEffect(() => {
     if (searchInput.categoryId) {
       refetch();
     }
   }, [searchInput.categoryId, refetch]);
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <StatusBar style="light" />
-      <View style={styles.container}>
+    <View style={styles.container}>
+        <StatusBar style="light" />
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollStyle}>
         <Text>find teachers!</Text>
         <View>
-          <Categories handleData={handleData} value={searchInput.categoryId} />
+          <Categories
+            value={searchInput.categoryId}
+            setSearchInput={setSearchInput}
+          />
           <MultiSelectComponent
             data={days}
-            handleData={handleData}
             placeholder="Өдөр сонгох"
             field="availableDays"
+            setSearchInput={setSearchInput}
           />
           <MultiSelectComponent
             data={times}
-            handleData={handleData}
             placeholder="Цаг сонгох"
             field="availableTimes"
+            setSearchInput={setSearchInput}
           />
-          <Price handleData={handleData} searchInput={searchInput} />
+          <Price searchInput={searchInput} setSearchInput={setSearchInput} />
           {subjects?.subjectsByCategory && (
             <Subjects
-              handleData={handleData}
               searchInput={searchInput}
               subjects={subjects.subjectsByCategory}
+              setSearchInput={setSearchInput}
             />
           )}
         </View>
@@ -98,7 +90,7 @@ export default function findTutors() {
             ))}
           </>
         )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }

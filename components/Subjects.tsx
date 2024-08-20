@@ -1,14 +1,15 @@
 import { GetTeachersInput } from "@/generated";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
+import { handleData } from "@/utils/services";
 
 type Props = {
   searchInput: GetTeachersInput;
-  handleData: (arg: any, field: string) => void;
+  setSearchInput: (arg: GetTeachersInput) => void;
   subjects: string[];
 };
 
-const Subjects = ({ handleData, searchInput, subjects }: Props) => {
+const Subjects = ({ setSearchInput, searchInput, subjects }: Props) => {
   const subjectsData =
     subjects?.map((subject) => ({
       label: subject,
@@ -31,7 +32,7 @@ const Subjects = ({ handleData, searchInput, subjects }: Props) => {
           placeholder="Чиглэл сонгох"
           searchPlaceholder="Хайх..."
           value={searchInput.subject}
-          onChange={(item) => handleData(item.value, "subject")}
+          onChange={(item) => handleData(item.value, "subject", setSearchInput)}
         />
       )}
     </>

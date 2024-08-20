@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { GetTeachersInput } from "@/generated";
+import { handleData } from "@/utils/services";
 import { MultiSelect } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { availableType } from "@/utils/dummyData";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 type Props = {
   data: availableType[];
-  handleData: (arg: any, field: string) => void;
   placeholder: string;
   field: string;
+  setSearchInput: (arg: GetTeachersInput) => void;
 };
 
-const MultiSelectComponent = ({ data, handleData, placeholder, field }: Props) => {
+const MultiSelectComponent = ({ data, placeholder, field, setSearchInput }: Props) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const renderItem = (item: any) => {
     return (
       <View style={styles.item}>
         <Text style={styles.selectedTextStyle}>{item.label}</Text>
-        <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
       </View>
     );
   };
@@ -30,7 +31,6 @@ const MultiSelectComponent = ({ data, handleData, placeholder, field }: Props) =
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
         data={data}
         labelField="label"
         valueField="value"
@@ -39,10 +39,9 @@ const MultiSelectComponent = ({ data, handleData, placeholder, field }: Props) =
         search
         searchPlaceholder="Хайх..."
         onChange={(item) => {
-          handleData(item, field);
+          handleData(item, field, setSearchInput);
           setSelected(item);
         }}
-        renderLeftIcon={() => <AntDesign style={styles.icon} color="black" name="Safety" size={20} />}
         renderItem={renderItem}
         renderSelectedItem={(item, unSelect) => (
           <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
@@ -81,10 +80,6 @@ const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: 14,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
   },
   inputSearchStyle: {
     height: 40,
