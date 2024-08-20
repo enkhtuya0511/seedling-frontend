@@ -1,22 +1,13 @@
-import React, { useState } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
 import { MultiSelect } from "react-native-element-dropdown";
-import { availableType } from "@/utils/dummyData";
+import { days } from "@/utils/dummyData";
 import { styles } from "@/styles/MultiSelect-style";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-type Props = {
-  data: availableType[];
-  placeholder: string;
-  field: string;
-};
-
-const MultiSelectComponent = ({ data, placeholder, field }: Props) => {
-  const [selected, setSelected] = useState<string[]>([]);
-  const { setSearchInput } = useSearch();
-
+const AvailableDays = () => {
+  const { setSearchInput, searchInput } = useSearch();
   const renderItem = (item: any) => {
     return (
       <View style={styles.item}>
@@ -32,17 +23,14 @@ const MultiSelectComponent = ({ data, placeholder, field }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
-        data={data}
+        data={days}
         labelField="label"
         valueField="value"
-        placeholder={placeholder}
-        value={selected}
+        placeholder="Өдөр сонгох"
+        value={searchInput.availableDays}
         search
         searchPlaceholder="Хайх..."
-        onChange={(item) => {
-          handleData(item, field, setSearchInput);
-          setSelected(item);
-        }}
+        onChange={(item) => handleData(item, "availableDays", setSearchInput)}
         renderItem={renderItem}
         renderSelectedItem={(item, unSelect) => (
           <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
@@ -57,6 +45,4 @@ const MultiSelectComponent = ({ data, placeholder, field }: Props) => {
   );
 };
 
-export default MultiSelectComponent;
-
-
+export default AvailableDays;

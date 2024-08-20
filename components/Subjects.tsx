@@ -4,10 +4,11 @@ import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
+import { ActivityIndicator } from "react-native";
 
 const Subjects = () => {
   const { searchInput, setSearchInput } = useSearch();
-  const { data, refetch } = useSubjectsByCategoryQuery({
+  const { data, refetch, loading } = useSubjectsByCategoryQuery({
     variables: {
       categoryId: searchInput.categoryId,
     },
@@ -27,7 +28,9 @@ const Subjects = () => {
   }, [searchInput.categoryId, refetch]);
   return (
     <>
-      {subjectsData && (
+      {loading ? (
+        <ActivityIndicator size="large" color="#fff" />
+      ) : (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}

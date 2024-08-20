@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from "react-native";
-import { GetTeachersInput } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
 import PagerView from "react-native-pager-view";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
@@ -8,11 +8,10 @@ import { styles } from "@/styles/search-style";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  setSearchInput: (arg: GetTeachersInput) => void;
-  searchInput: GetTeachersInput;
 };
 
-export const SearchFourthView = ({ pagerViewRef, setSearchInput, searchInput }: Props) => {
+export const SearchFourthView = ({ pagerViewRef }: Props) => {
+  const { searchInput, setSearchInput } = useSearch();
   return (
     <View style={styles.container} key="5">
       <View style={styles.content}>

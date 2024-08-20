@@ -1,26 +1,22 @@
 import { Pressable, Text, View } from "react-native";
 import { useState } from "react";
-import { GetTeachersInput, useSubjectsByCategoryQuery } from "@/generated";
+import { useSubjectsByCategoryQuery } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import PagerView from "react-native-pager-view";
 import { styles } from "@/styles/search-style";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  categoryId: string;
-  setSearchInput: (arg: GetTeachersInput) => void;
 };
 
-export const SearchFirstView = ({
-  pagerViewRef,
-  categoryId,
-  setSearchInput,
-}: Props) => {
+export const SearchFirstView = ({ pagerViewRef }: Props) => {
   const [selected, setSelected] = useState<string | null>(null);
+  const { searchInput, setSearchInput } = useSearch();
   const { data } = useSubjectsByCategoryQuery({
     variables: {
-      categoryId: categoryId,
+      categoryId: searchInput.categoryId,
     },
   });
   return (

@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
-import { GetTeachersInput } from "@/generated";
 import { handlePress } from "@/utils/services";
+import { useSearch } from "@/contexts/SearchProvider";
 import PagerView from "react-native-pager-view";
 import { days, times } from "@/utils/dummyData";
 import { AntDesign } from "@expo/vector-icons";
@@ -8,15 +8,12 @@ import { styles } from "@/styles/search-style";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  setSearchInput: (arg: GetTeachersInput) => void;
-  searchInput: GetTeachersInput;
 };
 
 export const SearchThirdView = ({
-  pagerViewRef,
-  setSearchInput,
-  searchInput,
+  pagerViewRef
 }: Props) => {
+  const { searchInput, setSearchInput } = useSearch();
   return (
     <View style={styles.container} key="4">
       <View style={[styles.content, { paddingTop: 80 }]}>

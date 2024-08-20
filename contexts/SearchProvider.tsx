@@ -24,6 +24,7 @@ export const SearchProvider = ({ children }: Props) => {
       max: "40000",
     },
   });
+  console.log("searchInput", searchInput)
   return (
     <SearchContext.Provider value={{ setSearchInput, searchInput }}>
       {children}
