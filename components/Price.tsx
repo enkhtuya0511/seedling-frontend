@@ -1,15 +1,11 @@
 import { Text, View } from "react-native";
-import { GetTeachersInput } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
+import { handleData } from "@/utils/services";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { styles } from "@/styles/findTutors-style";
-import { handleData } from "@/utils/services";
 
-type Props = {
-  searchInput: GetTeachersInput;
-  setSearchInput: (arg: GetTeachersInput) => void;
-};
-
-const Price = ({ searchInput, setSearchInput }: Props) => {
+const Price = () => {
+  const {searchInput, setSearchInput} = useSearch()
   return (
     <>
       <MultiSlider

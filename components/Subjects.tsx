@@ -1,20 +1,30 @@
-import { GetTeachersInput } from "@/generated";
+import { useEffect } from "react";
+import { useSubjectsByCategoryQuery } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
+import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
-import { handleData } from "@/utils/services";
 
-type Props = {
-  searchInput: GetTeachersInput;
-  setSearchInput: (arg: GetTeachersInput) => void;
-  subjects: string[];
-};
+const Subjects = () => {
+  const { searchInput, setSearchInput } = useSearch();
+  const { data, refetch } = useSubjectsByCategoryQuery({
+    variables: {
+      categoryId: searchInput.categoryId,
+    },
+    skip: !searchInput.categoryId,
+  });
 
-const Subjects = ({ setSearchInput, searchInput, subjects }: Props) => {
   const subjectsData =
-    subjects?.map((subject) => ({
+    data?.subjectsByCategory?.map((subject: string) => ({
       label: subject,
       value: subject,
     })) || [];
+
+  useEffect(() => {
+    if (searchInput.categoryId) {
+      refetch();
+    }
+  }, [searchInput.categoryId, refetch]);
   return (
     <>
       {subjectsData && (

@@ -1,15 +1,12 @@
-import { GetTeachersInput, useCategoriesQuery } from "@/generated";
+import { useCategoriesQuery } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
+import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
-import { handleData } from "@/utils/services";
 
-type Props = {
-  value: string;
-  setSearchInput: (arg: GetTeachersInput) => void;
-};
-
-const Categories = ({ value, setSearchInput }: Props) => {
+const Categories = () => {
   const { data } = useCategoriesQuery();
+  const { setSearchInput, searchInput } = useSearch();
   return (
     <>
       {data?.categories && (
@@ -26,8 +23,10 @@ const Categories = ({ value, setSearchInput }: Props) => {
           valueField="_id"
           placeholder="Төрөл сонгох"
           searchPlaceholder="Хайх..."
-          value={value}
-          onChange={(item) => handleData(item._id, "categoryId", setSearchInput)}
+          value={searchInput.categoryId}
+          onChange={(item) =>
+            handleData(item._id, "categoryId", setSearchInput)
+          }
         />
       )}
     </>

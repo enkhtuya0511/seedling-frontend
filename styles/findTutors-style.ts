@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 50,
     paddingHorizontal: 20,
-    gap: 20,
+    gap: 10,
   },
   dropdown: {
     marginHorizontal: 16,
@@ -49,8 +49,9 @@ export const styles = StyleSheet.create({
     width: "94%",
   },
   valuesContainer: {
-    alignItems: "flex-end",
-    marginTop: 10,
+    display: "flex",
+    flexDirection: "row",
+    gap: 30,
   },
   valueText: {
     fontSize: 16,
@@ -106,5 +107,12 @@ export const styles = StyleSheet.create({
   textSelectedStyle: {
     marginRight: 5,
     fontSize: 16,
+  },
+  loadingStyle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
   },
 });
