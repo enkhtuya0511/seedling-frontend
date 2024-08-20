@@ -1,19 +1,17 @@
-import { ActivityIndicator, Text, View } from "react-native";
-import { GetTeachersInput, useGetTeachersQuery } from "@/generated";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import { useGetTeachersQuery } from "@/generated";
 import { styles } from "@/styles/search-style";
+import { useSearch } from "@/contexts/SearchProvider";
+import { router } from "expo-router";
 
-type Props = {
-  searchInput: GetTeachersInput;
-};
-
-export const SearchFifthView = ({ searchInput }: Props) => {
+export const SearchFifthView = () => {
+  const { searchInput } = useSearch();
   const { data, loading } = useGetTeachersQuery({
     variables: {
       input: searchInput,
     },
     skip: !searchInput,
   });
-  // console.log("data", data);
   return (
     <View style={styles.container} key="5">
       <View style={[styles.content, loading && styles.loadingContainer]}>
@@ -47,6 +45,10 @@ export const SearchFifthView = ({ searchInput }: Props) => {
                 ))}
               </>
             )}
+
+            <Pressable onPress={() => router.replace("/findTutors")}>
+              <Text style={{color: "#fff"}}>click here!</Text>
+            </Pressable>
           </View>
         )}
       </View>

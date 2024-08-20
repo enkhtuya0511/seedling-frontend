@@ -11,7 +11,7 @@ export function handleData(value: any, field: string, setSearchInput: (arg: any)
   }
 }
 
-export const handlePress = (label: string, field: keyof GetTeachersInput, setSearchInput: (arg: any) => void) => {
+export const handlePress = (label: any, field: keyof GetTeachersInput, setSearchInput: (arg: any) => void) => {
   setSearchInput((prev: any) => {
     const currentFieldArray = (prev[field] || []) as string[];
     if (currentFieldArray?.includes(label))

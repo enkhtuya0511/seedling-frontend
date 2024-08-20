@@ -1,22 +1,36 @@
-import { GetTeachersInput } from "@/generated";
+import { useEffect } from "react";
+import { useSubjectsByCategoryQuery } from "@/generated";
+import { useSearch } from "@/contexts/SearchProvider";
+import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
+import { ActivityIndicator } from "react-native";
 
-type Props = {
-  searchInput: GetTeachersInput;
-  handleData: (arg: any, field: string) => void;
-  subjects: string[];
-};
+const Subjects = () => {
+  const { searchInput, setSearchInput } = useSearch();
+  const { data, refetch, loading } = useSubjectsByCategoryQuery({
+    variables: {
+      categoryId: searchInput.categoryId,
+    },
+    skip: !searchInput.categoryId,
+  });
 
-const Subjects = ({ handleData, searchInput, subjects }: Props) => {
   const subjectsData =
-    subjects?.map((subject) => ({
+    data?.subjectsByCategory?.map((subject: string) => ({
       label: subject,
       value: subject,
     })) || [];
+
+  useEffect(() => {
+    if (searchInput.categoryId) {
+      refetch();
+    }
+  }, [searchInput.categoryId, refetch]);
   return (
     <>
-      {subjectsData && (
+      {loading ? (
+        <ActivityIndicator size="large" color="#fff" />
+      ) : (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -31,7 +45,7 @@ const Subjects = ({ handleData, searchInput, subjects }: Props) => {
           placeholder="Чиглэл сонгох"
           searchPlaceholder="Хайх..."
           value={searchInput.subject}
-          onChange={(item) => handleData(item.value, "subject")}
+          onChange={(item) => handleData(item.value, "subject", setSearchInput)}
         />
       )}
     </>

@@ -1,17 +1,17 @@
 import { Pressable, Text, View } from "react-native";
+import { useState } from "react";
+import { useSearch } from "@/contexts/SearchProvider";
+import PagerView from "react-native-pager-view";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "@/styles/search-style";
-import PagerView from "react-native-pager-view";
-import { useState } from "react";
-import { GetTeachersInput } from "@/generated";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
-  setSearchInput: (arg: GetTeachersInput) => void;
 };
 
-export const SearchSecondView = ({ pagerViewRef, setSearchInput }: Props) => {
+export const SearchSecondView = ({ pagerViewRef }: Props) => {
   const [selected, setSelected] = useState<string | null>(null);
+  const { setSearchInput } = useSearch();
   return (
     <View style={styles.container} key="3">
       <View style={styles.content}>
