@@ -1,6 +1,76 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  style: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  enroll: {
+    width: 100,
+    height: 30,
+    borderColor: "black",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    marginLeft: 40,
+    shadowColor: "#334155",
+    shadowOpacity: 0.7,
+    shadowRadius: 15,
+  },
+  header: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 10,
+    fontWeight: "bold",
+  },
+  expandedCourseBox: {
+    backgroundColor: "#F6F7FB",
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: "#334155",
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    alignItems: "flex-start",
+    gap: 10,
+    width: 370,
+    height: "auto",
+    justifyContent: "center",
+    minHeight: 160,
+    margin: 10,
+    marginBottom: 20,
+  },
+  picker: {
+    backgroundColor: "white",
+    height: "90%",
+    justifyContent: "center",
+    borderRadius: 10,
+    width: "39%",
+  },
+  input: {
+    width: "60%",
+    backgroundColor: "white",
+    height: "90%",
+    borderRadius: 10,
+    padding: 10,
+    fontSize: 20,
+  },
+  selectbox: {
+    width: "90%",
+    justifyContent: "space-between",
+    height: "6%",
+    display: "flex",
+    flexDirection: "row",
+  },
   bottominfoBox: {
     display: "flex",
     flexDirection: "row",
@@ -8,6 +78,8 @@ export const styles = StyleSheet.create({
   },
   gap: {
     gap: 5,
+    display: "flex",
+    flexDirection: "row",
   },
   tutorInfoBox: {
     display: "flex",
@@ -39,9 +111,6 @@ export const styles = StyleSheet.create({
   otherSection: {
     width: "100%",
     height: 200,
-  },
-  scrollContent: {
-    alignItems: "center",
   },
   subjectTitle: {
     color: "#334155",
@@ -87,7 +156,7 @@ export const styles = StyleSheet.create({
   },
   courseBox1: {
     width: "90%",
-    height: "10%",
+    height: 160,
     margin: 10,
     marginBottom: 20,
     justifyContent: "center",
@@ -95,7 +164,7 @@ export const styles = StyleSheet.create({
   },
   courseBox: {
     backgroundColor: "#F6F7FB",
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 20,
     shadowColor: "#334155",
     shadowOffset: { width: 2, height: 4 },
@@ -103,9 +172,12 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     alignItems: "flex-start",
     gap: 10,
-    width: 370,
-    height: "100%",
     justifyContent: "center",
+    width: 370,
+    height: 200,
+    margin: 10,
+    marginBottom: 20,
+    paddingVertical: 30,
   },
   courseBoxOther: {
     backgroundColor: "#F6F7FB",
@@ -180,19 +252,15 @@ export const styles = StyleSheet.create({
   iconsBox: {
     flexDirection: "row",
     gap: 15,
-    marginLeft: "35%",
+    marginLeft: "42%",
   },
-  border: {
+  profilePic: {
     width: 50,
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "#334155",
     borderRadius: 100,
-    borderWidth: 4,
   },
   logo: {
-    color: "#334155",
+    color: "white",
     fontSize: 30,
   },
   border1: {
@@ -220,12 +288,15 @@ export const styles = StyleSheet.create({
     gap: 10,
   },
   name: {
-    color: "#334155",
+    color: "white",
     fontSize: 30,
     fontWeight: "bold",
   },
   body: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#181a21",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
   },
 });
