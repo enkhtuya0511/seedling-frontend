@@ -109,6 +109,23 @@ mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
 query Courses {
   courses {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -118,6 +135,7 @@ query Courses {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -125,6 +143,23 @@ query Courses {
 query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -134,22 +169,7 @@ query Course($courseId: String) {
     availableDays
     availableTimes
     enrolledStudentIds
-    reviewIds
-  }
-}
-
-query GetTeachers($input: getTeachersInput!) {
-  getTeachers(input: $input) {
-    _id
-    subject
-    categoryId
-    description
-    videoLesson
-    price
-    level
-    availableDays
-    availableTimes
-    enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -169,5 +189,39 @@ query Category($categoryId: String!) {
   category(categoryId: $categoryId) {
     _id
     name
+  }
+}
+
+query GetTeachers($input: getTeachersInput!) {
+  getTeachers(input: $input) {
+    _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    requestedStudentIds
+    reviewIds
   }
 }

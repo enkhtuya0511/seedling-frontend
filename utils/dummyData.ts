@@ -13,6 +13,11 @@ export const times = [
   { label: "Үдээс хойш /14:00-18:00/", value: "Үдээс хойш /14:00-18:00/" },
   { label: "Орой /18:00-21:00/", value: "Орой /18:00-21:00/" },
 ];
+export const levels = [
+  { label: "Анхан шат", value: "Анхан шат" },
+  { label: "Дунд шат", value: "Дунд шат" },
+  { label: "Ахисан шат", value: "Ахисан шат" },
+];
 
 export interface availableType {
   label: string;

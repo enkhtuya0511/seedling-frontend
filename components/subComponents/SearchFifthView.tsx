@@ -12,6 +12,7 @@ export const SearchFifthView = () => {
     },
     skip: !searchInput,
   });
+  console.log("searchInput", searchInput, data);
   return (
     <View style={styles.container} key="5">
       <View style={[styles.content, loading && styles.loadingContainer]}>
@@ -19,11 +20,7 @@ export const SearchFifthView = () => {
           <View>
             <Text style={styles.text}>Finding teachers </Text>
             <Text style={styles.text}>who will motivate you!</Text>
-            <ActivityIndicator
-              size="large"
-              color="#fff"
-              style={{ marginTop: 30 }}
-            />
+            <ActivityIndicator size="large" color="#fff" style={{ marginTop: 30 }} />
           </View>
         ) : (
           <View>
@@ -47,7 +44,7 @@ export const SearchFifthView = () => {
             )}
 
             <Pressable onPress={() => router.replace("/findTutors")}>
-              <Text style={{color: "#fff"}}>click here!</Text>
+              <Text style={{ color: "#fff" }}>click here!</Text>
             </Pressable>
           </View>
         )}

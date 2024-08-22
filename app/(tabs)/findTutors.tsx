@@ -8,6 +8,7 @@ import SearchResults from "@/components/SearchResults";
 import Loading from "@/components/Loading";
 import AvailableTimes from "@/components/AvailableTimes";
 import AvailableDays from "@/components/AvailableDays";
+import Levels from "@/components/Levels";
 import { styles } from "@/styles/findTutors-style";
 
 export default function findTutors() {
@@ -15,10 +16,7 @@ export default function findTutors() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={[loading && styles.loadingStyle]}
-      >
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[loading && styles.loadingStyle]}>
         {loading ? (
           <Loading />
         ) : (
@@ -26,6 +24,7 @@ export default function findTutors() {
             <Categories />
             <AvailableDays />
             <AvailableTimes />
+            <Levels />
             <Price />
             <Subjects />
             <SearchResults />
