@@ -4,6 +4,7 @@ import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
+import { Pressable, Text } from "react-native";
 
 const Subjects = () => {
   const { searchInput, setSearchInput } = useSearch();
@@ -26,22 +27,27 @@ const Subjects = () => {
     }
   }, [searchInput.categoryId, refetch]);
   return (
-    <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
-      data={subjectsData}
-      search
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      placeholder="Чиглэл сонгох"
-      searchPlaceholder="Хайх..."
-      value={searchInput.subject}
-      onChange={(item) => handleData(item.value, "subject", setSearchInput)}
-    />
+    <>
+      <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={subjectsData}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder="Чиглэл сонгох"
+        searchPlaceholder="Хайх..."
+        value={searchInput.subject}
+        onChange={(item) => handleData(item.value, "subject", setSearchInput)}
+      />
+      <Pressable onPress={() => handleData(null, "subject", setSearchInput)}>
+        <Text style={{ color: "#fff" }}>clear</Text>
+      </Pressable>
+    </>
   );
 };
 

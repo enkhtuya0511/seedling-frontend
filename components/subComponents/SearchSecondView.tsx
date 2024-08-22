@@ -1,17 +1,16 @@
 import { Pressable, Text, View } from "react-native";
-import { useState } from "react";
 import { useSearch } from "@/contexts/SearchProvider";
 import PagerView from "react-native-pager-view";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "@/styles/search-style";
+import { handlePress } from "@/utils/services";
 
 type Props = {
   pagerViewRef: React.RefObject<PagerView>;
 };
 
 export const SearchSecondView = ({ pagerViewRef }: Props) => {
-  const [selected, setSelected] = useState<string | null>(null);
-  const { setSearchInput } = useSearch();
+  const { setSearchInput, searchInput } = useSearch();
   return (
     <View style={styles.container} key="3">
       <View style={styles.content}>
@@ -22,18 +21,15 @@ export const SearchSecondView = ({ pagerViewRef }: Props) => {
         <View style={styles.innerContainer}>
           {levels.map((level, id) => (
             <Pressable
-              style={[styles.button, selected?.includes(level) && { backgroundColor: "pink" }]}
+              style={[styles.button, searchInput?.level?.includes(level) && { backgroundColor: "pink" }]}
               key={id}
-              onPress={() => {
-                // handleData(level, "level", setSearchInput);
-                setSelected(level);
-              }}
+              onPress={() => handlePress(level, "level", setSearchInput)}
             >
               <Text style={{ color: "#fff" }}>{level}</Text>
             </Pressable>
           ))}
         </View>
-        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(3)} disabled={!selected}>
+        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(3)}>
           <Text style={styles.buttonText}>continue</Text>
         </Pressable>
       </View>
@@ -41,4 +37,4 @@ export const SearchSecondView = ({ pagerViewRef }: Props) => {
   );
 };
 
-const levels = ["Aнхан шат", "Дунд шат", "Aхисан шат"];
+const levels = ["Aнхан шат", "Дунд шат", "Ахисан шат"];

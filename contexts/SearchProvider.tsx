@@ -21,7 +21,9 @@ export const SearchProvider = ({ children }: Props) => {
       min: "0",
       max: "40000",
     },
+    level: [],
   });
+  console.log("searchInput", searchInput);
   return <SearchContext.Provider value={{ setSearchInput, searchInput }}>{children}</SearchContext.Provider>;
 };
 
