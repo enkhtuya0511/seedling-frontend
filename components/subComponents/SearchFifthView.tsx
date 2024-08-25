@@ -18,16 +18,14 @@ export const SearchFifthView = () => {
       <View style={[styles.content, loading && styles.loadingContainer]}>
         {loading ? (
           <View>
-            <Text style={styles.text}>Finding teachers </Text>
-            <Text style={styles.text}>who will motivate you!</Text>
+            <Text style={styles.text}>Таньд урам зориг </Text>
+            <Text style={styles.text}>өгөх багшийг хайж байна!</Text>
             <ActivityIndicator size="large" color="#fff" style={{ marginTop: 30 }} />
           </View>
         ) : (
           <View>
-            <Text style={styles.text}>teachers will display here!</Text>
-
             {data?.getTeachers?.length === 0 ? (
-              <Text style={styles.text}>no results!</Text>
+              <Text style={styles.text}>таньд тохирсон багш олдсонгүй!</Text>
             ) : (
               <>
                 {data?.getTeachers?.map((teacher) => (

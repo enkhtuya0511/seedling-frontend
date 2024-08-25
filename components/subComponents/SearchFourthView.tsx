@@ -15,13 +15,10 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
   return (
     <View style={styles.container} key="5">
       <View style={styles.content}>
-        <Pressable
-          style={{ width: "100%", paddingLeft: 15 }}
-          onPress={() => pagerViewRef.current?.setPage(3)}
-        >
+        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => pagerViewRef.current?.setPage(3)}>
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
-        <Text style={styles.text}>What's your budget for per lesson?</Text>
+        <Text style={styles.text}>Таны 50 минутын хичээлд {"\n"}зориулсан төсөв хэд вэ?</Text>
         <View style={styles.innerContainer}>
           <MultiSlider
             isMarkersSeparated={true}
@@ -29,7 +26,7 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
             min={0}
             max={40000}
             step={1}
-            onValuesChange={(values) =>handleData(values, "priceRange", setSearchInput)}
+            onValuesChange={(values) => handleData(values, "priceRange", setSearchInput)}
             containerStyle={styles.sliderContainer}
             trackStyle={styles.track}
             selectedStyle={styles.selectedTrack}
@@ -37,15 +34,18 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
             pressedMarkerStyle={styles.pressedMarker}
           />
           <View style={styles.valuesContainer}>
-            <Text style={styles.valueText}>Min: {searchInput?.priceRange.min}</Text>
-            <Text style={styles.valueText}>Max: {searchInput?.priceRange.max}</Text>
+            <Text style={styles.valueText}>
+              Багадаа: {"\n"}
+              {searchInput?.priceRange.min} ₮
+            </Text>
+            <Text style={styles.valueText}>
+              Ихдээ: {"\n"}
+              {searchInput?.priceRange.max} ₮
+            </Text>
           </View>
         </View>
-        <Pressable
-          style={styles.button}
-          onPress={() => pagerViewRef.current?.setPage(5)}
-        >
-          <Text style={styles.buttonText}>continue</Text>
+        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(5)}>
+          <Text style={styles.buttonText}>үргэлжлүүлэх</Text>
         </Pressable>
       </View>
     </View>

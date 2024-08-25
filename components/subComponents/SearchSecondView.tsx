@@ -17,7 +17,7 @@ export const SearchSecondView = ({ pagerViewRef }: Props) => {
         <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => pagerViewRef.current?.setPage(1)}>
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
-        <Text style={styles.text}>What's your subject's level?</Text>
+        <Text style={styles.text}>Таны түвшин ямар вэ??</Text>
         <View style={styles.innerContainer}>
           {levels.map((level, id) => (
             <Pressable
@@ -30,7 +30,7 @@ export const SearchSecondView = ({ pagerViewRef }: Props) => {
           ))}
         </View>
         <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(3)}>
-          <Text style={styles.buttonText}>continue</Text>
+          <Text style={styles.buttonText}>үргэлжлүүлэх</Text>
         </Pressable>
       </View>
     </View>

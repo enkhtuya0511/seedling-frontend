@@ -22,25 +22,17 @@ export const SearchFirstView = ({ pagerViewRef }: Props) => {
   return (
     <View style={styles.container} key="2">
       <View style={styles.content}>
-        <Pressable
-          style={{ width: "100%", paddingLeft: 15 }}
-          onPress={() => pagerViewRef.current?.setPage(0)}
-        >
+        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => pagerViewRef.current?.setPage(0)}>
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
-        <Text style={{ color: "#fff" }}>
-          Which subject do you want to focus on?
-        </Text>
+        <Text style={{ color: "#fff" }}>Таны сурахыг хүсэж буй чиглэл{"\n"} юу вэ?</Text>
         <View style={styles.innerContainer}>
-          <Text style={styles.text}>Subjects: </Text>
+          <Text style={styles.text}>Чиглэлүүд: </Text>
           {data?.subjectsByCategory && (
             <>
               {data.subjectsByCategory?.map((subject, id) => (
                 <Pressable
-                  style={[
-                    styles.button,
-                    selected?.includes(subject) && { backgroundColor: "pink" },
-                  ]}
+                  style={[styles.button, selected?.includes(subject) && { backgroundColor: "pink" }]}
                   key={id}
                   onPress={() => {
                     handleData(subject, "subject", setSearchInput);
@@ -53,12 +45,8 @@ export const SearchFirstView = ({ pagerViewRef }: Props) => {
             </>
           )}
         </View>
-        <Pressable
-          style={styles.button}
-          onPress={() => pagerViewRef.current?.setPage(2)}
-          disabled={!selected}
-        >
-          <Text style={styles.buttonText}>continue</Text>
+        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(2)} disabled={!selected}>
+          <Text style={styles.buttonText}>үргэлжлүүлэх</Text>
         </Pressable>
       </View>
     </View>

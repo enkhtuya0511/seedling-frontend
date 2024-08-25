@@ -10,24 +10,19 @@ type Props = {
   pagerViewRef: React.RefObject<PagerView>;
 };
 
-export const SearchThirdView = ({
-  pagerViewRef
-}: Props) => {
+export const SearchThirdView = ({ pagerViewRef }: Props) => {
   const { searchInput, setSearchInput } = useSearch();
   return (
     <View style={styles.container} key="4">
       <View style={[styles.content, { paddingTop: 80 }]}>
-        <Pressable
-          style={{ width: "100%", paddingLeft: 15 }}
-          onPress={() => pagerViewRef.current?.setPage(2)}
-        >
+        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => pagerViewRef.current?.setPage(2)}>
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
         <View>
-          <Text style={styles.text}>When can u take lessons?</Text>
+          <Text style={styles.text}>Та хэзээ хичээлд суух{"\n"} боломжтой вэ?</Text>
         </View>
         <View style={[styles.innerContainer, { paddingBottom: 0 }]}>
-          <Text style={styles.text}>Days: </Text>
+          <Text style={styles.text}>Өдрүүд: </Text>
           <View style={styles.daysContainer}>
             {days.map((day) => (
               <Pressable
@@ -45,7 +40,7 @@ export const SearchThirdView = ({
               </Pressable>
             ))}
           </View>
-          <Text style={styles.text}>Times: </Text>
+          <Text style={styles.text}>Цагууд: </Text>
           {times.map((time) => (
             <Pressable
               style={[
@@ -61,11 +56,8 @@ export const SearchThirdView = ({
             </Pressable>
           ))}
         </View>
-        <Pressable
-          style={styles.button}
-          onPress={() => pagerViewRef.current?.setPage(4)}
-        >
-          <Text style={styles.buttonText}>continue</Text>
+        <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(4)}>
+          <Text style={styles.buttonText}>үргэлжлүүлэх</Text>
         </Pressable>
       </View>
     </View>
