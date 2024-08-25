@@ -225,3 +225,58 @@ query GetTeachers($input: getTeachersInput!) {
     reviewIds
   }
 }
+
+mutation CreateReview($input: CreateReviewInput!) {
+  createReview(input: $input) {
+    _id
+    studentId
+    comment
+    rating
+    courseId
+  }
+}
+
+query Review($reviewId: String!) {
+  review(reviewId: $reviewId) {
+    _id
+    studentId
+    comment
+    rating
+    courseId
+  }
+}
+
+mutation UpdateReview($input: UpdateReviewInput!) {
+  updateReview(input: $input) {
+    _id
+    studentId
+    comment
+    rating
+    courseId
+  }
+}
+
+mutation DeleteReview($reviewId: String!) {
+  deleteReview(reviewId: $reviewId) {
+    _id
+    studentId
+    comment
+    rating
+    courseId
+  }
+}
+
+query Reviews($courseId: String!) {
+  reviews(courseId: $courseId) {
+    _id
+    comment
+    rating
+    courseId
+    studentId {
+      email
+      _id
+      fullName
+      profilePic
+    }
+  }
+}

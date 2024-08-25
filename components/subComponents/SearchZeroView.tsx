@@ -17,13 +17,10 @@ export const SearchZeroView = ({ pagerViewRef }: Props) => {
   return (
     <View style={styles.container} key="1">
       <View style={[styles.content, { paddingTop: 30 }]}>
-        <Pressable
-          style={{ width: "100%", paddingLeft: 15 }}
-          onPress={() => router.back()}
-        >
+        <Pressable style={{ width: "100%", paddingLeft: 15 }} onPress={() => router.back()}>
           <AntDesign name="arrowleft" size={24} color="#fff" />
         </Pressable>
-        <Text style={{ color: "#fff" }}>I want to learn ...</Text>
+        <Text style={{ color: "#fff" }}>Би энэ ангилалаар {"\n"} сурмаар байна ...</Text>
         {loading ? (
           <ActivityIndicator color="#fff" size="large" />
         ) : (
@@ -33,9 +30,7 @@ export const SearchZeroView = ({ pagerViewRef }: Props) => {
                 {data?.categories?.map((category) => (
                   <Pressable
                     key={category._id}
-                    onPress={() =>
-                      handleData(category._id, "categoryId", setSearchInput)
-                    }
+                    onPress={() => handleData(category._id, "categoryId", setSearchInput)}
                     style={[
                       styles.category,
                       searchInput.categoryId?.includes(category._id) && {
@@ -43,19 +38,13 @@ export const SearchZeroView = ({ pagerViewRef }: Props) => {
                       },
                     ]}
                   >
-                    <Text style={{ color: "#fff", fontSize: 12 }}>
-                      {category.name}
-                    </Text>
+                    <Text style={{ color: "#fff", fontSize: 12 }}>{category.name}</Text>
                   </Pressable>
                 ))}
               </View>
             </View>
-            <Pressable
-              style={styles.button}
-              onPress={() => pagerViewRef.current?.setPage(1)}
-              disabled={!searchInput.categoryId}
-            >
-              <Text style={styles.buttonText}>continue</Text>
+            <Pressable style={styles.button} onPress={() => pagerViewRef.current?.setPage(1)} disabled={!searchInput.categoryId}>
+              <Text style={styles.buttonText}>үргэлжлүүлэх</Text>
             </Pressable>
           </>
         )}

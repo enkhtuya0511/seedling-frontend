@@ -42,7 +42,6 @@ export const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (userdata) {
-      // console.log("userdata: ", userdata.user);
       setUser(userdata.user);
       if (pathName === "/") {
         router.push("/home");

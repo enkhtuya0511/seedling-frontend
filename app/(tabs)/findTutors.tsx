@@ -20,11 +20,15 @@ export default function findTutors() {
         {loading ? (
           <Loading />
         ) : (
-          <View style={styles.scrollStyle}>
-            <Categories />
-            <AvailableDays />
-            <AvailableTimes />
-            <Levels />
+          <View style={[styles.scrollStyle, { backgroundColor: "pink" }]}>
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <Categories />
+              <AvailableDays />
+            </View>
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <AvailableTimes />
+              <Levels />
+            </View>
             <Price />
             <Subjects />
             <SearchResults />
