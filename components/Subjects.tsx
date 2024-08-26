@@ -4,7 +4,8 @@ import { useSearch } from "@/contexts/SearchProvider";
 import { handleData } from "@/utils/services";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "@/styles/findTutors-style";
-import { Pressable, Text } from "react-native";
+import { Pressable, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 const Subjects = () => {
   const { searchInput, setSearchInput } = useSearch();
@@ -27,7 +28,7 @@ const Subjects = () => {
     }
   }, [searchInput.categoryId, refetch]);
   return (
-    <>
+    <View style={styles.subjectsCon}>
       <Dropdown
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
@@ -44,10 +45,10 @@ const Subjects = () => {
         value={searchInput.subject}
         onChange={(item) => handleData(item.value, "subject", setSearchInput)}
       />
-      <Pressable onPress={() => handleData(null, "subject", setSearchInput)}>
-        <Text style={{ color: "#fff" }}>clear</Text>
+      <Pressable onPress={() => handleData(null, "subject", setSearchInput)} style={styles.clearButton}>
+        <Feather name="x" size={30} color="black" />
       </Pressable>
-    </>
+    </View>
   );
 };
 
