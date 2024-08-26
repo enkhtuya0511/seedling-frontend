@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, usePathname } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
-import { useUserLazyQuery, useLoginMutation, User, LoginInput, useSignUpMutation, SignUpInput } from "@/generated";
+import { useUserLazyQuery, useLoginMutation, User, LoginInput, useSignUpMutation, SignUpInput, User0 } from "@/generated";
 
 type Props = {
   children: React.ReactNode;
 };
 
 type AuthContextType = {
-  user: User | undefined;
+  user: User0 | undefined;
   onLogin: (user: LoginInput) => void;
   onLogout: () => void;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  setUser: React.Dispatch<React.SetStateAction<User0 | undefined>>;
   loading: boolean;
   onSignUp: (user: SignUpInput) => void;
   signUpLoading: boolean;
@@ -22,7 +22,7 @@ const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 export const AuthProvider = ({ children }: Props) => {
   const [loginMutation] = useLoginMutation();
   const [signUpMutation, { loading: signUpLoading }] = useSignUpMutation();
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState<User0 | undefined>();
   const [getUser, { data: userdata, loading }] = useUserLazyQuery();
   const pathName = usePathname();
   const navigation = useNavigation<any>();
@@ -42,7 +42,8 @@ export const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (userdata) {
-      setUser(userdata.user);
+      setUser(userdata.user as User0);
+      // console.log("first", userdata.user);
       if (pathName === "/") {
         router.push("/home");
       }
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }: Props) => {
           variables: { token: data.login.token as string },
         });
         if (userData.data?.user) {
-          setUser(userData.data.user);
+          setUser(userData.data.user as User0);
           router.push("/home");
         } else {
           console.error("Failed to get user data after login");
