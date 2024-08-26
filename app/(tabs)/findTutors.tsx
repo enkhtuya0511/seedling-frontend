@@ -20,7 +20,7 @@ export default function findTutors() {
         {loading ? (
           <Loading />
         ) : (
-          <View style={[styles.scrollStyle, { backgroundColor: "pink" }]}>
+          <View style={styles.scrollStyle}>
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Categories />
               <AvailableDays />

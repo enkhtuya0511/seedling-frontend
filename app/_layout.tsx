@@ -17,6 +17,7 @@ export default function RootLayout() {
             <Stack.Screen name="becomeTeacher/index" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" options={{ headerShown: false }} />
             <Stack.Screen name="category/[id]" />
+            <Stack.Screen name="lesson/[id]" options={{ headerShown: false }} />
           </Stack>
         </SearchProvider>
       </AuthProvider>
