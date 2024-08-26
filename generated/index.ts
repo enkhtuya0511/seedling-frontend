@@ -276,10 +276,10 @@ export type UpdateCourseInput = {
   availableTimes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   categoryId?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  enrolledStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  enrolledStudentIds?: InputMaybe<Scalars['String']['input']>;
   level?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   price?: InputMaybe<Scalars['String']['input']>;
-  requestedStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  requestedStudentIds?: InputMaybe<Scalars['String']['input']>;
   reviewIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   subject?: InputMaybe<Scalars['String']['input']>;
   videoLesson?: InputMaybe<Scalars['String']['input']>;
@@ -453,6 +453,14 @@ export type ReviewsQueryVariables = Exact<{
 
 
 export type ReviewsQuery = { __typename?: 'Query', reviews?: Array<{ __typename?: 'Review0', _id: string, comment: string, rating: number, courseId: string, studentId: { __typename?: 'User', email: string, _id: string, fullName: string, profilePic: string } }> | null };
+
+export type UpdateCourseMutationVariables = Exact<{
+  input: UpdateCourseInput;
+  courseId: Scalars['String']['input'];
+}>;
+
+
+export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, profilePic: string, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } } };
 
 
 export const UsersDocument = gql`
@@ -1502,3 +1510,76 @@ export type ReviewsQueryHookResult = ReturnType<typeof useReviewsQuery>;
 export type ReviewsLazyQueryHookResult = ReturnType<typeof useReviewsLazyQuery>;
 export type ReviewsSuspenseQueryHookResult = ReturnType<typeof useReviewsSuspenseQuery>;
 export type ReviewsQueryResult = Apollo.QueryResult<ReviewsQuery, ReviewsQueryVariables>;
+export const UpdateCourseDocument = gql`
+    mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
+  updateCourse(input: $input, courseId: $courseId) {
+    _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    requestedStudentIds
+    reviewIds
+  }
+}
+    `;
+export type UpdateCourseMutationFn = Apollo.MutationFunction<UpdateCourseMutation, UpdateCourseMutationVariables>;
+export type UpdateCourseProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: Apollo.MutationFunction<UpdateCourseMutation, UpdateCourseMutationVariables>
+    } & TChildProps;
+export function withUpdateCourse<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  UpdateCourseMutation,
+  UpdateCourseMutationVariables,
+  UpdateCourseProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, UpdateCourseMutation, UpdateCourseMutationVariables, UpdateCourseProps<TChildProps, TDataName>>(UpdateCourseDocument, {
+      alias: 'updateCourse',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useUpdateCourseMutation__
+ *
+ * To run a mutation, you first call `useUpdateCourseMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCourseMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCourseMutation, { data, loading, error }] = useUpdateCourseMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *      courseId: // value for 'courseId'
+ *   },
+ * });
+ */
+export function useUpdateCourseMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCourseMutation, UpdateCourseMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCourseMutation, UpdateCourseMutationVariables>(UpdateCourseDocument, options);
+      }
+export type UpdateCourseMutationHookResult = ReturnType<typeof useUpdateCourseMutation>;
+export type UpdateCourseMutationResult = Apollo.MutationResult<UpdateCourseMutation>;
+export type UpdateCourseMutationOptions = Apollo.BaseMutationOptions<UpdateCourseMutation, UpdateCourseMutationVariables>;

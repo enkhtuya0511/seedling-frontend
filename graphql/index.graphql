@@ -313,3 +313,35 @@ query Reviews($courseId: String!) {
     }
   }
 }
+
+mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
+  updateCourse(input: $input, courseId: $courseId) {
+    _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    requestedStudentIds
+    reviewIds
+  }
+}
