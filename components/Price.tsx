@@ -5,7 +5,7 @@ import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { styles } from "@/styles/findTutors-style";
 
 const Price = () => {
-  const {searchInput, setSearchInput} = useSearch()
+  const { searchInput, setSearchInput } = useSearch();
   return (
     <>
       <MultiSlider
@@ -22,8 +22,8 @@ const Price = () => {
         pressedMarkerStyle={styles.pressedMarker}
       />
       <View style={styles.valuesContainer}>
-        <Text style={styles.valueText}>Min: {searchInput.priceRange?.min}</Text>
-        <Text style={styles.valueText}>Max: {searchInput.priceRange?.max}</Text>
+        <Text style={styles.valueText}>Багадаа: {searchInput.priceRange?.min}₮</Text>
+        <Text style={styles.valueText}>Ихдээ: {searchInput.priceRange?.max}₮</Text>
       </View>
     </>
   );

@@ -60,6 +60,7 @@ export const styles = StyleSheet.create({
   title: {
     color: "#334155",
     fontSize: 17,
+    width: "95%",
   },
   text: {
     fontSize: 10,
