@@ -30,13 +30,22 @@ export const SearchThirdView = ({ pagerViewRef }: Props) => {
                   styles.button,
                   { width: 100 },
                   searchInput?.availableDays?.includes(day.value) && {
-                    backgroundColor: "pink",
+                    backgroundColor: "white",
                   },
                 ]}
                 key={day.value}
                 onPress={() => handlePress(day.value, "availableDays", setSearchInput)}
               >
-                <Text style={{ color: "#fff" }}>{day.label}</Text>
+                <Text
+                  style={[
+                    { color: "#fff" },
+                    searchInput?.availableDays?.includes(day.value) && {
+                      color: "black",
+                    },
+                  ]}
+                >
+                  {day.label}
+                </Text>
               </Pressable>
             ))}
           </View>
@@ -46,13 +55,22 @@ export const SearchThirdView = ({ pagerViewRef }: Props) => {
               style={[
                 styles.button,
                 searchInput?.availableTimes?.includes(time.value) && {
-                  backgroundColor: "pink",
+                  backgroundColor: "white",
                 },
               ]}
               key={time.value}
               onPress={() => handlePress(time.value, "availableTimes", setSearchInput)}
             >
-              <Text style={{ color: "#fff" }}>{time.label}</Text>
+              <Text
+                style={[
+                  { color: "#fff" },
+                  searchInput?.availableTimes?.includes(time.value) && {
+                    color: "black",
+                  },
+                ]}
+              >
+                {time.label}
+              </Text>
             </Pressable>
           ))}
         </View>

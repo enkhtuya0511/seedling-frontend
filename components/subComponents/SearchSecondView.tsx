@@ -21,11 +21,11 @@ export const SearchSecondView = ({ pagerViewRef }: Props) => {
         <View style={styles.innerContainer}>
           {levels.map((level, id) => (
             <Pressable
-              style={[styles.button, searchInput?.level?.includes(level) && { backgroundColor: "pink" }]}
+              style={[styles.button, searchInput?.level?.includes(level) && { backgroundColor: "white" }]}
               key={id}
               onPress={() => handlePress(level, "level", setSearchInput)}
             >
-              <Text style={{ color: "#fff" }}>{level}</Text>
+              <Text style={[{ color: "#fff" }, searchInput?.level?.includes(level) && { color: "black" }]}>{level}</Text>
             </Pressable>
           ))}
         </View>

@@ -32,14 +32,14 @@ export const SearchFirstView = ({ pagerViewRef }: Props) => {
             <>
               {data.subjectsByCategory?.map((subject, id) => (
                 <Pressable
-                  style={[styles.button, selected?.includes(subject) && { backgroundColor: "pink" }]}
+                  style={[styles.button, selected?.includes(subject) && { backgroundColor: "white" }]}
                   key={id}
                   onPress={() => {
                     handleData(subject, "subject", setSearchInput);
                     setSelected(subject);
                   }}
                 >
-                  <Text style={{ color: "#fff" }}>{subject}</Text>
+                  <Text style={[{ color: "#fff" }, selected?.includes(subject) && { color: "black" }]}>{subject}</Text>
                 </Pressable>
               ))}
             </>

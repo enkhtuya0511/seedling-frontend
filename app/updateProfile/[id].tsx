@@ -101,7 +101,7 @@ const Page: React.FC = () => {
         </View>
         {toast && <Text style={styles.toastText}>{toast}</Text>}
 
-        <Pressable style={styles.button} onPress={handleUpdate} disabled={loading}>
+        <Pressable style={styles.button} onPress={() => handleUpdate()} disabled={loading}>
           {loading ? <ActivityIndicator size="small" color="#20222a" /> : <Text style={styles.buttonText}>Хадгалах</Text>}
         </Pressable>
       </View>

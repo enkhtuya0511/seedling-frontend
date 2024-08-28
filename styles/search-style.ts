@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: 160,
-    paddingHorizontal: 40,
+    paddingTop: 50,
+    paddingHorizontal: 10,
     gap: 15,
   },
   innerContainer: {
@@ -47,20 +47,23 @@ export const styles = StyleSheet.create({
   },
   track: {
     height: 4,
-    backgroundColor: "#ddd",
+    // backgroundColor: "#ddd",
+    backgroundColor: "#fff",
   },
   selectedTrack: {
     height: 4,
-    backgroundColor: "#3b9", //-----
+    // backgroundColor: "#3b9", //-----
+    backgroundColor: "#fff",
   },
   marker: {
-    backgroundColor: "#3b9", // oo
+    // backgroundColor: "#3b9", // oo
+    backgroundColor: "#fff",
     width: 20,
     height: 20,
     borderRadius: 10,
   },
   pressedMarker: {
-    backgroundColor: "#1a6",
+    backgroundColor: "gray",
   },
   valuesContainer: {
     display: "flex",

@@ -25,7 +25,7 @@ export const SearchFourthView = ({ pagerViewRef }: Props) => {
             values={[0, 40000]}
             min={0}
             max={40000}
-            step={1}
+            step={1000}
             onValuesChange={(values) => handleData(values, "priceRange", setSearchInput)}
             containerStyle={styles.sliderContainer}
             trackStyle={styles.track}

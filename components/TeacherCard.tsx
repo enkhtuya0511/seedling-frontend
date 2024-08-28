@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Pressable } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styles } from "@/styles/teacherSave-style";
 import { Image } from "expo-image";
 import { useAuth } from "@/contexts/AuthProvider";
@@ -15,6 +15,7 @@ const TeacherCard = ({ course }: Props) => {
   const { user } = useAuth();
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
   const [updateUserMutation] = useUpdateUserMutation();
+  // const [isFavorite, setIsFavorite] = useState<boolean | null>();
   const description = course?.description || "";
   const isExpanded = expandedSubject === course?._id;
   let isFavorite = user?.favorites?.some((fav) => fav?._id === course?._id);
@@ -27,11 +28,6 @@ const TeacherCard = ({ course }: Props) => {
   };
 
   const handleFavoriteToggle = async (favoriteId: string) => {
-    // if (isFavorite) {
-    //   isFavorite = false;
-    // } else {
-    //   isFavorite = true;
-    // }
     try {
       await updateUserMutation({
         variables: {
@@ -44,6 +40,13 @@ const TeacherCard = ({ course }: Props) => {
       console.error("Error updating favorites:", error);
     }
   };
+
+  // useEffect(() => {
+  //   if (user?.favorites) {
+  //     const fav = user?.favorites?.some((fav) => fav?._id === course?._id);
+  //     setIsFavorite(fav);
+  //   }
+  // }, [user?.favorites]);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.courseBox}>
@@ -57,13 +60,13 @@ const TeacherCard = ({ course }: Props) => {
               <Pressable onPress={() => router.push(`/lesson/${course?._id}`)}>
                 <Text style={styles.title}>{course?.tutorId?.fullName}</Text>
                 <Text>Үнэ: {course?.price}₮</Text>
-                <Text>Дугаар: {course?.tutorId?.phoneNumber}</Text>
+                {course?.enrolledStudentIds?.includes(user?._id as string) && <Text>Дугаар: {course?.tutorId?.phoneNumber}</Text>}
               </Pressable>
             </View>
 
-            <Pressable onPress={() => handleFavoriteToggle(course?._id as string)} style={styles.iconContainer}>
+            {/* <Pressable onPress={() => handleFavoriteToggle(course?._id as string)} style={styles.iconContainer}>
               <AntDesign name={isFavorite ? "heart" : "hearto"} size={24} color={isFavorite ? "red" : "black"} />
-            </Pressable>
+            </Pressable> */}
           </View>
           <View style={styles.gap}>
             <Text>Чиглэл: {course?.subject}</Text>

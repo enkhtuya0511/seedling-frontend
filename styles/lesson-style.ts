@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#dcdce9",
+    borderColor: "gray",
   },
   iconsContainer: {
     display: "flex",

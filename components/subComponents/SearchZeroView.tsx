@@ -34,11 +34,20 @@ export const SearchZeroView = ({ pagerViewRef }: Props) => {
                     style={[
                       styles.category,
                       searchInput.categoryId?.includes(category._id) && {
-                        backgroundColor: "pink",
+                        backgroundColor: "white",
                       },
                     ]}
                   >
-                    <Text style={{ color: "#fff", fontSize: 12 }}>{category.name}</Text>
+                    <Text
+                      style={[
+                        { color: "#fff", fontSize: 12 },
+                        searchInput.categoryId?.includes(category._id) && {
+                          color: "black",
+                        },
+                      ]}
+                    >
+                      {category.name}
+                    </Text>
                   </Pressable>
                 ))}
               </View>
