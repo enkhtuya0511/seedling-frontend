@@ -1,47 +1,39 @@
 import { View, Text, ScrollView, TouchableOpacity, Pressable } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { styles } from "@/styles/teacherSave-style";
 import { Image } from "expo-image";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useAuth } from "@/contexts/AuthProvider";
-import { User0, useUpdateUserMutation } from "@/generated";
+import { useCoursesQuery, useUpdateUserMutation } from "@/generated";
 import { router } from "expo-router";
 
 export default function Favorites() {
   const { user } = useAuth();
-  const [userData, setUserData] = useState<User0 | null>(user || null);
   const [expandedSubject, setExpandedSubject] = useState<number | null>(null);
   const [updateUserMutation] = useUpdateUserMutation();
+  const { data, loading, error } = useCoursesQuery();
+
+  const favoriteTeachers = data?.courses?.filter((course) => user?.favorites?.includes(course._id));
 
   const handleReadMore = (id: number) => {
     setExpandedSubject(expandedSubject === id ? null : id);
   };
 
   const handleFavoriteToggle = async (favoriteId: string) => {
-    if (userData) {
-      const filteredData = userData.favorites?.filter((fav) => fav?._id !== favoriteId);
-      setUserData((prev) => ({ ...(prev as User0), favorites: filteredData }));
-
-      try {
-        await updateUserMutation({
-          variables: {
-            input: { favorites: favoriteId },
-            userId: user?._id as string,
-          },
-        });
-        console.log("success!");
-      } catch (error) {
-        console.error("Error updating favorites:", error);
-      }
+    try {
+      await updateUserMutation({
+        variables: {
+          input: { favorites: favoriteId },
+          userId: user?._id as string,
+        },
+      });
+      console.log("success!");
+    } catch (error) {
+      console.error("Error updating favorites:", error);
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      setUserData(user);
-    }
-  }, [user]);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -50,10 +42,10 @@ export default function Favorites() {
         <Text style={styles.name}>Seedling</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {userData?.favorites?.map((favorite, id) => {
+        {favoriteTeachers?.map((favorite, id) => {
           const description = favorite?.description || "";
           const isExpanded = expandedSubject === id;
-          const isFavorite = userData?.favorites?.some((fav) => fav?._id === favorite?._id);
+          const isFavorite = user?.favorites?.includes(favorite?._id);
           const displayText = isExpanded
             ? description
             : description.split(" ").slice(0, 9).join(" ") + (description.split(" ").length > 8 ? "..." : "");
@@ -75,7 +67,7 @@ export default function Favorites() {
                     </Pressable>
                   </View>
                   <Pressable onPress={() => handleFavoriteToggle(favorite?._id as string)} style={styles.iconContainer}>
-                    <AntDesign color={isFavorite ? "red" : "black"} name="heart" size={23} />
+                    <AntDesign color={isFavorite ? "red" : "black"} name={isFavorite ? "heart" : "hearto"} size={24} />
                   </Pressable>
                 </View>
                 <View style={styles.gap}>
