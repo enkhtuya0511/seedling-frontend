@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Pressable } from "react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { styles } from "@/styles/teacherSave-style";
 import { Image } from "expo-image";
 import { useAuth } from "@/contexts/AuthProvider";
@@ -15,10 +15,8 @@ const TeacherCard = ({ course }: Props) => {
   const { user } = useAuth();
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
   const [updateUserMutation] = useUpdateUserMutation();
-  // const [isFavorite, setIsFavorite] = useState<boolean | null>();
   const description = course?.description || "";
   const isExpanded = expandedSubject === course?._id;
-  let isFavorite = user?.favorites?.some((fav) => fav?._id === course?._id);
   const displayText = isExpanded
     ? description
     : description.split(" ").slice(0, 9).join(" ") + (description.split(" ").length > 8 ? "..." : "");
@@ -40,13 +38,6 @@ const TeacherCard = ({ course }: Props) => {
       console.error("Error updating favorites:", error);
     }
   };
-
-  // useEffect(() => {
-  //   if (user?.favorites) {
-  //     const fav = user?.favorites?.some((fav) => fav?._id === course?._id);
-  //     setIsFavorite(fav);
-  //   }
-  // }, [user?.favorites]);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.courseBox}>
@@ -64,9 +55,13 @@ const TeacherCard = ({ course }: Props) => {
               </Pressable>
             </View>
 
-            {/* <Pressable onPress={() => handleFavoriteToggle(course?._id as string)} style={styles.iconContainer}>
-              <AntDesign name={isFavorite ? "heart" : "hearto"} size={24} color={isFavorite ? "red" : "black"} />
-            </Pressable> */}
+            <Pressable onPress={() => handleFavoriteToggle(course?._id as string)} style={styles.iconContainer}>
+              <AntDesign
+                name={user?.favorites?.includes(course?._id as string) ? "heart" : "hearto"}
+                size={24}
+                color={user?.favorites?.includes(course?._id as string) ? "red" : "black"}
+              />
+            </Pressable>
           </View>
           <View style={styles.gap}>
             <Text>Чиглэл: {course?.subject}</Text>

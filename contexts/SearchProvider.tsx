@@ -23,7 +23,7 @@ export const SearchProvider = ({ children }: Props) => {
     },
     level: [],
   });
-  console.log("searchInput", searchInput);
+  // console.log("searchInput", searchInput);
   return <SearchContext.Provider value={{ setSearchInput, searchInput }}>{children}</SearchContext.Provider>;
 };
 

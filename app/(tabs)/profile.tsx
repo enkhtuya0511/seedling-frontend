@@ -2,18 +2,13 @@ import { Image } from "expo-image";
 import { useAuth } from "@/contexts/AuthProvider";
 import { View, Text, Pressable } from "react-native";
 import { styles } from "@/styles/settings-style";
-import {
-  Feather,
-  AntDesign,
-  FontAwesome,
-  FontAwesome5,
-} from "@expo/vector-icons";
+import { Feather, AntDesign, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 
 export default function Profile() {
-  const { onLogout, user } = useAuth();
+  const { onLogout, user, setUser } = useAuth();
   const [showView, setShowView] = useState(false);
   const handlePress = () => {
     setShowView(!showView);
@@ -28,10 +23,7 @@ export default function Profile() {
 
       <View style={styles.profileContainer}>
         {user?.profilePic.length === 0 ? (
-          <Image
-            source={require("../../assets/images/user.jpg")}
-            style={styles.profilePic}
-          />
+          <Image source={require("../../assets/images/user.jpg")} style={styles.profilePic} />
         ) : (
           <Image source={{ uri: user?.profilePic }} style={styles.profilePic} />
         )}
@@ -96,7 +88,13 @@ export default function Profile() {
             <Text style={styles.title}>Гарах</Text>
             <Text style={styles.text}>Та гарахдаа итгэлтэй байна уу</Text>
             <View style={styles.buttonsBox}>
-              <Pressable onPress={onLogout} style={styles.yes}>
+              <Pressable
+                onPress={() => {
+                  onLogout();
+                  setShowView(false);
+                }}
+                style={styles.yes}
+              >
                 <Text style={styles.itemText}>Тийм</Text>
               </Pressable>
               <Pressable onPress={handlePress} style={styles.no}>
